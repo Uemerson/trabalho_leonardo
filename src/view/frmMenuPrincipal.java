@@ -39,6 +39,11 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
         mnuCliente.setText("Cliente");
 
         mniCadastroCliente.setText("Cadastro de cliente");
+        mniCadastroCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniCadastroClienteActionPerformed(evt);
+            }
+        });
         mnuCliente.add(mniCadastroCliente);
 
         mnuMenu.add(mnuCliente);
@@ -70,7 +75,7 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
     private void mniCadastroFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniCadastroFuncionarioActionPerformed
         frmFuncionario funcionario = new frmFuncionario();
         funcionario.setVisible(true);
@@ -78,6 +83,13 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
         pnlPrincipal.add(funcionario);
     }//GEN-LAST:event_mniCadastroFuncionarioActionPerformed
 
+    private void mniCadastroClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniCadastroClienteActionPerformed
+        frmCliente cliente = new frmCliente();
+        cliente.setVisible(true);
+        
+        pnlPrincipal.add(cliente);
+    }//GEN-LAST:event_mniCadastroClienteActionPerformed
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem mniCadastroCliente;
     private javax.swing.JMenuItem mniCadastroFuncionario;
