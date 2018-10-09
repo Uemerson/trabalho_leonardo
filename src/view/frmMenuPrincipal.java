@@ -22,6 +22,7 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
         mniCadastroCliente = new javax.swing.JMenuItem();
         mnuFuncionario = new javax.swing.JMenu();
         mniCadastroFuncionario = new javax.swing.JMenuItem();
+        mniCadastroCargo = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -58,6 +59,14 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
         });
         mnuFuncionario.add(mniCadastroFuncionario);
 
+        mniCadastroCargo.setText("Cadastro de cargo");
+        mniCadastroCargo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniCadastroCargoActionPerformed(evt);
+            }
+        });
+        mnuFuncionario.add(mniCadastroCargo);
+
         mnuMenu.add(mnuFuncionario);
 
         setJMenuBar(mnuMenu);
@@ -77,20 +86,41 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     
     private void mniCadastroFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniCadastroFuncionarioActionPerformed
+        pnlPrincipal.removeAll();
+        pnlPrincipal.updateUI();
+        
         frmFuncionario funcionario = new frmFuncionario();
+       
+        pnlPrincipal.add(funcionario);
+        funcionario.setPosicao();                                               //Centraliza
         funcionario.setVisible(true);
         
-        pnlPrincipal.add(funcionario);
     }//GEN-LAST:event_mniCadastroFuncionarioActionPerformed
 
     private void mniCadastroClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniCadastroClienteActionPerformed
+        pnlPrincipal.removeAll();
+        pnlPrincipal.updateUI();
+        
         frmCliente cliente = new frmCliente();
-        cliente.setVisible(true);
         
         pnlPrincipal.add(cliente);
+        cliente.setPosicao();                                                   //Centraliza
+        cliente.setVisible(true);
     }//GEN-LAST:event_mniCadastroClienteActionPerformed
+
+    private void mniCadastroCargoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniCadastroCargoActionPerformed
+        pnlPrincipal.removeAll();
+        pnlPrincipal.updateUI();
+        
+        frmCargo cargo = new frmCargo();
+        
+        pnlPrincipal.add(cargo);
+        cargo.setPosicao();
+        cargo.setVisible(true);
+    }//GEN-LAST:event_mniCadastroCargoActionPerformed
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem mniCadastroCargo;
     private javax.swing.JMenuItem mniCadastroCliente;
     private javax.swing.JMenuItem mniCadastroFuncionario;
     private javax.swing.JMenu mnuCliente;
