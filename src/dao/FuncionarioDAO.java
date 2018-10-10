@@ -1,7 +1,10 @@
 package dao;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import model.Cargo;
+import model.Estado;
 import model.Funcionario;
 
 /**
@@ -84,6 +87,64 @@ public class FuncionarioDAO {
             pst.close();
             ConexaoDAO.closeInstance();
         }
+    }
+    
+    public Funcionario buscar(Funcionario funcionario) throws SQLException{
+        Funcionario retorno = new Funcionario();
+        
+        String SQL = "SELECT funcionario.id_funcionario, funcionario.nome_completo, estado.id_estado, estado.sigla, "
+                + "estado.descricao, funcionario.cep, funcionario.cidade, funcionario.endereco, funcionario.numero, "
+                + "funcionario.complemento, funcionario.bairro, funcionario.email, funcionario.telefone, "
+                + "funcionario.celular, funcionario.data_nascimento, funcionario.rg, funcionario.cpf, "
+                + "funcionario.login, funcionario.senha, funcionario.data_contratado, funcionario.data_demissao, "
+                + "funcionario.salario, cargo.id_cargo, cargo.nome_cargo "
+                + "FROM funcionario"
+                + "INNER JOIN estado ON estado.id_estado = funcionario.id_estado "
+                + "INNER JOIN cargo ON cargo.id_cargo = funcionario.id_cargo ";
+        
+        PreparedStatement pst = ConexaoDAO.getInstance().prepareStatement(SQL);
+        ResultSet rs = pst.executeQuery();
+        
+        if (rs.next()){
+            retorno.setId_funcionario(rs.getInt("id_funcionario"));
+            retorno.setNome_completo(rs.getString("nome_completo"));
+            
+            Estado estado = new Estado();
+            estado.setId_estado(rs.getInt("id_estado"));
+            estado.setSigla(rs.getString("sigla"));
+            estado.setDescricao(rs.getString("descricao"));
+            retorno.setEstado(estado);
+            
+            retorno.setCep(rs.getString("cep"));
+            retorno.setCidade(rs.getString("cidade"));
+            retorno.setEndereco(rs.getString("endereco"));
+            retorno.setNumero(rs.getString("numero"));
+            retorno.setComplemento(rs.getString("complemento"));
+            retorno.setBairro(rs.getString("bairro"));
+            retorno.setEmail(rs.getString("email"));
+            retorno.setTelefone(rs.getString("telefone"));
+            retorno.setCelular(rs.getString("celular"));
+            retorno.setData_nascimento(rs.getDate("data_nascimento"));
+            retorno.setRg(rs.getString("rg"));
+            retorno.setCpf(rs.getString("cpf"));
+            retorno.setLogin(rs.getString("login"));
+            retorno.setSenha(rs.getString("senha"));
+            retorno.setData_contratado(rs.getDate("data_contratado"));
+            retorno.setData_demissao(rs.getDate("data_demissao"));
+            retorno.setSalario(rs.getFloat("salario"));
+            
+            Cargo cargo = new Cargo();
+            cargo.setId_cargo(rs.getInt("id_cargo"));
+            cargo.setNome_cargo(rs.getString("nome_cargo"));
+            
+            retorno.setCargo(cargo);
+        }
+        
+        rs.close();
+        pst.close();
+        ConexaoDAO.closeInstance();
+        
+        return retorno;
     }
     
 }
