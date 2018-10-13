@@ -6,8 +6,10 @@
 package dao;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import model.Cliente;
+import model.Estado;
 
 /**
  *
@@ -46,6 +48,53 @@ public class ClienteDAO {
             pst.close();
             ConexaoDAO.closeInstance();
         
+    }
+    
+    public Cliente buscar(Cliente cliente) throws SQLException{
+        Cliente retorno = new Cliente();
+        
+        String SQL = "SELECT cliente.id_funcionario, cliente.nome_completo, estado.id_estado, estado.sigla, "
+                + "estado.descricao, cliente.cep, cliente.cidade, cliente.endereco, cliente.numero, "
+                + "cliente.complemento, cliente.bairro, cliente.email, cliente.telefone, "
+                + "cliente.celular, cliente.data_nascimento, cliente.rg, cliente.cpf, "
+                + "FROM cliente"
+                + "INNER JOIN estado ON estado.id_estado = cliente.id_estado ";
+                
+        
+        PreparedStatement pst = ConexaoDAO.getInstance().prepareStatement(SQL);
+        ResultSet rs = pst.executeQuery();
+        
+        if (rs.next()){
+            retorno.setId_cliente(rs.getInt("id_cliente"));
+            retorno.setNome_completo(rs.getString("nome_completo"));
+            
+            Estado estado = new Estado();
+            estado.setId_estado(rs.getInt("id_estado"));
+            estado.setSigla(rs.getString("sigla"));
+            estado.setDescricao(rs.getString("descricao"));
+            retorno.setEstado(estado);
+            
+            retorno.setCep(rs.getString("cep"));
+            retorno.setCidade(rs.getString("cidade"));
+            retorno.setEndereco(rs.getString("endereco"));
+            retorno.setNumero(rs.getString("numero"));
+            retorno.setComplemento(rs.getString("complemento"));
+            retorno.setBairro(rs.getString("bairro"));
+            retorno.setEmail(rs.getString("email"));
+            retorno.setTelefone(rs.getString("telefone"));
+            retorno.setCelular(rs.getString("celular"));
+            retorno.setData_nascimento(rs.getDate("data_nascimento"));
+            retorno.setRg(rs.getString("rg"));
+            retorno.setCpf(rs.getString("cpf"));
+            
+            
+            }
+        
+        rs.close();
+        pst.close();
+        ConexaoDAO.closeInstance();
+        
+        return retorno;
     }
     
 }
