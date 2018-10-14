@@ -6,6 +6,7 @@
 package dao;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import model.Produto;
 
@@ -21,7 +22,7 @@ public class ProdutoDAO {
     
     public void alterar(Produto produto) throws SQLException{
         
-        sql = "UPDATE produto SET nome_peca = ?, marca = ?, quantidae_estoque = ?, preco_compra = ?,"
+        sql = "UPDATE produto SET nome_peca = ?, marca = ?, quantidade_estoque = ?, preco_compra = ?,"
                     + "preco_venda = ?, fornecedor = ?, margem = ? WHERE id_produto = ?";
         pst = (PreparedStatement) ConexaoDAO.getInstance().prepareStatement(sql);
         pst.setString(1, produto.getNome_peca());
@@ -39,5 +40,36 @@ public class ProdutoDAO {
             ConexaoDAO.closeInstance();
         
     }
+    
+    public Produto buscar(Produto produto) throws SQLException{
+        String SQL = "SELECT id_produto, nome_peca, marca, quantidade_estoque, preco_compra,"
+                +"preco_venda, fornecedor, margem FROM produto WHERE produto.id_produto = ?";
+        
+        PreparedStatement pst = ConexaoDAO.getInstance().prepareStatement(SQL);
+        
+        pst.setInt(1, produto.getId_produto());
+        ResultSet rs = pst.executeQuery();
+        
+        if (rs.next()){
+            Produto retornoProduto = new Produto();
+            
+            retornoProduto.setId_produto(rs.getInt("id_produto"));
+            retornoProduto.setNome_peca(rs.getString("nome_peca"));
+            retornoProduto.setMarca(rs.getString("marca"));
+            retornoProduto.setQuantidade_estoque(rs.getInt("quantidade_estoque"));
+            retornoProduto.setPreco_compra(rs.getFloat("preco_compra"));
+            retornoProduto.setPreco_venda(rs.getFloat("preco_venda"));
+            retornoProduto.setFornecedor(rs.getString("fornecedor"));
+            retornoProduto.setMargem(rs.getString("margem"));
+            
+        }
+        
+        pst.close();
+        rs.close();
+        ConexaoDAO.closeInstance();
+        
+        return null;
+    }
+    
     
 }
