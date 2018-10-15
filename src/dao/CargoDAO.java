@@ -3,6 +3,7 @@ package dao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import model.Cargo;
 
 /**
@@ -63,5 +64,28 @@ public class CargoDAO {
         
         pst.close();
         ConexaoDAO.closeInstance();
+    }
+
+    public ArrayList<Cargo> listaCargo() throws SQLException{
+        ArrayList<Cargo> retorno = new ArrayList<>();
+        
+        String SQL = "SELECT * FROM cargo ORDER BY nome_cargo ASC";
+        
+        PreparedStatement pst = ConexaoDAO.getInstance().prepareStatement(SQL);
+        ResultSet rs = pst.executeQuery();
+        
+        while (rs.next()){
+            Cargo cargo = new Cargo();
+            
+            cargo.setId_cargo(rs.getInt("id_cargo"));
+            cargo.setNome_cargo(rs.getString("nome_cargo"));
+            retorno.add(cargo);
+        }
+        
+        pst.close();
+        rs.close();
+        ConexaoDAO.closeInstance();
+        
+        return retorno;
     }
 }

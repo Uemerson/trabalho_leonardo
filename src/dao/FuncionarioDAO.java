@@ -1,5 +1,8 @@
 package dao;
 
+import controller.GerarHash;
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,7 +16,7 @@ import model.Funcionario;
  */
 public class FuncionarioDAO {
     
-    public void alterar(Funcionario funcionario) throws SQLException{
+    public void alterar(Funcionario funcionario) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException{
         String SQL;
         
         if (funcionario.getSenha() != null){
@@ -40,7 +43,7 @@ public class FuncionarioDAO {
             pst.setString(13, funcionario.getRg());
             pst.setString(14, funcionario.getCpf());
             pst.setString(15, funcionario.getLogin());
-            pst.setString(16, funcionario.getSenha());
+            pst.setString(16, GerarHash.hash256(funcionario.getSenha()));
             pst.setDate(17, new java.sql.Date(funcionario.getData_contratado().getTime()));
             pst.setDate(18, (funcionario.getData_demissao() != null) ? new java.sql.Date(funcionario.getData_demissao().getTime()) : null);
             pst.setFloat(19, funcionario.getSalario());

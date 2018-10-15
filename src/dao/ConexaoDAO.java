@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 public class ConexaoDAO implements Serializable  {
     
@@ -19,7 +20,7 @@ public class ConexaoDAO implements Serializable  {
     private ConexaoDAO() {
         // Altere o usuário e senha de acordo com o banco de dados instalado
         usuario = "root";
-        senha = "tercio1996";
+        senha = "";
         
         // Defina aqui o nome do seu banco de dados
         url = "jdbc:mysql://localhost:3306/sistema_pecas";
@@ -27,8 +28,12 @@ public class ConexaoDAO implements Serializable  {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             connection = DriverManager.getConnection(url, usuario, senha);
-        } catch (ClassNotFoundException e) {
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
+            JOptionPane.showMessageDialog(null, "Não foi possivel conectar com o banco de dados\n"
+                    + "Entre em contato com o desenvolvedor!", "Sistema - Erro de conexão com banco de dados",
+                    JOptionPane.ERROR_MESSAGE);
+            System.out.println(e.getMessage());
+            System.exit(1);
         }
     }
 
