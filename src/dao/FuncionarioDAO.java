@@ -16,6 +16,42 @@ import model.Funcionario;
  */
 public class FuncionarioDAO {
     
+    public void inserir(Funcionario funcionario) throws SQLException{
+        String SQL = "INSERT funcionario (nome_completo, id_estado, cep, cidade, endereco"
+                + ", numero, complemento, bairro, email, telefone, celular, data_nascimento"
+                + ", rg, cpf, login, senha, data_contratado, data_demissao, salario, id_cargo) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        
+        PreparedStatement pst = ConexaoDAO.getInstance().prepareStatement(SQL);
+        
+        pst.setString(1, funcionario.getNome_completo());
+        pst.setInt(2, funcionario.getEstado().getId_estado());
+        pst.setString(3, funcionario.getCep());
+        pst.setString(4, funcionario.getCidade());
+        pst.setString(5, funcionario.getEndereco());
+        pst.setString(6, funcionario.getNumero());
+        pst.setString(7, funcionario.getComplemento());
+        pst.setString(8, funcionario.getBairro());
+        pst.setString(9, funcionario.getEmail());
+        pst.setString(10, funcionario.getTelefone());
+        pst.setString(11, funcionario.getCelular());
+        pst.setDate(12, new java.sql.Date(funcionario.getData_nascimento().getTime()));
+        pst.setString(13, funcionario.getRg());
+        pst.setString(14, funcionario.getCpf());
+        pst.setString(15, funcionario.getLogin());
+        pst.setString(16, funcionario.getSenha());
+        pst.setDate(17, new java.sql.Date(funcionario.getData_contratado().getTime()));
+        pst.setDate(18, new java.sql.Date(funcionario.getData_demissao().getTime()));
+        pst.setFloat(19, funcionario.getSalario());
+        pst.setInt(20, funcionario.getCargo().getId_cargo());
+        
+        pst.execute();
+        
+        pst.close();
+        ConexaoDAO.closeInstance();
+        
+    }
+    
     public void alterar(Funcionario funcionario) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException{
         String SQL;
         
@@ -148,6 +184,40 @@ public class FuncionarioDAO {
         ConexaoDAO.closeInstance();
         
         return retorno;
+    }
+    
+    public boolean verificaCpfDuplicado(Funcionario funcionario) throws SQLException{
+        String SQL = "SELECT funcionario.id_funcionario FROM funcionario WHERE funcionario.cpf = ?";
+        
+        //Editando cadastro
+        if (funcionario.getId_funcionario() != 0){
+            SQL += " AND id_funcionario != ?";
+        }
+        
+        PreparedStatement pst = ConexaoDAO.getInstance().prepareStatement(SQL);
+        
+        if (funcionario.getId_funcionario() != 0){
+            pst.setString(1, funcionario.getCpf());
+            pst.setInt(2, funcionario.getId_funcionario());
+        }else{
+            pst.setString(1, funcionario.getCpf());
+        }
+        
+        ResultSet rs = pst.executeQuery();
+        
+        if (rs.next()){
+            rs.close();
+            pst.close();
+            ConexaoDAO.closeInstance();
+
+            return true;                                                        //Existe CPF já cadastrado
+        }
+        
+        rs.close();
+        pst.close();
+        ConexaoDAO.closeInstance();
+        
+        return false;
     }
     
 }

@@ -11,6 +11,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -52,7 +53,9 @@ public class Funcoes {
         for (int i = 0; i < painel.getComponentCount(); i++) {
             // varre todos os componentes
             Component c = painel.getComponent(i);
-            c.setEnabled(true);
+
+            if (!(c instanceof JLabel))
+                c.setEnabled(true);
         }
     }
     
@@ -61,7 +64,9 @@ public class Funcoes {
         for (int i = 0; i < painel.getComponentCount(); i++) {
             // varre todos os componentes
             Component c = painel.getComponent(i);
-            c.setEnabled(false);
+            
+            if (!(c instanceof JLabel))
+                c.setEnabled(false);
         }
     }
     

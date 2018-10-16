@@ -87,8 +87,7 @@ public class ClienteDAO {
             retorno.setRg(rs.getString("rg"));
             retorno.setCpf(rs.getString("cpf"));
             
-            
-            }
+        }
         
         rs.close();
         pst.close();

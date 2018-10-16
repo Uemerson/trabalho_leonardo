@@ -7,6 +7,7 @@ import comboModel.EstadoComboModel;
 import controller.Funcoes;
 import dao.CargoDAO;
 import dao.EstadoDAO;
+import dao.FuncionarioDAO;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.sql.SQLException;
@@ -417,8 +418,8 @@ public class frmFuncionario extends javax.swing.JInternalFrame {
 
         tbpCadastro.addTab("Endereço", pnlEndereco);
 
-        txtBairro.setUpper(true);
-        txtBairro.setMaxLength(50);
+        txtEmail.setUpper(true);
+        txtEmail.setMaxLength(50);
         txtEmail.setEnabled(false);
 
         jLabel13.setText("Email");
@@ -835,6 +836,13 @@ public class frmFuncionario extends javax.swing.JInternalFrame {
             txtDataAdmissao.requestFocusInWindow();
         }
         
+        //Verifica se o email é valido
+        else if (!txtEmail.getText().isEmpty() && !Funcoes.isEmail(txtEmail.getText())) {
+            JOptionPane.showMessageDialog(null, "Entre com um Email válido!", "Sistema - Cadastro de funcionário", JOptionPane.ERROR_MESSAGE);
+            tbpCadastro.setSelectedComponent(pnlContato);
+            txtEmail.requestFocusInWindow();
+        }
+        
         //Todos os campos necessários preenchidos
         else{
             Funcionario funcionario = new Funcionario();
@@ -859,10 +867,10 @@ public class frmFuncionario extends javax.swing.JInternalFrame {
             
             funcionario.setEstado(estado);
             funcionario.setEndereco(txtEndereco.getText());
-            funcionario.setNumero(txtNumero.getText());
-            funcionario.setComplemento(txtComplemento.getText());
-            funcionario.setBairro(txtBairro.getText());
-            funcionario.setEmail(txtEmail.getText());
+            funcionario.setNumero((txtNumero.getText().isEmpty()) ? null : txtNumero.getText());
+            funcionario.setComplemento((txtComplemento.getText().isEmpty()) ? null : txtComplemento.getText());
+            funcionario.setBairro((txtBairro.getText().isEmpty()) ? null : txtBairro.getText());
+            funcionario.setEmail((txtEmail.getText().isEmpty()) ? null : txtEmail.getText());
             funcionario.setTelefone((txtTelefone.getValue() != null) ? 
                                     txtTelefone.getValue().toString().replace("(", "").replace(")", "").replace("-", "") : null);
             funcionario.setCelular((txtCelular.getValue() != null) ? 
@@ -890,9 +898,42 @@ public class frmFuncionario extends javax.swing.JInternalFrame {
                 Logger.getLogger(frmFuncionario.class.getName()).log(Level.SEVERE, null, ex);
             }
             
-            funcionario.setLogin(txtLogin.getText());
-            funcionario.setSenha(String.valueOf(txtSenha.getPassword()));
+            funcionario.setLogin((txtLogin.getText().isEmpty()) ? null : txtLogin.getText());
+            funcionario.setSenha((String.valueOf(txtSenha.getPassword()).isEmpty()) ? null : String.valueOf(txtSenha.getPassword()));
             
+            if (txtId.getText().equals("NOVO")){
+                FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
+                try {
+                    funcionarioDAO.inserir(funcionario);
+                    
+                    Funcoes.desativaCampos(pnlDados);
+                    Funcoes.desativaCampos(pnlEndereco);
+                    Funcoes.desativaCampos(pnlContato);
+                    Funcoes.desativaCampos(pnlEmpresa);
+                    Funcoes.desativaCampos(pnlSistema);
+
+                    Funcoes.limpaCampos(pnlDados);
+                    Funcoes.limpaCampos(pnlEndereco);
+                    Funcoes.limpaCampos(pnlContato);
+                    Funcoes.limpaCampos(pnlEmpresa);
+                    Funcoes.limpaCampos(pnlSistema);
+
+                    txtId.setText(null);
+                    txtId.setEnabled(false);
+
+                    btnNovo.setEnabled(true);
+                    btnSalvar.setEnabled(false);
+                    btnCancelar.setEnabled(false);
+                    btnEditar.setEnabled(false);
+                    btnExcluir.setEnabled(false);
+                    
+                    JOptionPane.showMessageDialog(null, "Cadastro de funcionário salvo com sucesso!", "Sistema - Cadstro de funcionário", JOptionPane.INFORMATION_MESSAGE);
+                    
+                } catch (SQLException ex) {
+                    Logger.getLogger(frmFuncionario.class.getName()).log(Level.SEVERE, null, ex);
+                    JOptionPane.showMessageDialog(null, "Erro ao tentar salvar funcionário", "Sistema - Cadastro de funcionário", JOptionPane.ERROR_MESSAGE);
+                }
+            }
         }
     }//GEN-LAST:event_btnSalvarActionPerformed
 
@@ -911,6 +952,21 @@ public class frmFuncionario extends javax.swing.JInternalFrame {
             });
             
             JOptionPane.showMessageDialog(null, "CPF inválido, tente novamente!", "Sistema - Cadastro de funcionário", JOptionPane.ERROR_MESSAGE);
+       
+        }else{
+            //Verifica se o CPF está duplicada
+            Funcionario funcionario = new Funcionario();
+            funcionario.setCpf(txtCpf.getText().replace(".", "").replace("-", "").replace(" ", ""));
+            FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
+            try {
+                if (funcionarioDAO.verificaCpfDuplicado(funcionario)){
+                    JOptionPane.showMessageDialog(null, "Já existe cadastro com esse CPF, tente novamente!", "Sistema - Cadastro de funcionário", JOptionPane.ERROR_MESSAGE);
+                    txtCpf.setValue(null);
+                    txtCpf.requestFocusInWindow();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(frmFuncionario.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_txtCpfFocusLost
 
