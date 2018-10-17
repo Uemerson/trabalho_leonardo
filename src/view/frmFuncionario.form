@@ -97,6 +97,9 @@
         <Property name="text" type="java.lang.String" value="Pesquisar (F6)"/>
         <Property name="horizontalTextPosition" type="int" value="4"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPesquisarActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JSeparator" name="jSeparator1">
     </Component>
@@ -325,6 +328,7 @@
             </Component>
             <Component class="controller.TextFieldIconPlaceHolder" name="txtId">
               <Properties>
+                <Property name="horizontalAlignment" type="int" value="0"/>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
             </Component>
@@ -768,6 +772,9 @@
               <Properties>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
+              <Events>
+                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtSalarioFocusLost"/>
+              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="txtSalario.setUpper(true);&#xa;txtSalario.setMaxLength(14); //999.999.999,99"/>
               </AuxValues>

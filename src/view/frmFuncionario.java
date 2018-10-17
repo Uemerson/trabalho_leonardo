@@ -8,6 +8,7 @@ import controller.Funcoes;
 import dao.CargoDAO;
 import dao.EstadoDAO;
 import dao.FuncionarioDAO;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.sql.SQLException;
@@ -17,6 +18,7 @@ import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.plaf.basic.BasicInternalFrameUI;
 import model.Cargo;
 import model.Estado;
 import model.Funcionario;
@@ -28,6 +30,10 @@ import model.Funcionario;
 public class frmFuncionario extends javax.swing.JInternalFrame {
     public frmFuncionario() {
         initComponents();
+        
+        // Hack para remover icone do nimbus
+        Container pane = ((BasicInternalFrameUI) this.getUI()).getNorthPane();
+        pane.getComponent(0).setVisible(false);
         
         try {
             //Carrrega lista de estados na caixa de seleção
@@ -129,6 +135,11 @@ public class frmFuncionario extends javax.swing.JInternalFrame {
         btnPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/pesquisar 24x24.png"))); // NOI18N
         btnPesquisar.setText("Pesquisar (F6)");
         btnPesquisar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btnPesquisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPesquisarActionPerformed(evt);
+            }
+        });
 
         lblImagemFormulario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/boss 64x64.png"))); // NOI18N
 
@@ -220,6 +231,7 @@ public class frmFuncionario extends javax.swing.JInternalFrame {
 
         jLabel20.setText("Data Nascimento*");
 
+        txtId.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtId.setEnabled(false);
 
         jLabel23.setText("Campos com * devem ser preenchidos obrigatóriamente");
@@ -504,6 +516,11 @@ public class frmFuncionario extends javax.swing.JInternalFrame {
         txtSalario.setUpper(true);
         txtSalario.setMaxLength(14); //999.999.999,99
         txtSalario.setEnabled(false);
+        txtSalario.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtSalarioFocusLost(evt);
+            }
+        });
 
         jLabel16.setText("Data Admissão*");
 
@@ -713,6 +730,7 @@ public class frmFuncionario extends javax.swing.JInternalFrame {
         btnCancelar.setEnabled(true);
         btnEditar.setEnabled(false);
         btnExcluir.setEnabled(false);
+        btnPesquisar.setEnabled(false);
         
         tbpCadastro.setSelectedComponent(pnlDados);
         txtNomeCompleto.requestFocusInWindow();
@@ -775,6 +793,7 @@ public class frmFuncionario extends javax.swing.JInternalFrame {
             btnCancelar.setEnabled(false);
             btnEditar.setEnabled(false);
             btnExcluir.setEnabled(false);
+            btnPesquisar.setEnabled(true);
         }
     }//GEN-LAST:event_btnCancelarActionPerformed
 
@@ -926,6 +945,7 @@ public class frmFuncionario extends javax.swing.JInternalFrame {
                     btnCancelar.setEnabled(false);
                     btnEditar.setEnabled(false);
                     btnExcluir.setEnabled(false);
+                    btnPesquisar.setEnabled(true);
                     
                     JOptionPane.showMessageDialog(null, "Cadastro de funcionário salvo com sucesso!", "Sistema - Cadstro de funcionário", JOptionPane.INFORMATION_MESSAGE);
                     
@@ -1015,6 +1035,29 @@ public class frmFuncionario extends javax.swing.JInternalFrame {
             }
         }
     }//GEN-LAST:event_txtDataDemissaoFocusLost
+
+    private void txtSalarioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSalarioFocusLost
+        if (!txtSalario.getText().isEmpty()){
+            try{
+                Float.parseFloat(txtSalario.getText());
+            }catch(NumberFormatException ex){
+                txtSalario.setText(null);
+                txtSalario.requestFocusInWindow();                
+                JOptionPane.showMessageDialog(null, "Salário invalido", "Sistema - Cadastro de funcionário", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_txtSalarioFocusLost
+
+    private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
+        frmPesquisaFuncionario pesquisarFuncionario = new frmPesquisaFuncionario(null, true);
+        pesquisarFuncionario.setVisible(true);
+        
+        Funcionario funcionarioSelecionado = pesquisarFuncionario.getFuncionarioSelecionado();
+        
+        if (funcionarioSelecionado != null)
+            txtId.setText(Integer.toString(funcionarioSelecionado.getId_funcionario()));
+        
+    }//GEN-LAST:event_btnPesquisarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;

@@ -6,6 +6,7 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import model.Cargo;
 import model.Estado;
 import model.Funcionario;
@@ -218,6 +219,78 @@ public class FuncionarioDAO {
         ConexaoDAO.closeInstance();
         
         return false;
+    }
+    
+    public ArrayList<Funcionario> listaFuncionarioPesquisar(Funcionario funcionario) throws SQLException{
+        ArrayList<Funcionario> listaFuncionario = new ArrayList<Funcionario>();
+        
+        String SQL = "SELECT funcionario.id_funcionario, funcionario.nome_completo, funcionario.cep, "
+                + "funcionario.cidade, funcionario.endereco, "
+                + "funcionario.bairro, funcionario.rg, funcionario.cpf "
+                + "FROM funcionario ";
+                
+        if (funcionario != null){
+            if (funcionario.getId_funcionario() != 0){
+                SQL += "WHERE id_funcionario = ?";
+            }else if (funcionario.getNome_completo() != null){
+                SQL += "WHERE nome_completo LIKE ?";
+            }else if (funcionario.getCpf() != null){
+                SQL += "WHERE cpf LIKE ?";
+            }else if (funcionario.getRg() != null){
+                SQL += "WHERE rg LIKE ?";
+            }else if (funcionario.getCep() != null){
+                SQL += "WHERE cep LIKE ?";
+            }else if (funcionario.getCidade() != null){
+                SQL += "WHERE cidade LIKE ?";
+            }else if (funcionario.getEndereco() != null){
+                SQL += "WHERE endereco LIKE ?";
+            }else if (funcionario.getBairro() != null){
+                SQL += "WHERE bairro LIKE ?";
+            }
+        }
+        
+        PreparedStatement pst = ConexaoDAO.getInstance().prepareStatement(SQL);
+        
+        if (funcionario != null){
+            if (funcionario.getId_funcionario() != 0){
+                pst.setInt(1, funcionario.getId_funcionario());
+            }else if (funcionario.getNome_completo() != null){
+                pst.setString(1, funcionario.getNome_completo() + "%");
+            }else if (funcionario.getCpf() != null){
+                pst.setString(1, funcionario.getCpf() + "%");
+            }else if (funcionario.getRg() != null){
+                pst.setString(1, funcionario.getRg() + "%");
+            }else if (funcionario.getCep() != null){
+                pst.setString(1, funcionario.getCep() + "%");
+            }else if (funcionario.getCidade() != null){
+                pst.setString(1, funcionario.getCidade() + "%");
+            }else if (funcionario.getEndereco() != null){
+                pst.setString(1, funcionario.getEndereco() + "%");
+            }else if (funcionario.getBairro() != null){
+                pst.setString(1, funcionario.getBairro() + "%");
+            }
+        }
+        
+        ResultSet rs = pst.executeQuery();
+        
+        while (rs.next()){
+            Funcionario funcionarioRetornado = new Funcionario();
+            funcionarioRetornado.setId_funcionario(rs.getInt("id_funcionario"));
+            funcionarioRetornado.setNome_completo(rs.getString("nome_completo"));
+            funcionarioRetornado.setCep(rs.getString("cep"));
+            funcionarioRetornado.setCidade(rs.getString("cidade"));
+            funcionarioRetornado.setEndereco(rs.getString("endereco"));
+            funcionarioRetornado.setBairro(rs.getString("bairro"));
+            funcionarioRetornado.setRg(rs.getString("rg"));
+            funcionarioRetornado.setCpf(rs.getString("cpf"));
+            listaFuncionario.add(funcionarioRetornado);
+        }
+        
+        pst.close();
+        rs.close();
+        ConexaoDAO.closeInstance();
+        
+        return listaFuncionario;
     }
     
 }
