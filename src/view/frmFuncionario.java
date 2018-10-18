@@ -11,6 +11,8 @@ import dao.FuncionarioDAO;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -123,7 +125,7 @@ public class frmFuncionario extends javax.swing.JInternalFrame {
         pnlSistema = new javax.swing.JPanel();
         jLabel21 = new javax.swing.JLabel();
         txtLogin = new controller.TextFieldIconPlaceHolder();
-        jLabel22 = new javax.swing.JLabel();
+        lblSenha = new javax.swing.JLabel();
         txtSenha = new controller.PasswordFieldIconPlaceHolder();
 
         setClosable(true);
@@ -156,11 +158,21 @@ public class frmFuncionario extends javax.swing.JInternalFrame {
         btnExcluir.setText("Excluir (F2)");
         btnExcluir.setEnabled(false);
         btnExcluir.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
 
         btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/editar 24x24.png"))); // NOI18N
         btnEditar.setText("Editar (F3)");
         btnEditar.setEnabled(false);
         btnEditar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
 
         btnSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/salvar 24x24.png"))); // NOI18N
         btnSalvar.setText("Salvar (F4)");
@@ -447,6 +459,11 @@ public class frmFuncionario extends javax.swing.JInternalFrame {
         }
         txtTelefone.setText(null);
         txtTelefone.setEnabled(false);
+        txtTelefone.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtTelefoneFocusLost(evt);
+            }
+        });
 
         try {
             javax.swing.text.MaskFormatter mascaraCelular = new javax.swing.text.MaskFormatter("(**)*####-####");
@@ -613,7 +630,7 @@ public class frmFuncionario extends javax.swing.JInternalFrame {
         txtLogin.setMaxLength(50);
         txtLogin.setEnabled(false);
 
-        jLabel22.setText("Senha");
+        lblSenha.setText("Senha");
 
         txtSenha.setEchoChar('\u25cf');
         txtSenha.setEnabled(false);
@@ -635,7 +652,7 @@ public class frmFuncionario extends javax.swing.JInternalFrame {
                 .addGroup(pnlSistemaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel21)
                     .addComponent(txtLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 385, Short.MAX_VALUE)
-                    .addComponent(jLabel22)
+                    .addComponent(lblSenha)
                     .addComponent(txtSenha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(437, Short.MAX_VALUE))
         );
@@ -647,7 +664,7 @@ public class frmFuncionario extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel22)
+                .addComponent(lblSenha)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(146, Short.MAX_VALUE))
@@ -772,13 +789,20 @@ public class frmFuncionario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtSenhaKeyPressed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        Funcoes.desativaCampos(pnlDados);
+        Funcoes.desativaCampos(pnlEndereco);
+        Funcoes.desativaCampos(pnlContato);
+        Funcoes.desativaCampos(pnlEmpresa);
+        Funcoes.desativaCampos(pnlSistema);
+        
+        btnNovo.setEnabled(true);
+        btnSalvar.setEnabled(false);
+        btnCancelar.setEnabled(false);
+        btnEditar.setEnabled(false);
+        btnExcluir.setEnabled(false);
+        btnPesquisar.setEnabled(true);
+        
         if (txtId.getText().equals("NOVO")){
-            Funcoes.desativaCampos(pnlDados);
-            Funcoes.desativaCampos(pnlEndereco);
-            Funcoes.desativaCampos(pnlContato);
-            Funcoes.desativaCampos(pnlEmpresa);
-            Funcoes.desativaCampos(pnlSistema);
-
             Funcoes.limpaCampos(pnlDados);
             Funcoes.limpaCampos(pnlEndereco);
             Funcoes.limpaCampos(pnlContato);
@@ -787,14 +811,56 @@ public class frmFuncionario extends javax.swing.JInternalFrame {
 
             txtId.setText(null);
             txtId.setEnabled(false);
-
-            btnNovo.setEnabled(true);
-            btnSalvar.setEnabled(false);
-            btnCancelar.setEnabled(false);
-            btnEditar.setEnabled(false);
-            btnExcluir.setEnabled(false);
-            btnPesquisar.setEnabled(true);
+        }else{
+            
+            //Retorna os dados que estão cadastrados no banco
+            try {
+                FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
+                Funcionario funcionarioId = new Funcionario();
+                funcionarioId.setId_funcionario(Integer.parseInt(txtId.getText()));
+                Funcionario funcionario = funcionarioDAO.buscar(funcionarioId);
+                
+                txtNomeCompleto.setText(funcionario.getNome_completo());
+                
+                javax.swing.text.MaskFormatter mask = new javax.swing.text.MaskFormatter("###.###.###-##");
+                mask.setValueContainsLiteralCharacters(false);
+                
+                txtCpf.setValue(mask.valueToString(funcionario.getCpf()));
+                txtRG.setText(funcionario.getRg());
+                txtDataNascimento.setValue(new SimpleDateFormat("dd/MM/yyyy").format(funcionario.getData_nascimento()));
+                
+                mask.setMask("#####-###");
+                txtCep.setValue(mask.valueToString(funcionario.getCep()));
+                txtCidade.setText(funcionario.getCidade());
+                cbEstado.getModel().setSelectedItem(funcionario.getEstado());
+                txtEndereco.setText(funcionario.getEndereco());
+                txtNumero.setText(funcionario.getNumero());
+                txtComplemento.setText(funcionario.getComplemento());
+                txtBairro.setText(funcionario.getBairro());
+                txtEmail.setText(funcionario.getEmail());
+                
+                mask.setMask("(**)####-####");
+                mask.setValidCharacters("0123456789 ");
+                txtTelefone.setValue((funcionario.getTelefone() != null) ? mask.valueToString(funcionario.getTelefone()) : null);
+                
+                mask.setMask("(**)*####-####");
+                mask.setValidCharacters("0123456789 ");
+                txtCelular.setValue((funcionario.getCelular() != null) ? mask.valueToString(funcionario.getCelular()) : null);
+                cbCargo.getModel().setSelectedItem(funcionario.getCargo());
+                txtSalario.setText(Float.toString(funcionario.getSalario()));
+                
+                txtDataAdmissao.setValue(new SimpleDateFormat("dd/MM/yyyy").format(funcionario.getData_contratado()));
+                txtDataDemissao.setValue((funcionario.getData_demissao() != null) ? new SimpleDateFormat("dd/MM/yyyy").format(funcionario.getData_demissao()) : null);
+                txtLogin.setText(funcionario.getLogin());
+                txtSenha.setText(null);
+                
+                btnEditar.setEnabled(true);
+                btnExcluir.setEnabled(true);
+            } catch (SQLException | ParseException ex) {
+                Logger.getLogger(frmFuncionario.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
+        
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
@@ -912,7 +978,7 @@ public class frmFuncionario extends javax.swing.JInternalFrame {
             try {
                 SimpleDateFormat dateFormat = new SimpleDateFormat ("dd/MM/yyyy");
                 dateFormat.setLenient (false); // Não permite transformar essa data caso a pessoa entre com uma data errada
-                funcionario.setData_demissao(dateFormat.parse(txtDataNascimento.getValue().toString()));
+                funcionario.setData_demissao((txtDataDemissao.getValue() != null) ? dateFormat.parse(txtDataDemissao.getValue().toString()) : null);
             } catch (ParseException ex) {
                 Logger.getLogger(frmFuncionario.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -920,7 +986,7 @@ public class frmFuncionario extends javax.swing.JInternalFrame {
             funcionario.setLogin((txtLogin.getText().isEmpty()) ? null : txtLogin.getText());
             funcionario.setSenha((String.valueOf(txtSenha.getPassword()).isEmpty()) ? null : String.valueOf(txtSenha.getPassword()));
             
-            if (txtId.getText().equals("NOVO")){
+            if (txtId.getText().equals("NOVO")){ //Inserindo um novo funcionário
                 FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
                 try {
                     funcionarioDAO.inserir(funcionario);
@@ -953,6 +1019,33 @@ public class frmFuncionario extends javax.swing.JInternalFrame {
                     Logger.getLogger(frmFuncionario.class.getName()).log(Level.SEVERE, null, ex);
                     JOptionPane.showMessageDialog(null, "Erro ao tentar salvar funcionário", "Sistema - Cadastro de funcionário", JOptionPane.ERROR_MESSAGE);
                 }
+            }else { //Atualizando os dados do funcionário
+                funcionario.setId_funcionario(Integer.parseInt(txtId.getText()));
+                FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
+                try {
+                    funcionarioDAO.alterar(funcionario);
+                    
+                    Funcoes.desativaCampos(pnlDados);
+                    Funcoes.desativaCampos(pnlEndereco);
+                    Funcoes.desativaCampos(pnlContato);
+                    Funcoes.desativaCampos(pnlEmpresa);
+                    Funcoes.desativaCampos(pnlSistema);
+
+                    btnNovo.setEnabled(true);
+                    btnSalvar.setEnabled(false);
+                    btnCancelar.setEnabled(false);
+                    btnEditar.setEnabled(true);
+                    btnExcluir.setEnabled(true);
+                    btnPesquisar.setEnabled(true);
+                    
+                    txtSenha.setText(null);
+                    
+                    JOptionPane.showMessageDialog(null, "Cadastro de funcionário alterado com sucesso!", "Sistema - Cadstro de funcionário", JOptionPane.INFORMATION_MESSAGE);
+                    
+                } catch (UnsupportedEncodingException | NoSuchAlgorithmException | SQLException ex) {
+                    Logger.getLogger(frmFuncionario.class.getName()).log(Level.SEVERE, null, ex);
+                    JOptionPane.showMessageDialog(null, "Erro ao tentar alterar funcionário", "Sistema - Cadastro de funcionário", JOptionPane.ERROR_MESSAGE);
+                }
             }
         }
     }//GEN-LAST:event_btnSalvarActionPerformed
@@ -976,6 +1069,10 @@ public class frmFuncionario extends javax.swing.JInternalFrame {
         }else{
             //Verifica se o CPF está duplicada
             Funcionario funcionario = new Funcionario();
+            
+            if (!txtId.getText().equals("NOVO") && !txtId.getText().isEmpty())
+                funcionario.setId_funcionario(Integer.parseInt(txtId.getText()));
+            
             funcionario.setCpf(txtCpf.getText().replace(".", "").replace("-", "").replace(" ", ""));
             FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
             try {
@@ -1022,7 +1119,9 @@ public class frmFuncionario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtDataAdmissaoFocusLost
 
     private void txtDataDemissaoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDataDemissaoFocusLost
-        if (txtDataDemissao.getText().replace("/", "").trim().length() >= 8){
+        if (txtDataDemissao.getText().replace("/", "").trim().length() <= 0){
+            txtDataDemissao.setValue(null);
+        }else if (txtDataDemissao.getText().replace("/", "").trim().length() >= 8){
             DateFormat df = new SimpleDateFormat ("dd/MM/yyyy");
             df.setLenient (false); // Não permite transformar essa data caso a pessoa entre com uma data errada
             try {
@@ -1049,15 +1148,154 @@ public class frmFuncionario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtSalarioFocusLost
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
+        Funcoes.desativaCampos(pnlDados);
+        Funcoes.desativaCampos(pnlEndereco);
+        Funcoes.desativaCampos(pnlContato);
+        Funcoes.desativaCampos(pnlEmpresa);
+        Funcoes.desativaCampos(pnlSistema);
+
+        Funcoes.limpaCampos(pnlDados);
+        Funcoes.limpaCampos(pnlEndereco);
+        Funcoes.limpaCampos(pnlContato);
+        Funcoes.limpaCampos(pnlEmpresa);
+        Funcoes.limpaCampos(pnlSistema);
+
+        txtId.setText(null);
+        txtId.setEnabled(false);
+
+        btnNovo.setEnabled(true);
+        btnSalvar.setEnabled(false);
+        btnCancelar.setEnabled(false);
+        btnEditar.setEnabled(false);
+        btnExcluir.setEnabled(false);
+        btnPesquisar.setEnabled(true);
+        
         frmPesquisaFuncionario pesquisarFuncionario = new frmPesquisaFuncionario(null, true);
         pesquisarFuncionario.setVisible(true);
         
         Funcionario funcionarioSelecionado = pesquisarFuncionario.getFuncionarioSelecionado();
         
-        if (funcionarioSelecionado != null)
+        if (funcionarioSelecionado != null){
             txtId.setText(Integer.toString(funcionarioSelecionado.getId_funcionario()));
+            btnEditar.setEnabled(true);
+            btnExcluir.setEnabled(true);
+            
+            try {
+                FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
+                Funcionario funcionario = funcionarioDAO.buscar(funcionarioSelecionado);
+                
+                txtNomeCompleto.setText(funcionario.getNome_completo());
+                
+                javax.swing.text.MaskFormatter mask = new javax.swing.text.MaskFormatter("###.###.###-##");
+                mask.setValueContainsLiteralCharacters(false);
+                
+                txtCpf.setValue(mask.valueToString(funcionario.getCpf()));
+                txtRG.setText(funcionario.getRg());
+                txtDataNascimento.setValue(new SimpleDateFormat("dd/MM/yyyy").format(funcionario.getData_nascimento()));
+                
+                mask.setMask("#####-###");
+                txtCep.setValue(mask.valueToString(funcionario.getCep()));
+                txtCidade.setText(funcionario.getCidade());
+                cbEstado.getModel().setSelectedItem(funcionario.getEstado());
+                txtEndereco.setText(funcionario.getEndereco());
+                txtNumero.setText(funcionario.getNumero());
+                txtComplemento.setText(funcionario.getComplemento());
+                txtBairro.setText(funcionario.getBairro());
+                txtEmail.setText(funcionario.getEmail());
+                
+                mask.setMask("(**)####-####");
+                mask.setValidCharacters("0123456789 ");
+                txtTelefone.setValue((funcionario.getTelefone() != null) ? mask.valueToString(funcionario.getTelefone()) : null);
+                
+                mask.setMask("(**)*####-####");
+                mask.setValidCharacters("0123456789 ");
+                txtCelular.setValue((funcionario.getCelular() != null) ? mask.valueToString(funcionario.getCelular()) : null);
+                cbCargo.getModel().setSelectedItem(funcionario.getCargo());
+                txtSalario.setText(Float.toString(funcionario.getSalario()));
+                
+                txtDataAdmissao.setValue(new SimpleDateFormat("dd/MM/yyyy").format(funcionario.getData_contratado()));
+                txtDataDemissao.setValue((funcionario.getData_demissao() != null) ? new SimpleDateFormat("dd/MM/yyyy").format(funcionario.getData_demissao()) : null);
+                txtLogin.setText(funcionario.getLogin());
+                
+            } catch (SQLException | ParseException ex) {
+                Logger.getLogger(frmFuncionario.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+        }
         
     }//GEN-LAST:event_btnPesquisarActionPerformed
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        if (JOptionPane.showConfirmDialog(null, "Deseja realmente excluir o cadastro do funcionário?", 
+                    "Sistema - Cadastro de funcionário", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
+
+            try {
+                FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
+                Funcionario funcionario = new Funcionario();
+                funcionario.setId_funcionario(Integer.parseInt(txtId.getText()));
+                funcionarioDAO.excluir(funcionario);
+                
+                Funcoes.desativaCampos(pnlDados);
+                Funcoes.desativaCampos(pnlEndereco);
+                Funcoes.desativaCampos(pnlContato);
+                Funcoes.desativaCampos(pnlEmpresa);
+                Funcoes.desativaCampos(pnlSistema);
+
+                Funcoes.limpaCampos(pnlDados);
+                Funcoes.limpaCampos(pnlEndereco);
+                Funcoes.limpaCampos(pnlContato);
+                Funcoes.limpaCampos(pnlEmpresa);
+                Funcoes.limpaCampos(pnlSistema);
+
+                txtId.setText(null);
+                txtId.setEnabled(false);
+
+                btnNovo.setEnabled(true);
+                btnSalvar.setEnabled(false);
+                btnCancelar.setEnabled(false);
+                btnEditar.setEnabled(false);
+                btnExcluir.setEnabled(false);
+                btnPesquisar.setEnabled(true);
+                
+                JOptionPane.showMessageDialog(null, "Funcionário excluído com sucesso!", "Sistema - Cadastro de funcionário", JOptionPane.INFORMATION_MESSAGE);
+
+            } catch (SQLException ex) {
+                Logger.getLogger(frmFuncionario.class.getName()).log(Level.SEVERE, null, ex);
+
+                if(ex instanceof java.sql.SQLIntegrityConstraintViolationException){
+                    JOptionPane.showMessageDialog(null, "Erro - Não foi possível excluir cadastro do funcionário.\nExistem dados vinculados com esse cadastro!", 
+                                            "Sistema - Cadastro de funcionário", JOptionPane.ERROR_MESSAGE);
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "Erro - Não foi possível excluir cadastro do funcionário, entre em contato com o desenvolvedor!", 
+                                                "Sistema - Cadastro de funcionário", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+            
+        }
+    }//GEN-LAST:event_btnExcluirActionPerformed
+
+    private void txtTelefoneFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtTelefoneFocusLost
+        if (txtTelefone.getText().replace("-", "").replace("(", "").replace(")", "").trim().length() <= 0)
+            txtTelefone.setValue(null);
+    }//GEN-LAST:event_txtTelefoneFocusLost
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        Funcoes.ativaCampos(pnlDados);
+        Funcoes.ativaCampos(pnlEndereco);
+        Funcoes.ativaCampos(pnlContato);
+        Funcoes.ativaCampos(pnlEmpresa);
+        Funcoes.ativaCampos(pnlSistema);
+        
+        txtId.setEnabled(false);
+        
+        btnNovo.setEnabled(false);
+        btnSalvar.setEnabled(true);
+        btnCancelar.setEnabled(true);
+        btnEditar.setEnabled(false);
+        btnExcluir.setEnabled(false);
+        btnPesquisar.setEnabled(false);
+    }//GEN-LAST:event_btnEditarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
@@ -1083,7 +1321,6 @@ public class frmFuncionario extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -1094,6 +1331,7 @@ public class frmFuncionario extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lblImagemFormulario;
+    private javax.swing.JLabel lblSenha;
     private javax.swing.JPanel pnlContato;
     private javax.swing.JPanel pnlDados;
     private javax.swing.JPanel pnlEmpresa;

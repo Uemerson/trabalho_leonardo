@@ -42,7 +42,7 @@ public class FuncionarioDAO {
         pst.setString(15, funcionario.getLogin());
         pst.setString(16, funcionario.getSenha());
         pst.setDate(17, new java.sql.Date(funcionario.getData_contratado().getTime()));
-        pst.setDate(18, new java.sql.Date(funcionario.getData_demissao().getTime()));
+        pst.setDate(18, (funcionario.getData_demissao() != null) ? new java.sql.Date(funcionario.getData_demissao().getTime()) : null);
         pst.setFloat(19, funcionario.getSalario());
         pst.setInt(20, funcionario.getCargo().getId_cargo());
         
@@ -129,6 +129,16 @@ public class FuncionarioDAO {
         }
     }
     
+    public void excluir(Funcionario funcionario) throws SQLException{
+        String SQL = "DELETE FROM funcionario WHERE id_funcionario = ?";
+        PreparedStatement pst = ConexaoDAO.getInstance().prepareStatement(SQL);
+        pst.setInt(1, funcionario.getId_funcionario());
+        
+        pst.execute();
+        pst.close();
+        ConexaoDAO.closeInstance();
+    }
+    
     public Funcionario buscar(Funcionario funcionario) throws SQLException{
         Funcionario retorno = new Funcionario();
         
@@ -138,11 +148,13 @@ public class FuncionarioDAO {
                 + "funcionario.celular, funcionario.data_nascimento, funcionario.rg, funcionario.cpf, "
                 + "funcionario.login, funcionario.senha, funcionario.data_contratado, funcionario.data_demissao, "
                 + "funcionario.salario, cargo.id_cargo, cargo.nome_cargo "
-                + "FROM funcionario"
+                + "FROM funcionario "
                 + "INNER JOIN estado ON estado.id_estado = funcionario.id_estado "
-                + "INNER JOIN cargo ON cargo.id_cargo = funcionario.id_cargo ";
+                + "INNER JOIN cargo ON cargo.id_cargo = funcionario.id_cargo "
+                + "WHERE funcionario.id_funcionario = ?";
         
         PreparedStatement pst = ConexaoDAO.getInstance().prepareStatement(SQL);
+        pst.setInt(1, funcionario.getId_funcionario());
         ResultSet rs = pst.executeQuery();
         
         if (rs.next()){
