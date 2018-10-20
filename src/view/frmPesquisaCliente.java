@@ -1,7 +1,7 @@
 package view;
 
 import controller.JTextFieldLimit;
-import dao.FuncionarioDAO;
+import dao.ClienteDAO;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
@@ -11,29 +11,30 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-import model.Funcionario;
+import model.Cliente;
+import tableModel.PesquisarClienteTableModel;
 import tableModel.PesquisarFuncionarioTableModel;
 
 /**
  *
  * @author UEMERSON
  */
-public class frmPesquisaFuncionario extends javax.swing.JDialog {
+public class frmPesquisaCliente extends javax.swing.JDialog {
     
     //Variaveis
-    Funcionario funcionarioSelecionado = null;
-    String ultimaColunaSelecionada = null;
+    private Cliente clienteSelecionado = null;
+    private String ultimaColunaSelecionada = null;
     
-    public frmPesquisaFuncionario(java.awt.Frame parent, boolean modal) {
+    public frmPesquisaCliente(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
         
-        tbFuncionario.getTableHeader().addMouseListener(new MouseAdapter() {
+        tbCliente.getTableHeader().addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                    int col = tbFuncionario.columnAtPoint(e.getPoint());
-                    String name = tbFuncionario.getColumnName(col);
+                    int col = tbCliente.columnAtPoint(e.getPoint());
+                    String name = tbCliente.getColumnName(col);
                     //System.out.println("Column index selected " + col + " " + name);
 
                     lblPesquisarPor.setText("Pesquisar pelo(a) " + name);
@@ -92,55 +93,55 @@ public class frmPesquisaFuncionario extends javax.swing.JDialog {
     }
 
     private void atualizarTabela(){
-        FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
-        Funcionario funcionario = null;
+        ClienteDAO clienteDAO = new ClienteDAO();
+        Cliente cliente = null;
         
         if (ultimaColunaSelecionada.equals("ID") && !txtBuscar.getText().isEmpty()){
-            funcionario = new Funcionario();
-            funcionario.setId_funcionario(Integer.parseInt(txtBuscar.getText()));
+            cliente = new Cliente();
+            cliente.setId_cliente(Integer.parseInt(txtBuscar.getText()));
         }else if (ultimaColunaSelecionada.equals("NOME COMPLETO") && !txtBuscar.getText().isEmpty()){
-            funcionario = new Funcionario();
-            funcionario.setNome_completo(txtBuscar.getText());
+            cliente = new Cliente();
+            cliente.setNome_completo(txtBuscar.getText());
         }else if (ultimaColunaSelecionada.equals("CPF") && !txtBuscar.getText().isEmpty()){
-            funcionario = new Funcionario();
-            funcionario.setCpf(txtBuscar.getText());
+            cliente = new Cliente();
+            cliente.setCpf(txtBuscar.getText());
         }else if (ultimaColunaSelecionada.equals("RG") && !txtBuscar.getText().isEmpty()){
-            funcionario = new Funcionario();
-            funcionario.setRg(txtBuscar.getText());
+            cliente = new Cliente();
+            cliente.setRg(txtBuscar.getText());
         }else if (ultimaColunaSelecionada.equals("CEP") && !txtBuscar.getText().isEmpty()){
-            funcionario = new Funcionario();
-            funcionario.setCep(txtBuscar.getText());
+            cliente = new Cliente();
+            cliente.setCep(txtBuscar.getText());
         }else if (ultimaColunaSelecionada.equals("CIDADE") && !txtBuscar.getText().isEmpty()){
-            funcionario = new Funcionario();
-            funcionario.setCidade(txtBuscar.getText());
+            cliente = new Cliente();
+            cliente.setCidade(txtBuscar.getText());
         }else if (ultimaColunaSelecionada.equals("ENDEREÇO") && !txtBuscar.getText().isEmpty()){
-            funcionario = new Funcionario();
-            funcionario.setEndereco(txtBuscar.getText());
+            cliente = new Cliente();
+            cliente.setEndereco(txtBuscar.getText());
         }else if (ultimaColunaSelecionada.equals("BAIRRO") && !txtBuscar.getText().isEmpty()){
-            funcionario = new Funcionario();
-            funcionario.setBairro(txtBuscar.getText());
+            cliente = new Cliente();
+            cliente.setBairro(txtBuscar.getText());
         }
             
         try {
-            PesquisarFuncionarioTableModel pesquisarFuncionarioTableModel = new PesquisarFuncionarioTableModel(funcionarioDAO.listaFuncionarioPesquisar(funcionario));
+            PesquisarClienteTableModel pesquisarClienteTableModel = new PesquisarClienteTableModel(clienteDAO.listaFuncionarioPesquisar(cliente));
             
-            tbFuncionario.setModel(pesquisarFuncionarioTableModel);
+            tbCliente.setModel(pesquisarClienteTableModel);
             
-            tbFuncionario.getColumnModel().getColumn(0).setPreferredWidth(50);
-            tbFuncionario.getColumnModel().getColumn(1).setPreferredWidth(250);
-            tbFuncionario.getColumnModel().getColumn(2).setPreferredWidth(110);
-            tbFuncionario.getColumnModel().getColumn(3).setPreferredWidth(110);
-            tbFuncionario.getColumnModel().getColumn(4).setPreferredWidth(80);
-            tbFuncionario.getColumnModel().getColumn(5).setPreferredWidth(250);
-            tbFuncionario.getColumnModel().getColumn(6).setPreferredWidth(250);
-            tbFuncionario.getColumnModel().getColumn(7).setPreferredWidth(250);
+            tbCliente.getColumnModel().getColumn(0).setPreferredWidth(50);
+            tbCliente.getColumnModel().getColumn(1).setPreferredWidth(250);
+            tbCliente.getColumnModel().getColumn(2).setPreferredWidth(110);
+            tbCliente.getColumnModel().getColumn(3).setPreferredWidth(110);
+            tbCliente.getColumnModel().getColumn(4).setPreferredWidth(80);
+            tbCliente.getColumnModel().getColumn(5).setPreferredWidth(250);
+            tbCliente.getColumnModel().getColumn(6).setPreferredWidth(250);
+            tbCliente.getColumnModel().getColumn(7).setPreferredWidth(250);
             
-            tbFuncionario.getTableHeader().setReorderingAllowed(false);
-            tbFuncionario.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-            tbFuncionario.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+            tbCliente.getTableHeader().setReorderingAllowed(false);
+            tbCliente.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+            tbCliente.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
             
         } catch (SQLException ex) {
-            Logger.getLogger(frmPesquisaFuncionario.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(frmPesquisaCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -152,7 +153,7 @@ public class frmPesquisaFuncionario extends javax.swing.JDialog {
         lblImagemFormulario = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tbFuncionario = new javax.swing.JTable();
+        tbCliente = new javax.swing.JTable();
         lblPesquisarPor = new javax.swing.JLabel();
         txtBuscar = new controller.TextFieldIconPlaceHolder();
 
@@ -161,12 +162,12 @@ public class frmPesquisaFuncionario extends javax.swing.JDialog {
         setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Calibri", 1, 36)); // NOI18N
-        jLabel1.setText("Procurar funcionário");
+        jLabel1.setText("Procurar cliente");
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         lblImagemFormulario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/boss 64x64 pesquisar.png"))); // NOI18N
 
-        tbFuncionario.setModel(new javax.swing.table.DefaultTableModel(
+        tbCliente.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -174,12 +175,12 @@ public class frmPesquisaFuncionario extends javax.swing.JDialog {
 
             }
         ));
-        tbFuncionario.addMouseListener(new java.awt.event.MouseAdapter() {
+        tbCliente.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tbFuncionarioMouseClicked(evt);
+                tbClienteMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(tbFuncionario);
+        jScrollPane1.setViewportView(tbCliente);
 
         lblPesquisarPor.setText("Pesquisar pelo(a) NOME COMPLETO");
 
@@ -226,16 +227,16 @@ public class frmPesquisaFuncionario extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tbFuncionarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbFuncionarioMouseClicked
+    private void tbClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbClienteMouseClicked
         if (evt.getClickCount() >= 2){
-            funcionarioSelecionado = new Funcionario();
-            funcionarioSelecionado.setId_funcionario((int) tbFuncionario.getValueAt(tbFuncionario.getSelectedRow(), 0));
+            clienteSelecionado = new Cliente();
+            clienteSelecionado.setId_cliente((int) tbCliente.getValueAt(tbCliente.getSelectedRow(), 0));
             dispose();
         }
-    }//GEN-LAST:event_tbFuncionarioMouseClicked
+    }//GEN-LAST:event_tbClienteMouseClicked
     
-    public Funcionario getFuncionarioSelecionado(){
-        return funcionarioSelecionado;
+    public Cliente getClienteSelecionado(){
+        return clienteSelecionado;
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -244,7 +245,7 @@ public class frmPesquisaFuncionario extends javax.swing.JDialog {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lblImagemFormulario;
     private javax.swing.JLabel lblPesquisarPor;
-    private javax.swing.JTable tbFuncionario;
+    private javax.swing.JTable tbCliente;
     private controller.TextFieldIconPlaceHolder txtBuscar;
     // End of variables declaration//GEN-END:variables
 }

@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JInternalFrameFormInfo">
+  <NonVisualComponents>
+    <Component class="javax.swing.JLabel" name="jLabel23">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Campos com * devem ser preenchidos obrigat&#xf3;riamente"/>
+      </Properties>
+    </Component>
+  </NonVisualComponents>
   <Properties>
     <Property name="closable" type="boolean" value="true"/>
   </Properties>
@@ -102,6 +109,9 @@
         <Property name="text" type="java.lang.String" value="Pesquisar (F6)"/>
         <Property name="horizontalTextPosition" type="int" value="4"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPesquisarActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JSeparator" name="jSeparator1">
     </Component>
@@ -120,6 +130,9 @@
         <Property name="text" type="java.lang.String" value="Novo (F1)"/>
         <Property name="horizontalTextPosition" type="int" value="4"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNovoActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnExcluir">
       <Properties>
@@ -127,6 +140,7 @@
           <Image iconType="3" name="/img/lixo 24x24.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Excluir (F2)"/>
+        <Property name="enabled" type="boolean" value="false"/>
         <Property name="horizontalTextPosition" type="int" value="4"/>
       </Properties>
       <Events>
@@ -139,8 +153,12 @@
           <Image iconType="3" name="/img/editar 24x24.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Editar (F3)"/>
+        <Property name="enabled" type="boolean" value="false"/>
         <Property name="horizontalTextPosition" type="int" value="4"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEditarActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnSalvar">
       <Properties>
@@ -148,8 +166,12 @@
           <Image iconType="3" name="/img/salvar 24x24.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Salvar (F4)"/>
+        <Property name="enabled" type="boolean" value="false"/>
         <Property name="horizontalTextPosition" type="int" value="4"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSalvarActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnCancelar">
       <Properties>
@@ -157,8 +179,12 @@
           <Image iconType="3" name="/img/cancelar 24x24.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Cancelar (F5)"/>
+        <Property name="enabled" type="boolean" value="false"/>
         <Property name="horizontalTextPosition" type="int" value="4"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCancelarActionPerformed"/>
+      </Events>
     </Component>
     <Container class="javax.swing.JTabbedPane" name="tbpCadastro">
 
@@ -192,7 +218,7 @@
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jFormattedTextField1" min="-2" pref="100" max="-2" attributes="0"/>
+                                  <Component id="txtCpf" min="-2" pref="100" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -206,6 +232,11 @@
                           </Group>
                       </Group>
                       <EmptySpace pref="109" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="jLabel24" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -229,7 +260,7 @@
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="txtId" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="txtNomeCompleto" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jFormattedTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtCpf" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -237,13 +268,19 @@
                       <Component id="jLabel20" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="txtDataNascimento" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="137" max="32767" attributes="0"/>
+                      <EmptySpace pref="121" max="32767" attributes="0"/>
+                      <Component id="jLabel24" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
             <Component class="controller.TextFieldIconPlaceHolder" name="txtId">
+              <Properties>
+                <Property name="horizontalAlignment" type="int" value="0"/>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel2">
               <Properties>
@@ -251,35 +288,42 @@
               </Properties>
             </Component>
             <Component class="controller.TextFieldIconPlaceHolder" name="txtNomeCompleto">
+              <Properties>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="txtNomeCompleto.setUpper(true);&#xa;txtNomeCompleto.setMaxLength(50);"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel3">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Nome Completo"/>
+                <Property name="text" type="java.lang.String" value="Nome Completo*"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JFormattedTextField" name="jFormattedTextField1">
+            <Component class="javax.swing.JFormattedTextField" name="txtCpf">
               <Properties>
                 <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.RADConnectionPropertyEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
                   <Connection code="new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter(&quot;###.###.###-##&quot;))" type="code"/>
                 </Property>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel4">
               <Properties>
-                <Property name="text" type="java.lang.String" value="CPF"/>
+                <Property name="text" type="java.lang.String" value="CPF*"/>
               </Properties>
             </Component>
             <Component class="controller.TextFieldIconPlaceHolder" name="txtRG">
+              <Properties>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="txtRG.setUpper(true);&#xa;txtRG.setMaxLength(10);"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel5">
               <Properties>
-                <Property name="text" type="java.lang.String" value="RG"/>
+                <Property name="text" type="java.lang.String" value="RG*"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JFormattedTextField" name="txtDataNascimento">
@@ -288,11 +332,17 @@
                   <Format format="##/##/####" subtype="-1" type="5"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel20">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Data Nascimento"/>
+                <Property name="text" type="java.lang.String" value="Data Nascimento*"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel24">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Campos com * devem ser preenchidos obrigat&#xf3;riamente"/>
               </Properties>
             </Component>
           </SubComponents>
@@ -316,7 +366,7 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jFormattedTextField2" min="-2" pref="90" max="-2" attributes="0"/>
+                                      <Component id="txtCep" min="-2" pref="90" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="jButton1" min="-2" pref="36" max="-2" attributes="0"/>
                                   </Group>
@@ -328,7 +378,7 @@
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="cbUf" min="-2" pref="70" max="-2" attributes="0"/>
+                                  <Component id="cbEstado" min="-2" pref="70" max="-2" attributes="0"/>
                                   <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -373,8 +423,8 @@
                           <Component id="jButton1" alignment="0" min="-2" pref="29" max="-2" attributes="0"/>
                           <Component id="txtCidade" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jFormattedTextField2" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="cbUf" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtCep" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="cbEstado" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -409,39 +459,49 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JFormattedTextField" name="jFormattedTextField2">
+            <Component class="javax.swing.JFormattedTextField" name="txtCep">
               <Properties>
                 <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.RADConnectionPropertyEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
                   <Connection code="new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter(&quot;#####-###&quot;))" type="code"/>
                 </Property>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel6">
               <Properties>
-                <Property name="text" type="java.lang.String" value="CEP"/>
+                <Property name="text" type="java.lang.String" value="CEP*"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel7">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Endere&#xe7;o"/>
+                <Property name="text" type="java.lang.String" value="Endere&#xe7;o*"/>
               </Properties>
             </Component>
             <Component class="controller.TextFieldIconPlaceHolder" name="txtEndereco">
+              <Properties>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="txtEndereco.setUpper(true);&#xa;txtEndereco.setMaxLength(50);"/>
               </AuxValues>
             </Component>
             <Component class="controller.TextFieldIconPlaceHolder" name="txtCidade">
+              <Properties>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="txtCidade.setUpper(true);&#xa;txtCidade.setMaxLength(255);"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel8">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Cidade"/>
+                <Property name="text" type="java.lang.String" value="Cidade*"/>
               </Properties>
             </Component>
             <Component class="controller.TextFieldIconPlaceHolder" name="txtNumero">
+              <Properties>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="txtNumero.setUpper(true);&#xa;txtNumero.setMaxLength(5);"/>
               </AuxValues>
@@ -453,21 +513,18 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel10">
               <Properties>
-                <Property name="text" type="java.lang.String" value="UF"/>
+                <Property name="text" type="java.lang.String" value="Estado*"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JComboBox" name="cbUf">
+            <Component class="javax.swing.JComboBox" name="cbEstado">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="3">
-                    <StringItem index="0" value="MG"/>
-                    <StringItem index="1" value="SP"/>
-                    <StringItem index="2" value="RJ"/>
-                  </StringArray>
+                  <StringArray count="0"/>
                 </Property>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value=""/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JButton" name="jButton1">
@@ -478,6 +535,9 @@
               </Properties>
             </Component>
             <Component class="controller.TextFieldIconPlaceHolder" name="txtComplemento">
+              <Properties>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="txtComplemento.setUpper(true);&#xa;txtComplemento.setMaxLength(50);"/>
               </AuxValues>
@@ -488,6 +548,9 @@
               </Properties>
             </Component>
             <Component class="controller.TextFieldIconPlaceHolder" name="txtBairro">
+              <Properties>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="txtBairro.setUpper(true);&#xa;txtBairro.setMaxLength(50);"/>
               </AuxValues>
@@ -520,12 +583,12 @@
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel18" min="-2" max="-2" attributes="0"/>
-                          <Component id="jFormattedTextField5" min="-2" pref="110" max="-2" attributes="0"/>
+                          <Component id="txtTelefone" min="-2" pref="110" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel19" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jFormattedTextField6" alignment="0" min="-2" pref="110" max="-2" attributes="0"/>
+                          <Component id="txtCelular" alignment="0" min="-2" pref="110" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="182" max="32767" attributes="0"/>
                   </Group>
@@ -539,7 +602,7 @@
                           <Group type="102" attributes="0">
                               <Component id="jLabel19" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jFormattedTextField6" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtCelular" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="3" attributes="0">
@@ -549,7 +612,7 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="txtEmail" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jFormattedTextField5" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtTelefone" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -560,13 +623,16 @@
           </Layout>
           <SubComponents>
             <Component class="controller.TextFieldIconPlaceHolder" name="txtEmail">
+              <Properties>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="txtBairro.setUpper(true);&#xa;txtBairro.setMaxLength(50);"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel13">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Email"/>
+                <Property name="text" type="java.lang.String" value="Email*"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel18">
@@ -574,7 +640,7 @@
                 <Property name="text" type="java.lang.String" value="Telefone"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JFormattedTextField" name="jFormattedTextField5">
+            <Component class="javax.swing.JFormattedTextField" name="txtTelefone">
               <Properties>
                 <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.RADConnectionPropertyEditor" preCode="try {&#xa;javax.swing.text.MaskFormatter mascaraTelefone = new javax.swing.text.MaskFormatter(&quot;(**)####-####&quot;);&#xa;mascaraTelefone.setValidCharacters(&quot;0123456789 &quot;);" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
                   <Connection code="new javax.swing.text.DefaultFormatterFactory(mascaraTelefone)" type="code"/>
@@ -582,12 +648,13 @@
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection code="null" type="code"/>
                 </Property>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JFormattedTextField(&quot;&quot;)"/>
               </AuxValues>
             </Component>
-            <Component class="javax.swing.JFormattedTextField" name="jFormattedTextField6">
+            <Component class="javax.swing.JFormattedTextField" name="txtCelular">
               <Properties>
                 <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.RADConnectionPropertyEditor" preCode="try {&#xa;javax.swing.text.MaskFormatter mascaraCelular = new javax.swing.text.MaskFormatter(&quot;(**)*####-####&quot;);&#xa;mascaraCelular.setValidCharacters(&quot;0123456789 &quot;);" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
                   <Connection code="new javax.swing.text.DefaultFormatterFactory(mascaraCelular)" type="code"/>
@@ -595,6 +662,7 @@
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection code="null" type="code"/>
                 </Property>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JFormattedTextField(&quot;&quot;)"/>
@@ -602,7 +670,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel19">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Celular"/>
+                <Property name="text" type="java.lang.String" value="Celular*"/>
               </Properties>
             </Component>
           </SubComponents>

@@ -632,7 +632,6 @@ public class frmFuncionario extends javax.swing.JInternalFrame {
 
         lblSenha.setText("Senha");
 
-        txtSenha.setEchoChar('\u25cf');
         txtSenha.setEnabled(false);
         txtSenha.setMaxLength(50);
 
