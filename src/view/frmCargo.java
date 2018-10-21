@@ -1,6 +1,14 @@
 package view;
 
+import controller.Funcoes;
+import controller.TextFieldIconPlaceHolder;
+import dao.CargoDAO;
 import java.awt.Dimension;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import model.Cargo;
 
 /**
  *
@@ -52,10 +60,20 @@ public class frmCargo extends javax.swing.JInternalFrame {
         btnNovo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/adicionar 24x24.png"))); // NOI18N
         btnNovo.setText("Novo (F1)");
         btnNovo.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btnNovo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNovoActionPerformed(evt);
+            }
+        });
 
         btnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/lixo 24x24.png"))); // NOI18N
         btnExcluir.setText("Excluir (F2)");
         btnExcluir.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
 
         btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/editar 24x24.png"))); // NOI18N
         btnEditar.setText("Editar (F3)");
@@ -68,6 +86,14 @@ public class frmCargo extends javax.swing.JInternalFrame {
         btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cancelar 24x24.png"))); // NOI18N
         btnCancelar.setText("Cancelar (F5)");
         btnCancelar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+
+        jPanel1.setToolTipText("");
+
+        txtId.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtIdActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("ID");
 
@@ -163,6 +189,84 @@ public class frmCargo extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+                       
+    private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
+
+        Funcoes.ativaCampos(txtId);
+        Funcoes.ativaCampos(txtNomeCompleto);
+        
+        Funcoes.limparampos(txtId);
+        Funcoes.limparCampos(txtNomeCompleto);
+        
+        
+        txtId.setText("NOVO");
+        txtId.setEnabled(false);
+        
+        btnNovo.setEnabled(false);
+        btnSalvar.setEnabled(true);
+        btnCancelar.setEnabled(true);
+        btnEditar.setEnabled(false);
+        btnExcluir.setEnabled(false);
+        btnPesquisar.setEnabled(false);
+        
+        txtId.setSelectedComponent(txtId);
+        txtNomeCompleto.requestFocusInWindow();
+        
+    }//GEN-LAST:event_btnNovoActionPerformed
+
+    private void txtIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtIdActionPerformed
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        
+        if (JOptionPane.showConfirmDialog(null, "Deseja realmente excluir o cadastro do Cargo?", 
+                    "Sistema - Cadastro de Cargo", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
+
+            try {
+                CargoDAO cargoDAO = new CargoDAO();
+                Cargo cargo = new Cargo();
+                TextFieldIconPlaceHolder txtId = null;
+                cargo.setId_cargo(Integer.parseInt(txtId.getText()));
+                cargoDAO.excluir(cargo);
+                
+                Funcoes.desativaCampos(txtId);
+                TextFieldIconPlaceHolder txtNomeCompleto = null;
+                Funcoes.desativaCampos(txtNomeCompleto);
+                
+                Funcoes.limparCampos(txtId);
+                Funcoes.limparCampos(txtNomeCompleto);
+               
+
+                txtId.setText(null);
+                txtId.setEnabled(false);
+
+                btnNovo.setEnabled(true);
+                btnSalvar.setEnabled(false);
+                btnCancelar.setEnabled(false);
+                btnEditar.setEnabled(false);
+                btnExcluir.setEnabled(false);
+                btnPesquisar.setEnabled(true);
+                
+                JOptionPane.showMessageDialog(null, "Cargo excluído com sucesso!", "Sistema - Cadastro de Cargo", JOptionPane.INFORMATION_MESSAGE);
+
+            } catch (SQLException ex) {
+                Logger.getLogger(frmCliente.class.getName()).log(Level.SEVERE, null, ex);
+
+                if(ex instanceof java.sql.SQLIntegrityConstraintViolationException){
+                    JOptionPane.showMessageDialog(null, "Erro - Não foi possível excluir cadastro do cargo.\nExistem dados vinculados com esse cadastro!", 
+                                            "Sistema - Cadastro de Cargo", JOptionPane.ERROR_MESSAGE);
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "Erro - Não foi possível excluir cadastro do cargo, entre em contato com o desenvolvedor!", 
+                                                "Sistema - Cadastro de Cargo", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+            
+        }
+    }                   
+        
+    }//GEN-LAST:event_btnExcluirActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
