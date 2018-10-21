@@ -209,5 +209,39 @@ public class ClienteDAO {
         
         return listaCliente;
     }
+    
+    public boolean verificaCpfDuplicado(Cliente cliente) throws SQLException{
+        String SQL = "SELECT cliente.id_cliente FROM cliente WHERE cliente.cpf = ?";
+        
+        //Editando cadastro
+        if (cliente.getId_cliente() != 0){
+            SQL += " AND id_cliente != ?";
+        }
+        
+        PreparedStatement pst = ConexaoDAO.getInstance().prepareStatement(SQL);
+        
+        if (cliente.getId_cliente() != 0){
+            pst.setString(1, cliente.getCpf());
+            pst.setInt(2, cliente.getId_cliente());
+        }else{
+            pst.setString(1, cliente.getCpf());
+        }
+        
+        ResultSet rs = pst.executeQuery();
+        
+        if (rs.next()){
+            rs.close();
+            pst.close();
+            ConexaoDAO.closeInstance();
+
+            return true;                                                        //Existe CPF já cadastrado
+        }
+        
+        rs.close();
+        pst.close();
+        ConexaoDAO.closeInstance();
+        
+        return false;
+    }
 }
 

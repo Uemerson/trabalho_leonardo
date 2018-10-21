@@ -166,14 +166,14 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_mniCadastroClienteActionPerformed
 
     private void mniCadastroCargoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniCadastroCargoActionPerformed
-        pnlPrincipal.removeAll();
+        /*pnlPrincipal.removeAll();
         pnlPrincipal.updateUI();
         
         frmCargo cargo = new frmCargo();
         
         pnlPrincipal.add(cargo);
         cargo.setPosicao();
-        cargo.setVisible(true);
+        cargo.setVisible(true);*/
     }//GEN-LAST:event_mniCadastroCargoActionPerformed
 
     private void mniCadastroProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniCadastroProdutoActionPerformed

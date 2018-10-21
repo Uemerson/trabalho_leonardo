@@ -1,4 +1,4 @@
-package view;
+/*package view;
 
 import controller.Funcoes;
 import controller.TextFieldIconPlaceHolder;
@@ -14,7 +14,7 @@ import model.Cargo;
  *
  * @author UEMERSON
  */
-public class frmCargo extends javax.swing.JInternalFrame {
+/*public class frmCargo extends javax.swing.JInternalFrame {
 
     public frmCargo() {
         initComponents();
@@ -287,3 +287,4 @@ public class frmCargo extends javax.swing.JInternalFrame {
     private controller.TextFieldIconPlaceHolder txtNomeCompleto;
     // End of variables declaration//GEN-END:variables
 }
+*/
