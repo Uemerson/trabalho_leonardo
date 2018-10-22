@@ -2,18 +2,14 @@ package view;
 
 import controller.Funcoes;
 import dao.CargoDAO;
-import dao.FuncionarioDAO;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.sql.SQLException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 import model.Cargo;
-import model.Funcionario;
 
 public class frmCargo extends javax.swing.JInternalFrame {
 
