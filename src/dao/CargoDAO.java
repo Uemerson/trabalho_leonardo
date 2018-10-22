@@ -24,6 +24,12 @@ public class CargoDAO {
             
             cargoRetorno.setId_cargo(rs.getInt("id_cargo"));
             cargoRetorno.setNome_cargo(rs.getString("nome_cargo"));
+            
+            pst.close();
+            rs.close();
+            ConexaoDAO.closeInstance();
+            
+            return cargoRetorno;
         }
         
         pst.close();
@@ -55,12 +61,13 @@ public class CargoDAO {
         ConexaoDAO.closeInstance();
     }
     
-    public void atualizar(Cargo cargo) throws SQLException{
+    public void alterar(Cargo cargo) throws SQLException{
         String SQL = "UPDATE cargo SET nome_cargo = ? WHERE id_cargo = ?";
         
         PreparedStatement pst = ConexaoDAO.getInstance().prepareStatement(SQL);
         pst.setString(1, cargo.getNome_cargo());
         pst.setInt(2, cargo.getId_cargo());
+        pst.execute();
         
         pst.close();
         ConexaoDAO.closeInstance();
@@ -87,5 +94,45 @@ public class CargoDAO {
         ConexaoDAO.closeInstance();
         
         return retorno;
+    }
+
+    public ArrayList<Cargo> listaCargoPesquisar(Cargo cargo) throws SQLException{
+        ArrayList<Cargo> listaCargo = new ArrayList<Cargo>();
+        
+        String SQL = "SELECT cargo.id_cargo, cargo.nome_cargo "
+                + "FROM cargo ORDER BY id_cargo ASC ";
+                
+        if (cargo != null){
+            if (cargo.getId_cargo() != 0){
+                SQL += "WHERE id_cargo = ?";
+            }else if (cargo.getNome_cargo() != null){
+                SQL += "WHERE nome_cargo LIKE ?";
+            }
+        }
+        
+        PreparedStatement pst = ConexaoDAO.getInstance().prepareStatement(SQL);
+        
+        if (cargo != null){
+            if (cargo.getId_cargo() != 0){
+                pst.setInt(1, cargo.getId_cargo());
+            }else if (cargo.getNome_cargo() != null){
+                pst.setString(1, cargo.getNome_cargo() + "%");
+            }
+        }
+        
+        ResultSet rs = pst.executeQuery();
+        
+        while (rs.next()){
+            Cargo cargoRetornado = new Cargo();
+            cargoRetornado.setId_cargo(rs.getInt("id_cargo"));
+            cargoRetornado.setNome_cargo(rs.getString("nome_cargo"));
+            listaCargo.add(cargoRetornado);
+        }
+        
+        pst.close();
+        rs.close();
+        ConexaoDAO.closeInstance();
+        
+        return listaCargo;
     }
 }

@@ -144,5 +144,9 @@ public class TextFieldIconPlaceHolder extends JTextField implements DocumentList
     public void changedUpdate(DocumentEvent e) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    public void setSelectedComponent(TextFieldIconPlaceHolder txtId) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

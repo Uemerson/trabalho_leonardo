@@ -198,5 +198,29 @@ public class Funcoes {
         Matcher matcher = pattern.matcher(email);
         return matcher.matches();
     }
+
+    public static void ativaCampos(TextFieldIconPlaceHolder txtId) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public static void limparCampos(TextFieldIconPlaceHolder txtNomeCompleto) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public static void limparampos(TextFieldIconPlaceHolder txtId) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public static void desativaCampos(TextFieldIconPlaceHolder txtNomeCompleto) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public static void limparampos(JPanel txtId) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public static void limparCampos(JPanel txtNomeCompleto) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

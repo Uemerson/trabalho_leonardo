@@ -23,4 +23,8 @@ public class Cargo {
     public void setNome_cargo(String nome_cargo) {
         this.nome_cargo = nome_cargo;
     }
+
+    public void setId_Cargo(int id_cargo) {
+        this.id_cargo = id_cargo;
+    }
 }
