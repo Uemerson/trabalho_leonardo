@@ -49,7 +49,7 @@
                           </Group>
                       </Group>
                   </Group>
-                  <Component id="jTabbedPane1" alignment="0" max="32767" attributes="0"/>
+                  <Component id="tbpCadastroCargo" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -78,7 +78,7 @@
                   <Component id="btnCancelar" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="jTabbedPane1" max="32767" attributes="0"/>
+              <Component id="tbpCadastroCargo" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -102,6 +102,9 @@
         <Property name="text" type="java.lang.String" value="Pesquisar (F6)"/>
         <Property name="horizontalTextPosition" type="int" value="4"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPesquisarActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JSeparator" name="jSeparator1">
     </Component>
@@ -130,6 +133,7 @@
           <Image iconType="3" name="/img/lixo 24x24.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Excluir (F2)"/>
+        <Property name="enabled" type="boolean" value="false"/>
         <Property name="horizontalTextPosition" type="int" value="4"/>
       </Properties>
       <Events>
@@ -142,8 +146,12 @@
           <Image iconType="3" name="/img/editar 24x24.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Editar (F3)"/>
+        <Property name="enabled" type="boolean" value="false"/>
         <Property name="horizontalTextPosition" type="int" value="4"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEditarActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnSalvar">
       <Properties>
@@ -151,8 +159,12 @@
           <Image iconType="3" name="/img/salvar 24x24.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Salvar (F4)"/>
+        <Property name="enabled" type="boolean" value="false"/>
         <Property name="horizontalTextPosition" type="int" value="4"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSalvarActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnCancelar">
       <Properties>
@@ -160,14 +172,18 @@
           <Image iconType="3" name="/img/cancelar 24x24.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Cancelar (F5)"/>
+        <Property name="enabled" type="boolean" value="false"/>
         <Property name="horizontalTextPosition" type="int" value="4"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCancelarActionPerformed"/>
+      </Events>
     </Component>
-    <Container class="javax.swing.JTabbedPane" name="jTabbedPane1">
+    <Container class="javax.swing.JTabbedPane" name="tbpCadastroCargo">
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
       <SubComponents>
-        <Container class="javax.swing.JPanel" name="jPanel1">
+        <Container class="javax.swing.JPanel" name="pnlDados">
           <Properties>
             <Property name="toolTipText" type="java.lang.String" value=""/>
           </Properties>
@@ -191,9 +207,14 @@
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtNomeCompleto" alignment="0" min="-2" pref="385" max="-2" attributes="0"/>
+                          <Component id="txtNomeCargo" alignment="0" min="-2" pref="385" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="364" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -208,32 +229,43 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="txtId" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtNomeCompleto" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtNomeCargo" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="141" max="32767" attributes="0"/>
+                      <EmptySpace pref="70" max="32767" attributes="0"/>
+                      <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
             <Component class="controller.TextFieldIconPlaceHolder" name="txtId">
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtIdActionPerformed"/>
-              </Events>
+              <Properties>
+                <Property name="horizontalAlignment" type="int" value="0"/>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel2">
               <Properties>
                 <Property name="text" type="java.lang.String" value="ID"/>
               </Properties>
             </Component>
-            <Component class="controller.TextFieldIconPlaceHolder" name="txtNomeCompleto">
+            <Component class="controller.TextFieldIconPlaceHolder" name="txtNomeCargo">
+              <Properties>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="txtNomeCompleto.setUpper(true);&#xa;txtNomeCompleto.setMaxLength(50);"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="txtNomeCargo.setUpper(true);&#xa;txtNomeCargo.setMaxLength(50);"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel3">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Nome do Cargo"/>
+                <Property name="text" type="java.lang.String" value="Nome do Cargo*"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel4">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Campos com * devem ser preenchidos obrigat&#xf3;riamente"/>
               </Properties>
             </Component>
           </SubComponents>
