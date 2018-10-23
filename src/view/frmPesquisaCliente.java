@@ -123,7 +123,7 @@ public class frmPesquisaCliente extends javax.swing.JDialog {
         }
             
         try {
-            PesquisarClienteTableModel pesquisarClienteTableModel = new PesquisarClienteTableModel(clienteDAO.listaFuncionarioPesquisar(cliente));
+            PesquisarClienteTableModel pesquisarClienteTableModel = new PesquisarClienteTableModel(clienteDAO.listaClientePesquisar(cliente));
             
             tbCliente.setModel(pesquisarClienteTableModel);
             

@@ -139,7 +139,7 @@ public class ClienteDAO {
         ConexaoDAO.closeInstance();
     }
     
-    public ArrayList<Cliente> listaFuncionarioPesquisar(Cliente cliente) throws SQLException{
+    public ArrayList<Cliente> listaClientePesquisar(Cliente cliente) throws SQLException{
         ArrayList<Cliente> listaCliente = new ArrayList<Cliente>();
         
         String SQL = "SELECT cliente.id_cliente, cliente.nome_completo, cliente.cep, "
