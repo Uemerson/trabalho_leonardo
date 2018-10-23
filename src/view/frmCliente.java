@@ -11,6 +11,7 @@ import java.awt.event.KeyEvent;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
@@ -183,6 +184,16 @@ public class frmCliente extends javax.swing.JInternalFrame {
             ex.printStackTrace();
         }
         txtCpf.setEnabled(false);
+        txtCpf.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtCpfFocusLost(evt);
+            }
+        });
+        txtCpf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCpfActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("CPF*");
 
@@ -199,6 +210,17 @@ public class frmCliente extends javax.swing.JInternalFrame {
         }
         txtDataNascimento.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtDataNascimento.setEnabled(false);
+        txtDataNascimento.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtDataNascimentoFocusLost(evt);
+            }
+        });
+        txtDataNascimento.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtDataNascimentoKeyPressed(evt);
+            }
+        });
+        txtDataNascimento.setFocusTraversalKeysEnabled(false);
 
         jLabel20.setText("Data Nascimento*");
 
@@ -308,6 +330,12 @@ public class frmCliente extends javax.swing.JInternalFrame {
         txtBairro.setUpper(true);
         txtBairro.setMaxLength(50);
         txtBairro.setEnabled(false);
+        txtBairro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtBairroKeyPressed(evt);
+            }
+        });
+        txtBairro.setFocusTraversalKeysEnabled(false);
 
         jLabel12.setText("Bairro");
 
@@ -408,6 +436,11 @@ public class frmCliente extends javax.swing.JInternalFrame {
         }
         txtTelefone.setText(null);
         txtTelefone.setEnabled(false);
+        txtTelefone.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtTelefoneFocusLost(evt);
+            }
+        });
 
         try {
             javax.swing.text.MaskFormatter mascaraCelular = new javax.swing.text.MaskFormatter("(**)*####-####");
@@ -418,6 +451,11 @@ public class frmCliente extends javax.swing.JInternalFrame {
         }
         txtCelular.setText(null);
         txtCelular.setEnabled(false);
+        txtCelular.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCelularKeyPressed(evt);
+            }
+        });
 
         jLabel19.setText("Celular*");
 
@@ -532,7 +570,7 @@ public class frmCliente extends javax.swing.JInternalFrame {
 
             try {
                 ClienteDAO clienteDAO = new ClienteDAO();
-               Cliente cliente = new Cliente();
+                Cliente cliente = new Cliente();
                 cliente.setId_cliente(Integer.parseInt(txtId.getText()));
                 clienteDAO.excluir(cliente);
                 
@@ -598,68 +636,6 @@ public class frmCliente extends javax.swing.JInternalFrame {
         tbpCadastro.setSelectedComponent(pnlDados);
         txtNomeCompleto.requestFocusInWindow();
     }//GEN-LAST:event_btnNovoActionPerformed
-
-    private void txtDataNascimentoKeyPressed(java.awt.event.KeyEvent evt) {                                             
-        if (evt.getKeyCode() == KeyEvent.VK_TAB){
-            tbpCadastro.setSelectedComponent(pnlEndereco);
-            txtCep.requestFocus();
-        }
-    }
-   private void txtBairroKeyPressed(java.awt.event.KeyEvent evt) {                                     
-        if (evt.getKeyCode() == KeyEvent.VK_TAB){
-            tbpCadastro.setSelectedComponent(pnlContato);
-            txtEmail.requestFocus();
-        }
-    }
-   
-   private void txtCelularKeyPressed(java.awt.event.KeyEvent evt) {                                      
-        if (evt.getKeyCode() == KeyEvent.VK_TAB){
-            tbpCadastro.setSelectedComponent(pnlContato);
-            txtTelefone.requestFocus();
-        }
-    } 
-   private void txtCpfFocusLost(java.awt.event.FocusEvent evt) {                                 
-        //Verifica o que preencheu é um CPF
-        if (!Funcoes.isCPF(txtCpf.getText().replace(".", "").replace("-", "").replace(" ", "")) 
-                && txtCpf.getText().replace(".", "").replace("-", "").replace(" ", "").length() >= 11){
-            txtCpf.setValue(null);
-            tbpCadastro.setSelectedComponent(pnlDados);
-            
-            //Força o foco
-            javax.swing.SwingUtilities.invokeLater(new Runnable() {
-                public void run() {
-                    txtCpf.requestFocusInWindow();
-                }
-            });
-            
-            JOptionPane.showMessageDialog(null, "CPF inválido, tente novamente!", "Sistema - Cadastro de Cliente", JOptionPane.ERROR_MESSAGE);
-       
-        }else{
-            //Verifica se o CPF está duplicada
-            Cliente cliente = new Cliente();
-            
-            if (!txtId.getText().equals("NOVO") && !txtId.getText().isEmpty())
-                cliente.setId_cliente(Integer.parseInt(txtId.getText()));
-            
-            cliente.setCpf(txtCpf.getText().replace(".", "").replace("-", "").replace(" ", ""));
-            ClienteDAO clienteDAO = new ClienteDAO();
-            try {
-                if (clienteDAO.verificaCpfDuplicado(cliente)){
-                    JOptionPane.showMessageDialog(null, "Já existe cadastro com esse CPF, tente novamente!", "Sistema - Cadastro de cliente", JOptionPane.ERROR_MESSAGE);
-                    txtCpf.setValue(null);
-                    txtCpf.requestFocusInWindow();
-                }
-            } catch (SQLException ex) {
-                Logger.getLogger(frmCliente.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-    }
-   
-   private void txtTelefoneFocusLost(java.awt.event.FocusEvent evt) {                                      
-        if (txtTelefone.getText().replace("-", "").replace("(", "").replace(")", "").trim().length() <= 0)
-            txtTelefone.setValue(null);
-    }   
-    
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
          //Verifica os campos obrigatórios
         if (txtNomeCompleto.getText().isEmpty()){
@@ -958,7 +934,87 @@ public class frmCliente extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_btnPesquisarActionPerformed
 
-    
+    private void txtCpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCpfActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCpfActionPerformed
+
+    private void txtCpfFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCpfFocusLost
+        //Verifica o que preencheu é um CPF
+        if (!Funcoes.isCPF(txtCpf.getText().replace(".", "").replace("-", "").replace(" ", "")) 
+                && txtCpf.getText().replace(".", "").replace("-", "").replace(" ", "").length() >= 11){
+            txtCpf.setValue(null);
+            tbpCadastro.setSelectedComponent(pnlDados);
+            
+            //Força o foco
+            javax.swing.SwingUtilities.invokeLater(new Runnable() {
+                public void run() {
+                    txtCpf.requestFocusInWindow();
+                }
+            });
+            
+            JOptionPane.showMessageDialog(null, "CPF inválido, tente novamente!", "Sistema - Cadastro de Cliente", JOptionPane.ERROR_MESSAGE);
+       
+        }else{
+            //Verifica se o CPF está duplicada
+            Cliente cliente = new Cliente();
+            
+            if (!txtId.getText().equals("NOVO") && !txtId.getText().isEmpty())
+                cliente.setId_cliente(Integer.parseInt(txtId.getText()));
+            
+            cliente.setCpf(txtCpf.getText().replace(".", "").replace("-", "").replace(" ", ""));
+            ClienteDAO clienteDAO = new ClienteDAO();
+            try {
+                if (clienteDAO.verificaCpfDuplicado(cliente)){
+                    JOptionPane.showMessageDialog(null, "Já existe cadastro com esse CPF, tente novamente!", "Sistema - Cadastro de cliente", JOptionPane.ERROR_MESSAGE);
+                    txtCpf.setValue(null);
+                    txtCpf.requestFocusInWindow();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(frmCliente.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_txtCpfFocusLost
+
+    private void txtDataNascimentoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDataNascimentoFocusLost
+       if (txtDataNascimento.getText().replace("/", "").trim().length() >= 8){
+            DateFormat df = new SimpleDateFormat ("dd/MM/yyyy");
+            df.setLenient (false); // Não permite transformar essa data caso a pessoa entre com uma data errada
+            try {
+                df.parse (txtDataNascimento.getText());
+            } catch (ParseException ex) {
+               JOptionPane.showMessageDialog(null, "Data de Nascimento inválida", "Sistema - Cadastro de cliente", JOptionPane.ERROR_MESSAGE);
+               txtDataNascimento.setValue(null);
+               tbpCadastro.setSelectedComponent(pnlDados);
+               txtDataNascimento.requestFocusInWindow();
+            }
+        }
+    }//GEN-LAST:event_txtDataNascimentoFocusLost
+
+    private void txtTelefoneFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtTelefoneFocusLost
+        if (txtTelefone.getText().replace("-", "").replace("(", "").replace(")", "").trim().length() <= 0)
+            txtTelefone.setValue(null);
+    }//GEN-LAST:event_txtTelefoneFocusLost
+
+    private void txtCelularKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCelularKeyPressed
+       if (evt.getKeyCode() == KeyEvent.VK_TAB){
+            tbpCadastro.setSelectedComponent(pnlContato);
+            txtTelefone.requestFocus();
+        }
+    }//GEN-LAST:event_txtCelularKeyPressed
+
+    private void txtBairroKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBairroKeyPressed
+         if (evt.getKeyCode() == KeyEvent.VK_TAB){
+            tbpCadastro.setSelectedComponent(pnlContato);
+            txtEmail.requestFocus();
+        }
+    }//GEN-LAST:event_txtBairroKeyPressed
+
+    private void txtDataNascimentoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDataNascimentoKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_TAB){
+            tbpCadastro.setSelectedComponent(pnlEndereco);
+            txtCep.requestFocus();
+        }
+    }//GEN-LAST:event_txtDataNascimentoKeyPressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;

@@ -85,7 +85,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Calibri" size="36" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Cadastro de funcion&#xe1;rio"/>
+        <Property name="text" type="java.lang.String" value="Cadastro de Funcion&#xe1;rio"/>
         <Property name="horizontalTextPosition" type="int" value="0"/>
       </Properties>
     </Component>

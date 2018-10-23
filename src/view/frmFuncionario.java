@@ -131,7 +131,7 @@ public class frmFuncionario extends javax.swing.JInternalFrame {
         setClosable(true);
 
         jLabel1.setFont(new java.awt.Font("Calibri", 1, 36)); // NOI18N
-        jLabel1.setText("Cadastro de funcionário");
+        jLabel1.setText("Cadastro de Funcionário");
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         btnPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/pesquisar 24x24.png"))); // NOI18N
