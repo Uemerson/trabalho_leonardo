@@ -8,6 +8,7 @@ package dao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import model.Produto;
 
 /**
@@ -18,6 +19,29 @@ public class ProdutoDAO {
     
     PreparedStatement pst;
         String sql;
+        
+     public void inserir(Produto produto) throws SQLException{
+        sql = "INSERT produto (nome_peca, marca, quantidade_estoque, preco_compra, preco_venda,"
+                + "fornecedor, margem)"
+                + "VALUES (?, ?, ?, ?, ?, ?, ?)";
+        
+             pst = ConexaoDAO.getInstance().prepareStatement(sql);
+        
+            pst.setString(1, produto.getNome_peca());
+            pst.setString(2, produto.getMarca());
+            pst.setInt(3, produto.getQuantidade_estoque());
+            pst.setFloat(4, produto.getPreco_compra());
+            pst.setFloat(5, produto.getPreco_venda());
+            pst.setString(6, produto.getFornecedor());
+            pst.setString(7, produto.getMargem());
+        
+        
+        pst.execute();
+        
+        pst.close();
+        ConexaoDAO.closeInstance();
+        
+    }
     
     
     public void alterar(Produto produto) throws SQLException{
@@ -42,6 +66,8 @@ public class ProdutoDAO {
     }
     
     public Produto buscar(Produto produto) throws SQLException{
+        Produto retornoProduto = new Produto();
+        
         String SQL = "SELECT id_produto, nome_peca, marca, quantidade_estoque, preco_compra,"
                 +"preco_venda, fornecedor, margem FROM produto WHERE produto.id_produto = ?";
         
@@ -51,7 +77,6 @@ public class ProdutoDAO {
         ResultSet rs = pst.executeQuery();
         
         if (rs.next()){
-            Produto retornoProduto = new Produto();
             
             retornoProduto.setId_produto(rs.getInt("id_produto"));
             retornoProduto.setNome_peca(rs.getString("nome_peca"));
@@ -68,7 +93,89 @@ public class ProdutoDAO {
         rs.close();
         ConexaoDAO.closeInstance();
         
-        return null;
+        return retornoProduto;
+    }
+    
+    public void excluir(Produto produto) throws SQLException{
+       sql = "DELETE FROM produto WHERE id_produto = ?";
+         pst = ConexaoDAO.getInstance().prepareStatement(sql);
+        pst.setInt(1, produto.getId_produto());
+        
+        pst.execute();
+        pst.close();
+        ConexaoDAO.closeInstance();
+    }
+    
+    public ArrayList<Produto> listaProdutoPesquisar(Produto produto) throws SQLException{
+        ArrayList<Produto> listaProduto = new ArrayList<Produto>();
+        
+        String SQL = "SELECT produto.id_produto, produto.nome_peca, produto.marca, "
+                + "produto.quantidade_estoque, produto.preco_compra, "
+                + "produto.preco_venda, produto.fornecedor, produto.margem "
+                + "FROM produto ";
+                
+        if (produto != null){
+            if (produto.getId_produto()!= 0){
+                SQL += "WHERE id_produto = ?";
+            }else if (produto.getNome_peca() != null){
+                SQL += "WHERE nome_peca LIKE ?";
+            }else if (produto.getMarca() != null){
+                SQL += "WHERE marca LIKE ?";
+            }else if (produto.getQuantidade_estoque()!= 0){
+                SQL += "WHERE quantidade_estoque LIKE ?";
+            }else if (produto.getPreco_compra()!= 0){
+                SQL += "WHERE preco_compra LIKE ?";
+            }else if (produto.getPreco_venda() != 0){
+                SQL += "WHERE preco_venda LIKE ?";
+            }else if (produto.getFornecedor()!= null){
+                SQL += "WHERE fornecedor LIKE ?";
+            }else if (produto.getMargem()!= null){
+                SQL += "WHERE margem LIKE ?";
+            }
+        }
+        PreparedStatement pst = ConexaoDAO.getInstance().prepareStatement(SQL);
+        
+        if (produto != null){
+            if (produto.getId_produto()!= 0){
+                pst.setInt(1, produto.getId_produto());
+            }else if (produto.getNome_peca()!= null){
+                pst.setString(1, produto.getNome_peca() + "%");
+            }else if (produto.getMarca() != null){
+                pst.setString(1, produto.getMarca() + "%");
+            }else if (produto.getQuantidade_estoque() != 0){
+                pst.setString(1, produto.getQuantidade_estoque() + "%");
+            }else if (produto.getPreco_compra() != 0){
+                pst.setString(1, produto.getPreco_compra() + "%");
+            }else if (produto.getPreco_venda() != 0){
+                pst.setString(1, produto.getPreco_venda() + "%");
+            }else if (produto.getFornecedor() != null){
+                pst.setString(1, produto.getFornecedor() + "%");
+            }else if (produto.getMargem() != null){
+                pst.setString(1, produto.getMargem() + "%");
+            }
+        }
+        
+        ResultSet rs = pst.executeQuery();
+        
+        while (rs.next()){
+            Produto produtoRetornado = new Produto();
+            produtoRetornado.setId_produto(rs.getInt("id_produto"));
+            produtoRetornado.setNome_peca(rs.getString("nome_peca"));
+            produtoRetornado.setMarca(rs.getString("marca"));
+            produtoRetornado.setQuantidade_estoque(rs.getInt("quantidade_estoque"));
+            produtoRetornado.setPreco_compra(rs.getFloat("preco_compra"));
+            produtoRetornado.setPreco_venda(rs.getFloat("preco_venda"));
+            produtoRetornado.setFornecedor(rs.getString("fornecedor"));
+            produtoRetornado.setMargem(rs.getString("margem"));
+            
+            listaProduto.add(produtoRetornado);
+        }
+        
+        pst.close();
+        rs.close();
+        ConexaoDAO.closeInstance();
+        
+        return listaProduto;
     }
     
     

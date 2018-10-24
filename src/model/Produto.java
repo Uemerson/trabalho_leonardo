@@ -84,6 +84,6 @@ public class Produto {
     public void setMargem(String margem) {
         this.margem= margem;
     }
-    
+
     
 }
