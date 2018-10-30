@@ -3,6 +3,7 @@ package view;
 import controller.Funcoes;
 import dao.ClienteDAO;
 import dao.ProdutoDAO;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -10,7 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import model.Cliente;
+import javax.swing.plaf.basic.BasicInternalFrameUI;
 import model.Produto;
 
 /**
@@ -21,6 +22,9 @@ public class frmProduto extends javax.swing.JInternalFrame {
 
     public frmProduto() {
         initComponents();
+        // Hack para remover icone do nimbus
+        Container pane = ((BasicInternalFrameUI) this.getUI()).getNorthPane();
+        pane.getComponent(0).setVisible(false);
     }
 
     public void setPosicao(){
@@ -45,7 +49,7 @@ public class frmProduto extends javax.swing.JInternalFrame {
         pnlDados = new javax.swing.JPanel();
         txtId = new controller.TextFieldIconPlaceHolder();
         lblId = new javax.swing.JLabel();
-        txtNomePeca = new controller.TextFieldIconPlaceHolder();
+        txtNomeProduto = new controller.TextFieldIconPlaceHolder();
         jLabel3 = new javax.swing.JLabel();
         lblMarca = new javax.swing.JLabel();
         txtMarca = new javax.swing.JTextField();
@@ -130,11 +134,11 @@ public class frmProduto extends javax.swing.JInternalFrame {
 
         lblId.setText("ID");
 
-        txtNomePeca.setUpper(true);
-        txtNomePeca.setMaxLength(50);
-        txtNomePeca.setEnabled(false);
+        txtNomeProduto.setUpper(true);
+        txtNomeProduto.setMaxLength(50);
+        txtNomeProduto.setEnabled(false);
 
-        jLabel3.setText("Nome da Peça");
+        jLabel3.setText("Nome do Produto");
 
         lblMarca.setText("Marca");
 
@@ -183,7 +187,7 @@ public class frmProduto extends javax.swing.JInternalFrame {
                             .addComponent(lblId))
                         .addGap(18, 18, 18)
                         .addGroup(pnlDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtNomePeca, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtNomeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3))
                         .addGap(18, 18, 18)
                         .addGroup(pnlDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -224,7 +228,7 @@ public class frmProduto extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNomePeca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNomeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(pnlDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -312,10 +316,10 @@ public class frmProduto extends javax.swing.JInternalFrame {
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         
-        if (txtNomePeca.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null, "O campo Nome da peça deve ser preenchido!", "Sistema - Cadastro de produto", JOptionPane.ERROR_MESSAGE);
+        if (txtNomeProduto.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "O campo Nome da produto deve ser preenchido!", "Sistema - Cadastro de produto", JOptionPane.ERROR_MESSAGE);
             tbpCadastro.setSelectedComponent(pnlDados);
-            txtNomePeca.requestFocusInWindow();
+            txtNomeProduto.requestFocusInWindow();
         }else if (txtMarca.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "O campo Marca deve ser preenchido!", "Sistema - Cadastro de produto", JOptionPane.ERROR_MESSAGE);
             tbpCadastro.setSelectedComponent(pnlDados);
@@ -348,7 +352,7 @@ public class frmProduto extends javax.swing.JInternalFrame {
         else{
             Produto produto = new Produto();
             
-            produto.setNome_peca(txtNomePeca.getText());
+            produto.setNome_produto(txtNomeProduto.getText());
             produto.setMarca(txtMarca.getText());
             produto.setQuantidade_estoque(Integer.parseInt(txtQuantidadeEstoque.getText()));
             produto.setPreco_compra(Float.parseFloat(txtPrecoCompra.getText()));
@@ -428,7 +432,7 @@ public class frmProduto extends javax.swing.JInternalFrame {
         btnPesquisar.setEnabled(false);
         
         tbpCadastro.setSelectedComponent(pnlDados);
-        txtNomePeca.requestFocusInWindow();
+        txtNomeProduto.requestFocusInWindow();
     }//GEN-LAST:event_btnNovoActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -456,7 +460,7 @@ public class frmProduto extends javax.swing.JInternalFrame {
                 produtoId.setId_produto(Integer.parseInt(txtId.getText()));
                 Produto produto = produtoDAO.buscar(produtoId);
                 
-                txtNomePeca.setText(produto.getNome_peca());
+                txtNomeProduto.setText(produto.getNome_produto());
                 txtMarca.setText(produto.getMarca());
                 txtQuantidadeEstoque.setText(Integer.toString(produto.getQuantidade_estoque()) );
                 txtPrecoCompra.setText(Float.toString(produto.getPreco_compra()));
@@ -505,7 +509,7 @@ public class frmProduto extends javax.swing.JInternalFrame {
                 ProdutoDAO produtoDAO = new ProdutoDAO();
                 Produto produto = produtoDAO.buscar(produtoSelecionado);
                 
-                txtNomePeca.setText(produto.getNome_peca());
+                txtNomeProduto.setText(produto.getNome_produto());
                 txtMarca.setText(produto.getMarca());
                 txtQuantidadeEstoque.setText(Integer.toString(produto.getQuantidade_estoque()));
                 txtPrecoCompra.setText(Float.toString(produto.getPreco_compra()));
@@ -609,7 +613,7 @@ public class frmProduto extends javax.swing.JInternalFrame {
     private controller.TextFieldIconPlaceHolder txtId;
     private javax.swing.JTextField txtMarca;
     private javax.swing.JTextField txtMargen;
-    private controller.TextFieldIconPlaceHolder txtNomePeca;
+    private controller.TextFieldIconPlaceHolder txtNomeProduto;
     private javax.swing.JTextField txtPrecoCompra;
     private javax.swing.JTextField txtPrecoVenda;
     private javax.swing.JTextField txtQuantidadeEstoque;

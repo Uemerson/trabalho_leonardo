@@ -17,11 +17,11 @@ public class PesquisarProdutoTableModel extends AbstractTableModel{
     private ArrayList<Produto> linhas;
     
     // Array com os nomes das colunas.
-    private String[] colunas = new String[] { "ID", "NOME DA PEÇA", "MARCA", "QUANTIDADE DE ESTOQUE", "PREÇO DE COMPRA", "PREÇO DE VENDA", "FORNECEDOR", "MARGEM"};
+    private String[] colunas = new String[] { "ID", "NOME DO PRODUTO", "MARCA", "QUANTIDADE DE ESTOQUE", "PREÇO DE COMPRA", "PREÇO DE VENDA", "FORNECEDOR", "MARGEM"};
 
     // Constantes representando o índice das colunas
     private static final int ID = 0;
-    private static final int NOME_PECA = 1;
+    private static final int NOME_PRODUTO = 1;
     private static final int MARCA = 2;
     private static final int QUANTIDADE_ESTOQUE = 3;
     private static final int PRECO_COMPRA = 4;
@@ -59,7 +59,7 @@ public class PesquisarProdutoTableModel extends AbstractTableModel{
         switch (columnIndex) {
             case ID:
                 return Integer.class;
-            case NOME_PECA:
+            case NOME_PRODUTO:
                 return String.class;
             case MARCA:
                 return String.class;
@@ -93,8 +93,8 @@ public class PesquisarProdutoTableModel extends AbstractTableModel{
         switch (columnIndex) {
             case ID:
                 return produto.getId_produto();
-            case NOME_PECA:
-                return produto.getNome_peca();
+            case NOME_PRODUTO:
+                return produto.getNome_produto();
             case MARCA:
                 return produto.getMarca();
             case QUANTIDADE_ESTOQUE:
@@ -124,8 +124,8 @@ public class PesquisarProdutoTableModel extends AbstractTableModel{
                 produto.setId_produto((int) aValue);
                 break;
 
-            case NOME_PECA:
-                produto.setNome_peca((String) aValue);
+            case NOME_PRODUTO:
+                produto.setNome_produto((String) aValue);
                 break;
 
             case MARCA:

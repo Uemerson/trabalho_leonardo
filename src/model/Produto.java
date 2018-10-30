@@ -13,7 +13,7 @@ public class Produto {
 
     
     private int id_produto;
-    private String nome_peca;
+    private String nome_produto;
     private String marca;
     private int quantidade_estoque;
     private float preco_compra;
@@ -29,12 +29,12 @@ public class Produto {
         this.id_produto = id_produto;
     }
 
-    public String getNome_peca() {
-        return nome_peca;
+    public String getNome_produto() {
+        return nome_produto;
     }
 
-    public void setNome_peca(String nome_peca) {
-        this.nome_peca = nome_peca;
+    public void setNome_produto(String nome_produto) {
+        this.nome_produto = nome_produto;
     }
 
     public String getMarca() {

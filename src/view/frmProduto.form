@@ -205,7 +205,7 @@
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="txtNomePeca" alignment="0" min="-2" pref="385" max="-2" attributes="0"/>
+                                  <Component id="txtNomeProduto" alignment="0" min="-2" pref="385" max="-2" attributes="0"/>
                                   <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -260,7 +260,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="txtId" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtNomePeca" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtNomeProduto" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtMarca" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -295,17 +295,17 @@
                 <Property name="text" type="java.lang.String" value="ID"/>
               </Properties>
             </Component>
-            <Component class="controller.TextFieldIconPlaceHolder" name="txtNomePeca">
+            <Component class="controller.TextFieldIconPlaceHolder" name="txtNomeProduto">
               <Properties>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="txtNomePeca.setUpper(true);&#xa;txtNomePeca.setMaxLength(50);"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="txtNomeProduto.setUpper(true);&#xa;txtNomeProduto.setMaxLength(50);"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel3">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Nome da Pe&#xe7;a"/>
+                <Property name="text" type="java.lang.String" value="Nome do Produto"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lblMarca">

@@ -1,7 +1,6 @@
 package view;
 
 import controller.JTextFieldLimit;
-import dao.ClienteDAO;
 import dao.ProdutoDAO;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -12,10 +11,7 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-import model.Cliente;
 import model.Produto;
-import tableModel.PesquisarClienteTableModel;
-import tableModel.PesquisarFuncionarioTableModel;
 import tableModel.PesquisarProdutoTableModel;
 
 /**
@@ -99,9 +95,9 @@ public class frmPesquisaProduto extends javax.swing.JDialog {
         if (ultimaColunaSelecionada.equals("ID") && !txtBuscar.getText().isEmpty()){
             produto = new Produto();
             produto.setId_produto(Integer.parseInt(txtBuscar.getText()));
-        }else if (ultimaColunaSelecionada.equals("NOME DA PEÇA") && !txtBuscar.getText().isEmpty()){
+        }else if (ultimaColunaSelecionada.equals("NOME DO PRODUTO") && !txtBuscar.getText().isEmpty()){
             produto = new Produto();
-            produto.setNome_peca(txtBuscar.getText());
+            produto.setNome_produto(txtBuscar.getText());
         }else if (ultimaColunaSelecionada.equals("MARCA") && !txtBuscar.getText().isEmpty()){
             produto = new Produto();
             produto.setMarca(txtBuscar.getText());
