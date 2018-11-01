@@ -153,6 +153,17 @@ public class frmPesquisaCargo extends javax.swing.JDialog {
 
         lblPesquisarPor.setText("Pesquisar pelo(a) NOME DO CARGO");
 
+        txtBuscar.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                txtBuscarCaretUpdate(evt);
+            }
+        });
+        txtBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtBuscarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -203,6 +214,14 @@ public class frmPesquisaCargo extends javax.swing.JDialog {
             dispose();
         }
     }//GEN-LAST:event_tbCargoMouseClicked
+
+    private void txtBuscarCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtBuscarCaretUpdate
+        
+    }//GEN-LAST:event_txtBuscarCaretUpdate
+
+    private void txtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtBuscarActionPerformed
     
     public Cargo getCargoSelecionado(){
         return cargoSelecionado;
