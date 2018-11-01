@@ -124,9 +124,9 @@ public class ProdutoDAO {
             }else if (produto.getQuantidade_estoque()!= 0){
                 SQL += "WHERE quantidade_estoque LIKE ?";
             }else if (produto.getPreco_compra()!= 0){
-                SQL += "WHERE preco_compra LIKE ?";
+                SQL += "WHERE preco_compra = ?";
             }else if (produto.getPreco_venda() != 0){
-                SQL += "WHERE preco_venda LIKE ?";
+                SQL += "WHERE preco_venda = ?";
             }else if (produto.getFornecedor()!= null){
                 SQL += "WHERE fornecedor LIKE ?";
             }else if (produto.getMargem()!= null){

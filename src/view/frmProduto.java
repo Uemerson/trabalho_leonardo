@@ -52,17 +52,17 @@ public class frmProduto extends javax.swing.JInternalFrame {
         txtNomeProduto = new controller.TextFieldIconPlaceHolder();
         jLabel3 = new javax.swing.JLabel();
         lblMarca = new javax.swing.JLabel();
-        txtMarca = new javax.swing.JTextField();
         lblQuantidadeEstoque = new javax.swing.JLabel();
-        txtQuantidadeEstoque = new javax.swing.JTextField();
         lblPrecoCompra = new javax.swing.JLabel();
         txtPrecoCompra = new javax.swing.JTextField();
         lblPrecoVenda = new javax.swing.JLabel();
         txtPrecoVenda = new javax.swing.JTextField();
         lblFornecedor = new javax.swing.JLabel();
-        txtFornecedor = new javax.swing.JTextField();
         lblMargen = new javax.swing.JLabel();
-        txtMargen = new javax.swing.JTextField();
+        txtMarca = new controller.TextFieldIconPlaceHolder();
+        txtFornecedor = new controller.TextFieldIconPlaceHolder();
+        txtMargem = new controller.TextFieldIconPlaceHolder();
+        txtQuantidadeEstoque = new controller.TextFieldIconPlaceHolder();
 
         setClosable(true);
 
@@ -142,16 +142,7 @@ public class frmProduto extends javax.swing.JInternalFrame {
 
         lblMarca.setText("Marca");
 
-        txtMarca.setEnabled(false);
-
         lblQuantidadeEstoque.setText("Quantidade de Estoque");
-
-        txtQuantidadeEstoque.setEnabled(false);
-        txtQuantidadeEstoque.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtQuantidadeEstoqueActionPerformed(evt);
-            }
-        });
 
         lblPrecoCompra.setText("Preço de Compra");
 
@@ -168,11 +159,23 @@ public class frmProduto extends javax.swing.JInternalFrame {
 
         lblFornecedor.setText("Fornecedor");
 
-        txtFornecedor.setEnabled(false);
-
         lblMargen.setText("Margem");
 
-        txtMargen.setEnabled(false);
+        txtMarca.setUpper(true);
+        txtMarca.setMaxLength(50);
+        txtMarca.setEnabled(false);
+
+        txtFornecedor.setUpper(true);
+        txtFornecedor.setMaxLength(50);
+        txtFornecedor.setEnabled(false);
+
+        txtMargem.setUpper(true);
+        txtMargem.setMaxLength(50);
+        txtMargem.setEnabled(false);
+
+        txtQuantidadeEstoque.setOnlyNumber(true);
+        txtQuantidadeEstoque.setMaxLength(50);
+        txtQuantidadeEstoque.setEnabled(false);
 
         javax.swing.GroupLayout pnlDadosLayout = new javax.swing.GroupLayout(pnlDados);
         pnlDados.setLayout(pnlDadosLayout);
@@ -192,12 +195,12 @@ public class frmProduto extends javax.swing.JInternalFrame {
                         .addGap(18, 18, 18)
                         .addGroup(pnlDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblMarca)
-                            .addComponent(txtMarca)))
+                            .addComponent(txtMarca, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(pnlDadosLayout.createSequentialGroup()
-                        .addGroup(pnlDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(txtQuantidadeEstoque, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblQuantidadeEstoque, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
+                        .addGroup(pnlDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblQuantidadeEstoque)
+                            .addComponent(txtQuantidadeEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pnlDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtPrecoCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblPrecoCompra))
@@ -208,14 +211,14 @@ public class frmProduto extends javax.swing.JInternalFrame {
                         .addGap(18, 18, 18)
                         .addGroup(pnlDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblFornecedor)
-                            .addComponent(txtFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                            .addComponent(txtFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(26, 26, 26)
                         .addGroup(pnlDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(pnlDadosLayout.createSequentialGroup()
                                 .addComponent(lblMargen)
                                 .addGap(100, 100, 100))
-                            .addComponent(txtMargen))))
-                .addContainerGap(28, Short.MAX_VALUE))
+                            .addComponent(txtMargem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
         pnlDadosLayout.setVerticalGroup(
             pnlDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -239,12 +242,12 @@ public class frmProduto extends javax.swing.JInternalFrame {
                     .addComponent(lblMargen))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtQuantidadeEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtPrecoCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtPrecoVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtMargen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(91, Short.MAX_VALUE))
+                    .addComponent(txtMargem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtQuantidadeEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(103, Short.MAX_VALUE))
         );
 
         tbpCadastro.addTab("Dados", pnlDados);
@@ -276,7 +279,7 @@ public class frmProduto extends javax.swing.JInternalFrame {
                                 .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(39, 39, 39)
                                 .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addComponent(tbpCadastro))
+                    .addComponent(tbpCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -305,10 +308,6 @@ public class frmProduto extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txtQuantidadeEstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtQuantidadeEstoqueActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtQuantidadeEstoqueActionPerformed
 
     private void txtPrecoVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecoVendaActionPerformed
         // TODO add your handling code here:
@@ -340,10 +339,10 @@ public class frmProduto extends javax.swing.JInternalFrame {
             tbpCadastro.setSelectedComponent(pnlDados);
             txtPrecoVenda.requestFocusInWindow();
         }
-        else if (txtMargen.getText().isEmpty()){
+        else if (txtMargem.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "O campo Margem deve ser preenchido!", "Sistema - Cadastro de cliente", JOptionPane.ERROR_MESSAGE);
             tbpCadastro.setSelectedComponent(pnlDados);
-            txtMargen.requestFocusInWindow();
+            txtMargem.requestFocusInWindow();
         }
         
         
@@ -358,7 +357,7 @@ public class frmProduto extends javax.swing.JInternalFrame {
             produto.setPreco_compra(Float.parseFloat(txtPrecoCompra.getText()));
             produto.setPreco_venda(Float.parseFloat(txtPrecoVenda.getText()));
             produto.setFornecedor(txtFornecedor.getText());
-            produto.setMargem(txtMargen.getText());
+            produto.setMargem(txtMargem.getText());
             
             
             
@@ -466,7 +465,7 @@ public class frmProduto extends javax.swing.JInternalFrame {
                 txtPrecoCompra.setText(Float.toString(produto.getPreco_compra()));
                 txtPrecoVenda.setText(Float.toString(produto.getPreco_venda()));
                 txtFornecedor.setText(produto.getFornecedor());
-                txtMargen.setText(produto.getMargem());
+                txtMargem.setText(produto.getMargem());
                 
                
                 
@@ -515,7 +514,7 @@ public class frmProduto extends javax.swing.JInternalFrame {
                 txtPrecoCompra.setText(Float.toString(produto.getPreco_compra()));
                 txtPrecoVenda.setText(Float.toString(produto.getPreco_venda()));
                 txtFornecedor.setText(produto.getFornecedor());
-                txtMargen.setText(produto.getMargem());
+                txtMargem.setText(produto.getMargem());
                 
                 
                 
@@ -609,13 +608,13 @@ public class frmProduto extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblQuantidadeEstoque;
     private javax.swing.JPanel pnlDados;
     private javax.swing.JTabbedPane tbpCadastro;
-    private javax.swing.JTextField txtFornecedor;
+    private controller.TextFieldIconPlaceHolder txtFornecedor;
     private controller.TextFieldIconPlaceHolder txtId;
-    private javax.swing.JTextField txtMarca;
-    private javax.swing.JTextField txtMargen;
+    private controller.TextFieldIconPlaceHolder txtMarca;
+    private controller.TextFieldIconPlaceHolder txtMargem;
     private controller.TextFieldIconPlaceHolder txtNomeProduto;
     private javax.swing.JTextField txtPrecoCompra;
     private javax.swing.JTextField txtPrecoVenda;
-    private javax.swing.JTextField txtQuantidadeEstoque;
+    private controller.TextFieldIconPlaceHolder txtQuantidadeEstoque;
     // End of variables declaration//GEN-END:variables
 }

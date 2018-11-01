@@ -49,7 +49,7 @@
                           </Group>
                       </Group>
                   </Group>
-                  <Component id="tbpCadastro" alignment="0" max="32767" attributes="0"/>
+                  <Component id="tbpCadastro" alignment="0" pref="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -215,11 +215,11 @@
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="txtQuantidadeEstoque" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="lblQuantidadeEstoque" alignment="0" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="lblQuantidadeEstoque" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtQuantidadeEstoque" min="-2" pref="101" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="txtPrecoCompra" alignment="0" min="-2" pref="107" max="-2" attributes="0"/>
                                   <Component id="lblPrecoCompra" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -232,19 +232,19 @@
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="lblFornecedor" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtFornecedor" min="-2" pref="262" max="-2" attributes="0"/>
+                                  <Component id="txtFornecedor" min="-2" pref="254" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Group type="102" attributes="0">
                                       <Component id="lblMargen" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="txtMargen" max="32767" attributes="0"/>
+                                  <Component id="txtMargem" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace pref="28" max="32767" attributes="0"/>
+                      <EmptySpace pref="40" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -273,13 +273,13 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txtQuantidadeEstoque" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtPrecoCompra" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtPrecoVenda" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtFornecedor" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtMargen" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtMargem" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtQuantidadeEstoque" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="91" max="32767" attributes="0"/>
+                      <EmptySpace pref="103" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -313,23 +313,10 @@
                 <Property name="text" type="java.lang.String" value="Marca"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtMarca">
-              <Properties>
-                <Property name="enabled" type="boolean" value="false"/>
-              </Properties>
-            </Component>
             <Component class="javax.swing.JLabel" name="lblQuantidadeEstoque">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Quantidade de Estoque"/>
               </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="txtQuantidadeEstoque">
-              <Properties>
-                <Property name="enabled" type="boolean" value="false"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtQuantidadeEstoqueActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="lblPrecoCompra">
               <Properties>
@@ -359,20 +346,42 @@
                 <Property name="text" type="java.lang.String" value="Fornecedor"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtFornecedor">
-              <Properties>
-                <Property name="enabled" type="boolean" value="false"/>
-              </Properties>
-            </Component>
             <Component class="javax.swing.JLabel" name="lblMargen">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Margem"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtMargen">
+            <Component class="controller.TextFieldIconPlaceHolder" name="txtMarca">
               <Properties>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="txtMarca.setUpper(true);&#xa;txtMarca.setMaxLength(50);"/>
+              </AuxValues>
+            </Component>
+            <Component class="controller.TextFieldIconPlaceHolder" name="txtFornecedor">
+              <Properties>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="txtFornecedor.setUpper(true);&#xa;txtFornecedor.setMaxLength(50);"/>
+              </AuxValues>
+            </Component>
+            <Component class="controller.TextFieldIconPlaceHolder" name="txtMargem">
+              <Properties>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="txtMargem.setUpper(true);&#xa;txtMargem.setMaxLength(50);"/>
+              </AuxValues>
+            </Component>
+            <Component class="controller.TextFieldIconPlaceHolder" name="txtQuantidadeEstoque">
+              <Properties>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="txtQuantidadeEstoque.setOnlyNumber(true);&#xd;&#xa;txtQuantidadeEstoque.setMaxLength(50);"/>
+              </AuxValues>
             </Component>
           </SubComponents>
         </Container>
