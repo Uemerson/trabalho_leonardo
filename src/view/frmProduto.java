@@ -79,7 +79,7 @@ public class frmProduto extends javax.swing.JInternalFrame {
             }
         });
 
-        lblImagemFormulario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/employee 64x64.png"))); // NOI18N
+        lblImagemFormulario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/delivery-cart (1).png"))); // NOI18N
 
         btnNovo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/adicionar 24x24.png"))); // NOI18N
         btnNovo.setText("Novo (F1)");

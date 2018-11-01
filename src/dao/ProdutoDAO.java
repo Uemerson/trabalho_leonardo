@@ -145,9 +145,9 @@ public class ProdutoDAO {
             }else if (produto.getQuantidade_estoque() != 0){
                 pst.setString(1, produto.getQuantidade_estoque() + "%");
             }else if (produto.getPreco_compra() != 0){
-                pst.setString(1, produto.getPreco_compra() + "%");
+                pst.setFloat(1, produto.getPreco_compra());
             }else if (produto.getPreco_venda() != 0){
-                pst.setString(1, produto.getPreco_venda() + "%");
+                pst.setFloat(1, produto.getPreco_venda());
             }else if (produto.getFornecedor() != null){
                 pst.setString(1, produto.getFornecedor() + "%");
             }else if (produto.getMargem() != null){

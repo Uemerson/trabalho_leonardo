@@ -104,7 +104,7 @@ public class frmPesquisaProduto extends javax.swing.JDialog {
         }else if (ultimaColunaSelecionada.equals("QUANTIDADE DE ESTOQUE") && !txtBuscar.getText().isEmpty()){
             produto = new Produto();
             produto.setQuantidade_estoque(Integer.parseInt(txtBuscar.getText()));
-        }else if (ultimaColunaSelecionada.equals("PREÇO DE COMPRA ") && !txtBuscar.getText().isEmpty()){
+        }else if (ultimaColunaSelecionada.equals("PREÇO DE COMPRA") && !txtBuscar.getText().isEmpty()){
             produto = new Produto();
             produto.setPreco_compra(Float.parseFloat(txtBuscar.getText()));
         }else if (ultimaColunaSelecionada.equals("PREÇO DE VENDA") && !txtBuscar.getText().isEmpty()){
@@ -161,7 +161,7 @@ public class frmPesquisaProduto extends javax.swing.JDialog {
         jLabel1.setText("Procurar produto");
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        lblImagemFormulario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/boss 64x64 pesquisar.png"))); // NOI18N
+        lblImagemFormulario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/delivery-cart (1).png"))); // NOI18N
 
         tbProduto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
