@@ -115,6 +115,9 @@
       </Properties>
     </Component>
     <Component class="controller.TextFieldIconPlaceHolder" name="txtBuscar">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtBuscarActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

@@ -115,6 +115,10 @@
       </Properties>
     </Component>
     <Component class="controller.TextFieldIconPlaceHolder" name="txtBuscar">
+      <Events>
+        <EventHandler event="caretUpdate" listener="javax.swing.event.CaretListener" parameters="javax.swing.event.CaretEvent" handler="txtBuscarCaretUpdate"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtBuscarActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

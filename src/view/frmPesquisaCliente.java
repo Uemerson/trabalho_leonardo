@@ -184,6 +184,12 @@ public class frmPesquisaCliente extends javax.swing.JDialog {
 
         lblPesquisarPor.setText("Pesquisar pelo(a) NOME COMPLETO");
 
+        txtBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtBuscarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -234,6 +240,10 @@ public class frmPesquisaCliente extends javax.swing.JDialog {
             dispose();
         }
     }//GEN-LAST:event_tbClienteMouseClicked
+
+    private void txtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtBuscarActionPerformed
     
     public Cliente getClienteSelecionado(){
         return clienteSelecionado;

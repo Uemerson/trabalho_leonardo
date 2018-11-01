@@ -100,14 +100,16 @@ public class CargoDAO {
         ArrayList<Cargo> listaCargo = new ArrayList<Cargo>();
         
         String SQL = "SELECT cargo.id_cargo, cargo.nome_cargo "
-                + "FROM cargo ORDER BY id_cargo ASC ";
+                + "FROM cargo ";
                 
         if (cargo != null){
             if (cargo.getId_cargo() != 0){
-                SQL += "WHERE id_cargo = ?";
+                SQL += "WHERE id_cargo = ? ORDER BY id_cargo ASC";
             }else if (cargo.getNome_cargo() != null){
-                SQL += "WHERE nome_cargo LIKE ?";
+                SQL += "WHERE nome_cargo LIKE ? ORDER BY id_cargo ASC";
             }
+        }else {
+            SQL += "ORDER BY id_cargo ASC";
         }
         
         PreparedStatement pst = ConexaoDAO.getInstance().prepareStatement(SQL);
