@@ -305,4 +305,34 @@ public class FuncionarioDAO {
         return listaFuncionario;
     }
     
+    public ArrayList<Funcionario> listaFuncionario() throws SQLException{
+        ArrayList<Funcionario> listaFuncionario = new ArrayList<Funcionario>();
+        
+        String SQL = "SELECT funcionario.id_funcionario, funcionario.nome_completo, funcionario.cep, "
+                + "funcionario.cidade, funcionario.endereco, "
+                + "funcionario.bairro, funcionario.rg, funcionario.cpf "
+                + "FROM funcionario ";
+        
+        PreparedStatement pst = ConexaoDAO.getInstance().prepareStatement(SQL);
+        ResultSet rs = pst.executeQuery();
+        
+        while (rs.next()){
+            Funcionario funcionarioRetornado = new Funcionario();
+            funcionarioRetornado.setId_funcionario(rs.getInt("id_funcionario"));
+            funcionarioRetornado.setNome_completo(rs.getString("nome_completo"));
+            funcionarioRetornado.setCep(rs.getString("cep"));
+            funcionarioRetornado.setCidade(rs.getString("cidade"));
+            funcionarioRetornado.setEndereco(rs.getString("endereco"));
+            funcionarioRetornado.setBairro(rs.getString("bairro"));
+            funcionarioRetornado.setRg(rs.getString("rg"));
+            funcionarioRetornado.setCpf(rs.getString("cpf"));
+            listaFuncionario.add(funcionarioRetornado);
+        }
+        
+        pst.close();
+        rs.close();
+        ConexaoDAO.closeInstance();
+        
+        return listaFuncionario;
+    }
 }

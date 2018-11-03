@@ -524,7 +524,7 @@ public class frmCliente extends javax.swing.JInternalFrame {
 
         tbpCadastro.addTab("Contato", pnlContato);
 
-        btnRelatorio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/doc.png"))); // NOI18N
+        btnRelatorio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/pdf.png"))); // NOI18N
         btnRelatorio.setText("Relatório (F7)");
         btnRelatorio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -545,10 +545,10 @@ public class frmCliente extends javax.swing.JInternalFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(lblImagemFormulario)
                                 .addGap(18, 18, 18)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnRelatorio, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(137, 137, 137)
+                                .addComponent(btnRelatorio)
+                                .addGap(18, 18, 18)
                                 .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 837, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
@@ -1053,7 +1053,7 @@ public class frmCliente extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtDataNascimentoKeyPressed
 
     private void btnRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRelatorioActionPerformed
-       String nomediretorio = null;
+        String nomediretorio = null;
         String nomepasta = "CLIENTE"; // Informe o nome da pasta que armazenará o relatório
         String separador = java.io.File.separator;
         try {

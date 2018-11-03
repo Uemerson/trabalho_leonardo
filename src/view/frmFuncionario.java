@@ -1,5 +1,14 @@
 package view;
 
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.PageSize;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 import comboModel.CargoCellRenderer;
 import comboModel.CargoComboModel;
 import comboModel.EstadoCellRenderer;
@@ -9,17 +18,25 @@ import dao.CargoDAO;
 import dao.EstadoDAO;
 import dao.FuncionarioDAO;
 import java.awt.Container;
+import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 import model.Cargo;
 import model.Estado;
@@ -127,6 +144,7 @@ public class frmFuncionario extends javax.swing.JInternalFrame {
         txtLogin = new controller.TextFieldIconPlaceHolder();
         lblSenha = new javax.swing.JLabel();
         txtSenha = new controller.PasswordFieldIconPlaceHolder();
+        btnRelatorio = new javax.swing.JButton();
 
         setClosable(true);
 
@@ -671,6 +689,14 @@ public class frmFuncionario extends javax.swing.JInternalFrame {
 
         tbpCadastro.addTab("Sistema", pnlSistema);
 
+        btnRelatorio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/pdf.png"))); // NOI18N
+        btnRelatorio.setText("Relatório (F7)");
+        btnRelatorio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRelatorioActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -681,8 +707,10 @@ public class frmFuncionario extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblImagemFormulario)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(155, 155, 155)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(93, 93, 93)
+                        .addComponent(btnRelatorio)
+                        .addGap(18, 18, 18)
                         .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jSeparator1)
                     .addGroup(layout.createSequentialGroup()
@@ -696,7 +724,7 @@ public class frmFuncionario extends javax.swing.JInternalFrame {
                         .addGap(39, 39, 39)
                         .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(tbpCadastro))
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -707,7 +735,9 @@ public class frmFuncionario extends javax.swing.JInternalFrame {
                         .addGap(6, 6, 6)
                         .addComponent(lblImagemFormulario))
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnPesquisar))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnPesquisar)
+                        .addComponent(btnRelatorio)))
                 .addGap(6, 6, 6)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12)
@@ -1296,12 +1326,130 @@ public class frmFuncionario extends javax.swing.JInternalFrame {
         btnPesquisar.setEnabled(false);
     }//GEN-LAST:event_btnEditarActionPerformed
 
+    private void btnRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRelatorioActionPerformed
+        FileFilter filter = new FileNameExtensionFilter("Arquivos em PDF", ".pdf");
+
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogType(JFileChooser.SAVE_DIALOG);
+        fileChooser.setDialogTitle("Salvar relatório de funcionário");
+        fileChooser.setAcceptAllFileFilterUsed(false);
+        fileChooser.setFileFilter(filter);
+        
+        fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        if (fileChooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION){
+            File diretorio = new File(
+                                (!fileChooser.getSelectedFile().toString().toLowerCase().endsWith(".pdf")) ? 
+                                fileChooser.getSelectedFile().toString() + ".pdf" : fileChooser.getSelectedFile().toString());
+            
+            gerarDocumento(diretorio.getAbsolutePath().toString());
+        }
+    }//GEN-LAST:event_btnRelatorioActionPerformed
+    
+    public void gerarDocumento(String path) {
+        try {
+            FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
+            ArrayList<Funcionario> lista = new ArrayList<>();
+            lista = funcionarioDAO.listaFuncionario();
+            Document doc = new Document(PageSize.A4, 41.5f, 41.5f, 55.2f, 55.2f);
+            PdfWriter.getInstance(doc, new FileOutputStream(path));
+            doc.open();
+
+            Font f1 = new Font(Font.FontFamily.HELVETICA, 14, Font.BOLD);
+            Font f2 = new Font(Font.FontFamily.HELVETICA, 12, Font.BOLD);
+            Font f3 = new Font(Font.FontFamily.HELVETICA, 12, Font.NORMAL);
+            Font f4 = new Font(Font.FontFamily.HELVETICA, 10, Font.BOLD);
+            Font f5 = new Font(Font.FontFamily.HELVETICA, 10, Font.NORMAL);
+
+            Paragraph titulo1 = new Paragraph("Sistema de Auto Peças", f2);
+            titulo1.setAlignment(Element.ALIGN_CENTER);
+            titulo1.setSpacingAfter(10);
+
+            Paragraph titulo2 = new Paragraph("Relatório de Funcionários", f1);
+            titulo2.setAlignment(Element.ALIGN_CENTER);
+            titulo2.setSpacingAfter(0);
+
+            PdfPTable tabela = new PdfPTable(new float[]{0.10f, 0.40f, 0.40f, 0.40f});     //Define o tamanho das colunas
+            tabela.setHorizontalAlignment(Element.ALIGN_CENTER);
+            tabela.setWidthPercentage(100f);
+            
+            PdfPCell cabecalho0 = new PdfPCell(new Paragraph("ID", f3));
+            //cabecalho1.setBackgroundColor(new Color(0xc0, 0xc0, 0xc0));
+            cabecalho0.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
+            cabecalho0.setBorder(0);
+            
+            PdfPCell cabecalho1 = new PdfPCell(new Paragraph("Nome", f3));
+            //cabecalho1.setBackgroundColor(new Color(0xc0, 0xc0, 0xc0));
+            cabecalho1.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
+            cabecalho1.setBorder(0);
+
+            PdfPCell cabecalho2 = new PdfPCell(new Paragraph("Endereço", f3));
+            //cabecalho2.setBackgroundColor(new Color(0xc0, 0xc0, 0xc0));
+            cabecalho2.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
+            cabecalho2.setBorder(0);
+            
+            PdfPCell cabecalho3 = new PdfPCell(new Paragraph("CPF", f3));
+            //cabecalho2.setBackgroundColor(new Color(0xc0, 0xc0, 0xc0));
+            cabecalho3.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
+            cabecalho3.setBorder(0);
+            
+            tabela.addCell(cabecalho0);
+            tabela.addCell(cabecalho1);
+            tabela.addCell(cabecalho2);
+            tabela.addCell(cabecalho3);
+            
+            for (Funcionario funcionario : lista) {
+                
+                Paragraph p0 = new Paragraph(Integer.toString(funcionario.getId_funcionario()), f5);
+                p0.setAlignment(Element.ALIGN_RIGHT);
+                PdfPCell col0 = new PdfPCell(p0);
+                col0.setBorder(0);
+                
+                Paragraph p1 = new Paragraph(funcionario.getNome_completo(), f5);
+                p1.setAlignment(Element.ALIGN_JUSTIFIED);
+                PdfPCell col1 = new PdfPCell(p1);
+                col1.setBorder(0);
+                
+                Paragraph p2 = new Paragraph(funcionario.getEndereco(), f5);
+                p2.setAlignment(Element.ALIGN_JUSTIFIED);
+                PdfPCell col2 = new PdfPCell(p2);
+                col2.setBorder(0);
+               
+                Paragraph p3 = new Paragraph(funcionario.getCpf(), f5);
+                p3.setAlignment(Element.ALIGN_JUSTIFIED);
+                PdfPCell col3 = new PdfPCell(p3);
+                col3.setBorder(0);
+                
+                tabela.addCell(col0);
+                tabela.addCell(col1);
+                tabela.addCell(col2);
+                tabela.addCell(col3);          
+                
+            }
+            
+            doc.add(titulo2);
+            doc.add(titulo1);
+            doc.add(tabela);
+            doc.close();
+            
+            JOptionPane.showMessageDialog(null, "Relatório salvo com sucesso\nSalvo em: " + path, "Sistema - Relatório cadastro de funcionário", JOptionPane.INFORMATION_MESSAGE);
+            Desktop.getDesktop().open(new File(path));
+        } catch (DocumentException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Documento de Requisitos aberto. Feche para gerar um novo.", "Sistema - Erro ao abrir", JOptionPane.ERROR_MESSAGE);
+        } catch (SQLException ex) {
+            Logger.getLogger(frmFuncionario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnNovo;
     private javax.swing.JButton btnPesquisar;
+    private javax.swing.JButton btnRelatorio;
     private javax.swing.JButton btnSalvar;
     private javax.swing.JComboBox cbCargo;
     private javax.swing.JComboBox cbEstado;
