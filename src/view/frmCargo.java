@@ -1,15 +1,32 @@
 package view;
 
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.PageSize;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 import controller.Funcoes;
 import dao.CargoDAO;
 import java.awt.Container;
+import java.awt.Desktop;
 import java.awt.Dimension;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 import model.Cargo;
+
+
 
 public class frmCargo extends javax.swing.JInternalFrame {
 
@@ -438,7 +455,97 @@ public class frmCargo extends javax.swing.JInternalFrame {
             
         }
     }//GEN-LAST:event_btnPesquisarActionPerformed
+    
+    private void btnRelatorioActionPerformed(java.awt.event.ActionEvent evt) {                                             
+        String nomediretorio = null;
+        String nomepasta = "CARGO"; // Informe o nome da pasta que armazenará o relatório
+        String separador = java.io.File.separator;
+        try {
+            nomediretorio = "C:" + separador + nomepasta;
+            if (!new File(nomediretorio).exists()) {
+                (new File(nomediretorio)).mkdir();
+            }
+            gerarDocumento();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+      
+    }                     
+    
+    public void gerarDocumento() throws IOException, SQLException {
+        try {
+            List<Cargo> lista = new ArrayList<>();
+            lista = CargoDAO.listaCargoPesquisar(cargo);
+            doc = new Document(PageSize.A4, 41.5f, 41.5f, 55.2f, 55.2f);
+            PdfWriter.getInstance(doc, new FileOutputStream("C:/CARGO/RelatorioCargo" + ".pdf"));
+            doc.open();
 
+            Font f1 = new Font(Font.FontFamily.HELVETICA, 14, Font.BOLD);
+            Font f2 = new Font(Font.FontFamily.HELVETICA, 12, Font.BOLD);
+            Font f3 = new Font(Font.FontFamily.HELVETICA, 12, Font.NORMAL);
+            Font f4 = new Font(Font.FontFamily.HELVETICA, 10, Font.BOLD);
+            Font f5 = new Font(Font.FontFamily.HELVETICA, 10, Font.NORMAL);
+
+            Paragraph titulo1 = new Paragraph("Sistema de Auto Peças", f2);
+            titulo1.setAlignment(Element.ALIGN_CENTER);
+            titulo1.setSpacingAfter(10);
+
+            Paragraph titulo2 = new Paragraph("Relatório de Cargos", f1);
+            titulo2.setAlignment(Element.ALIGN_CENTER);
+            titulo2.setSpacingAfter(0);
+
+            PdfPTable tabela = new PdfPTable(new float[]{0.40f, 0.40f, 0.40f});
+            tabela.setHorizontalAlignment(Element.ALIGN_CENTER);
+            tabela.setWidthPercentage(100f);
+
+            PdfPCell cabecalho1 = new PdfPCell(new Paragraph("ID", f3));
+            //cabecalho1.setBackgroundColor(new Color(0xc0, 0xc0, 0xc0));
+            cabecalho1.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
+            cabecalho1.setBorder(0);
+
+            PdfPCell cabecalho2 = new PdfPCell(new Paragraph("Nome", f3));
+            //cabecalho1.setBackgroundColor(new Color(0xc0, 0xc0, 0xc0));
+            cabecalho2.setHorizontalAlignment(Element.ALIGN_JUSTIFIED);
+            cabecalho2.setBorder(0);
+
+            tabela.addCell(cabecalho1);
+            tabela.addCell(cabecalho2);
+
+            for (Cargo  cargo : lista) {
+                
+                Paragraph p1 = new Paragraph(cargo.getId_cargo(), f5);
+                p1.setAlignment(Element.ALIGN_JUSTIFIED);
+                PdfPCell col1 = new PdfPCell(p1);
+                col1.setBorder(0);               
+                
+                Paragraph p2 = new Paragraph(cargo.getNome_cargo(), f5);
+                p2.setAlignment(Element.ALIGN_JUSTIFIED);
+                PdfPCell col2 = new PdfPCell(p2);
+                col2.setBorder(0);           
+                tabela.addCell(col1);
+                tabela.addCell(col2);         
+                
+              
+            }
+            
+            doc.add(titulo2);
+            doc.add(titulo1);
+            doc.add(tabela);
+            doc.close();
+            
+            JOptionPane.showMessageDialog(null, "Relatório salvo com sucesso");
+            String caminho = "C:/CARGO/RelatorioCargo.pdf";
+            Desktop.getDesktop().open(new File(caminho));
+        } catch (DocumentException e) {
+            e.printStackTrace();
+        }
+        catch (SQLException ex) {
+            ex.printStackTrace();
+        } catch (IOException exx) {
+            exx.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Documento de Requisitos aberto. Feche para gerar um novo.");
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
