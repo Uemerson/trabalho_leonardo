@@ -634,7 +634,7 @@ public class frmProduto extends javax.swing.JInternalFrame {
 
     public void gerarDocumento() throws IOException, SQLException {
         try {
-            List<Produto> lista = new ArrayList<>();
+            List<Produto> listaProduto = new ArrayList<>();
             lista = produtoDAO.listaProdutoPesquisar(produto);
             doc = new Document(PageSize.A4, 41.5f, 41.5f, 55.2f, 55.2f) {};
             PdfWriter.getInstance(doc, new FileOutputStream("C:/PRODUTO/RelatorioProduto" + ".pdf"));
