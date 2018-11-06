@@ -41,6 +41,10 @@ public class frmProduto extends javax.swing.JInternalFrame {
     Document doc;
 
     public frmProduto() {
+                
+                produtoDAO = new ProdutoDAO();
+                listaProduto = new ArrayList<>();
+        
         initComponents();
         // Hack para remover icone do nimbus
         Container pane = ((BasicInternalFrameUI) this.getUI()).getNorthPane();
@@ -83,6 +87,7 @@ public class frmProduto extends javax.swing.JInternalFrame {
         txtFornecedor = new controller.TextFieldIconPlaceHolder();
         txtMargem = new controller.TextFieldIconPlaceHolder();
         txtQuantidadeEstoque = new controller.TextFieldIconPlaceHolder();
+        btnRelatorio = new javax.swing.JButton();
 
         setClosable(true);
 
@@ -277,6 +282,14 @@ public class frmProduto extends javax.swing.JInternalFrame {
 
         tbpCadastro.addTab("Dados", pnlDados);
 
+        btnRelatorio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/pdf.png"))); // NOI18N
+        btnRelatorio.setText("Relatório (F7)");
+        btnRelatorio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRelatorioActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -291,7 +304,9 @@ public class frmProduto extends javax.swing.JInternalFrame {
                                 .addComponent(lblImagemFormulario)
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(155, 155, 155)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnRelatorio)
+                                .addGap(27, 27, 27)
                                 .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 837, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
@@ -316,7 +331,9 @@ public class frmProduto extends javax.swing.JInternalFrame {
                         .addGap(6, 6, 6)
                         .addComponent(lblImagemFormulario))
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnPesquisar))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnPesquisar)
+                        .addComponent(btnRelatorio, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(6, 6, 6)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12)
@@ -327,7 +344,7 @@ public class frmProduto extends javax.swing.JInternalFrame {
                     .addComponent(btnSalvar)
                     .addComponent(btnCancelar))
                 .addGap(18, 18, 18)
-                .addComponent(tbpCadastro)
+                .addComponent(tbpCadastro, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -616,7 +633,7 @@ public class frmProduto extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNomeProdutoActionPerformed
 
-        private void btnRelatorioActionPerformed(java.awt.event.ActionEvent evt) {                                             
+    private void btnRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRelatorioActionPerformed
         String nomediretorio = null;
         String nomepasta = "PRODUTO"; // Informe o nome da pasta que armazenará o relatório
         String separador = java.io.File.separator;
@@ -629,16 +646,19 @@ public class frmProduto extends javax.swing.JInternalFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
-      
-    }                                            
 
+    }//GEN-LAST:event_btnRelatorioActionPerformed
+                                          
     public void gerarDocumento() throws IOException, SQLException {
+        
+        
         try {
             List<Produto> listaProduto = new ArrayList<>();
-            lista = produtoDAO.listaProdutoPesquisar(produto);
+            listaProduto = produtoDAO.listaProdutoPesquisar(produto);
             doc = new Document(PageSize.A4, 41.5f, 41.5f, 55.2f, 55.2f) {};
             PdfWriter.getInstance(doc, new FileOutputStream("C:/PRODUTO/RelatorioProduto" + ".pdf"));
-            doc.open();
+            
+            
 
             Font f1 = new Font(Font.FontFamily.HELVETICA, 14, Font.BOLD);
             Font f2 = new Font(Font.FontFamily.HELVETICA, 12, Font.BOLD);
@@ -680,9 +700,9 @@ public class frmProduto extends javax.swing.JInternalFrame {
             tabela.addCell(cabecalho3);
             
 
-            for (Produto  produto : lista) {
+            for (Produto  produto : listaProduto) {
                 
-                Paragraph p1 = new Paragraph(produto.getNomeproduto(), f5);
+                Paragraph p1 = new Paragraph(produto.getNome_produto(), f5);
                 p1.setAlignment(Element.ALIGN_JUSTIFIED);
                 PdfPCell col1 = new PdfPCell(p1);
                 col1.setBorder(0);
@@ -693,7 +713,7 @@ public class frmProduto extends javax.swing.JInternalFrame {
                 col2.setBorder(0);
                
                 
-                Paragraph p3 = new Paragraph(produto.getQuantidadeEstoque(), f5);
+                Paragraph p3 = new Paragraph(produto.getQuantidade_estoque(), f5);
                 p3.setAlignment(Element.ALIGN_JUSTIFIED);
                 PdfPCell col3 = new PdfPCell(p3);
                 col3.setBorder(0);           
@@ -729,6 +749,7 @@ public class frmProduto extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnNovo;
     private javax.swing.JButton btnPesquisar;
+    private javax.swing.JButton btnRelatorio;
     private javax.swing.JButton btnSalvar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
