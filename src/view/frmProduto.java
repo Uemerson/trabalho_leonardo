@@ -1,6 +1,6 @@
 package view;
 
-import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Document;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.PageSize;
@@ -26,8 +26,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
-import javax.swing.text.Document;
+import com.itextpdf.text.DocumentException;
 import model.Produto;
+import com.itextpdf.text.Document;
 
 /**
  *
@@ -712,8 +713,7 @@ public class frmProduto extends javax.swing.JInternalFrame {
                 PdfPCell col2 = new PdfPCell(p2);
                 col2.setBorder(0);
                
-                
-                Paragraph p3 = new Paragraph(produto.getQuantidade_estoque(), f5);
+                Paragraph p3 = new Paragraph(Integer.toString(produto.getQuantidade_estoque()), f5);
                 p3.setAlignment(Element.ALIGN_JUSTIFIED);
                 PdfPCell col3 = new PdfPCell(p3);
                 col3.setBorder(0);           

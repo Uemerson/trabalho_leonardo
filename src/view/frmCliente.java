@@ -31,7 +31,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 import model.Cliente;
 import model.Estado;
@@ -41,10 +44,12 @@ import model.Estado;
  * @author Uemerson
  */
 public class frmCliente extends javax.swing.JInternalFrame {
+    
     Cliente cliente;
     List<Cliente> listaCliente;
     ClienteDAO clienteDAO;
     Document doc;
+    
     public frmCliente() {
        clienteDAO = new ClienteDAO();
         listaCliente = new ArrayList<>();
@@ -1053,27 +1058,31 @@ public class frmCliente extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtDataNascimentoKeyPressed
 
     private void btnRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRelatorioActionPerformed
-        String nomediretorio = null;
-        String nomepasta = "CLIENTE"; // Informe o nome da pasta que armazenará o relatório
-        String separador = java.io.File.separator;
-        try {
-            nomediretorio = "C:" + separador + nomepasta;
-            if (!new File(nomediretorio).exists()) {
-                (new File(nomediretorio)).mkdir();
-            }
-            gerarDocumento();
-        } catch (Exception e) {
-            e.printStackTrace();
+        FileFilter filter = new FileNameExtensionFilter("Arquivos em PDF", ".pdf");
+
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogType(JFileChooser.SAVE_DIALOG);
+        fileChooser.setDialogTitle("Salvar relatório de Clientes");
+        fileChooser.setAcceptAllFileFilterUsed(false);
+        fileChooser.setFileFilter(filter);
+        
+        fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        if (fileChooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION){
+            File diretorio = new File(
+                                (!fileChooser.getSelectedFile().toString().toLowerCase().endsWith(".pdf")) ? 
+                                fileChooser.getSelectedFile().toString() + ".pdf" : fileChooser.getSelectedFile().toString());
+            
+            gerarDocumento(diretorio.getAbsolutePath().toString());
         }
       
     }//GEN-LAST:event_btnRelatorioActionPerformed
 
-    public void gerarDocumento() throws IOException, SQLException {
+    public void gerarDocumento(String path) {
         try {
             List<Cliente> lista = new ArrayList<>();
             lista = clienteDAO.listaClientePesquisar(cliente);
-            doc = new Document(PageSize.A4, 41.5f, 41.5f, 55.2f, 55.2f);
-            PdfWriter.getInstance(doc, new FileOutputStream("C:/CLIENTE/RelatorioCliente" + ".pdf"));
+            Document doc = new Document(PageSize.A4, 41.5f, 41.5f, 55.2f, 55.2f);
+            PdfWriter.getInstance(doc, new FileOutputStream(path));
             doc.open();
 
             Font f1 = new Font(Font.FontFamily.HELVETICA, 14, Font.BOLD);
@@ -1145,9 +1154,8 @@ public class frmCliente extends javax.swing.JInternalFrame {
             doc.add(tabela);
             doc.close();
             
-            JOptionPane.showMessageDialog(null, "Relatório salvo com sucesso");
-            String caminho = "C:/CLIENTE/RelatorioCliente.pdf";
-            Desktop.getDesktop().open(new File(caminho));
+            JOptionPane.showMessageDialog(null, "Relatório salvo com sucesso\nSalvo em: " + path, "Sistema - Relatório cadastro de Clientes", JOptionPane.INFORMATION_MESSAGE);
+            Desktop.getDesktop().open(new File(path));
         } catch (DocumentException e) {
             e.printStackTrace();
         }
