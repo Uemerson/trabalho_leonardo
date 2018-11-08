@@ -29,6 +29,9 @@ import javax.swing.plaf.basic.BasicInternalFrameUI;
 import com.itextpdf.text.DocumentException;
 import model.Produto;
 import com.itextpdf.text.Document;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -635,29 +638,34 @@ public class frmProduto extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtNomeProdutoActionPerformed
 
     private void btnRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRelatorioActionPerformed
-        String nomediretorio = null;
-        String nomepasta = "PRODUTO"; // Informe o nome da pasta que armazenará o relatório
-        String separador = java.io.File.separator;
-        try {
-            nomediretorio = "C:" + separador + nomepasta;
-            if (!new File(nomediretorio).exists()) {
-                (new File(nomediretorio)).mkdir();
-            }
-            gerarDocumento();
-        } catch (Exception e) {
-            e.printStackTrace();
+        FileFilter filter = new FileNameExtensionFilter("Arquivos em PDF", ".pdf");
+
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogType(JFileChooser.SAVE_DIALOG);
+        fileChooser.setDialogTitle("Salvar relatório de Produtos");
+        fileChooser.setAcceptAllFileFilterUsed(false);
+        fileChooser.setFileFilter(filter);
+        
+        fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        if (fileChooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION){
+            File diretorio = new File(
+                                (!fileChooser.getSelectedFile().toString().toLowerCase().endsWith(".pdf")) ? 
+                                fileChooser.getSelectedFile().toString() + ".pdf" : fileChooser.getSelectedFile().toString());
+            
+            gerarDocumento(diretorio.getAbsolutePath().toString());
         }
 
     }//GEN-LAST:event_btnRelatorioActionPerformed
                                           
-    public void gerarDocumento() throws IOException, SQLException {
+    public void gerarDocumento(String path)  {
         
         
         try {
             List<Produto> listaProduto = new ArrayList<>();
             listaProduto = produtoDAO.listaProdutoPesquisar(produto);
-            doc = new Document(PageSize.A4, 41.5f, 41.5f, 55.2f, 55.2f) {};
-            PdfWriter.getInstance(doc, new FileOutputStream("C:/PRODUTO/RelatorioProduto" + ".pdf"));
+            Document doc = new Document(PageSize.A4, 41.5f, 41.5f, 55.2f, 55.2f);
+            PdfWriter.getInstance(doc, new FileOutputStream(path));
+            doc.open();
             
             
 
@@ -729,9 +737,9 @@ public class frmProduto extends javax.swing.JInternalFrame {
             doc.add(tabela);
             doc.close();
             
-            JOptionPane.showMessageDialog(null, "Relatório salvo com sucesso");
-            String caminho = "C:/PRODUTO/RelatorioProduto.pdf";
-            Desktop.getDesktop().open(new File(caminho));
+            JOptionPane.showMessageDialog(null, "Relatório salvo com sucesso\nSalvo em: " + path, "Sistema - Relatório cadastro de Produtos", JOptionPane.INFORMATION_MESSAGE);
+            Desktop.getDesktop().open(new File(path));
+           
         } catch (DocumentException e) {
             e.printStackTrace();
         }
