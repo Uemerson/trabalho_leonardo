@@ -16,7 +16,7 @@ public class PesquisarFornecedorTableModel extends AbstractTableModel{
     private String[] colunas = new String[] { "ID", "NOME COMPLETO", "CNPJ", "RG", "CEP", "CIDADE", "ENDEREÇO", "BAIRRO"};
 
     // Constantes representando o índice das colunas
-    private static final int  = 0;
+    private static final int ID = 0;
     private static final int NOME_COMPLETO = 1;
     private static final int CNPJ = 2;
     private static final int CEP = 3;

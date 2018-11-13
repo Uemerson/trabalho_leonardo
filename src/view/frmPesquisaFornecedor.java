@@ -1,7 +1,7 @@
 package view;
 
 import controller.JTextFieldLimit;
-import dao.ClienteDAO;
+import dao.FornecedorDAO;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
@@ -11,42 +11,40 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-import model.Cliente;
-import tableModel.PesquisarClienteTableModel;
+import model.Fornecedor;
+import tableModel.PesquisarFornecedorTableModel;
 
 /**
  *
  * @author UEMERSON
  */
-public class frmPesquisaCliente extends javax.swing.JDialog {
+public class frmPesquisaFornecedor extends javax.swing.JDialog {
     
     //Variaveis
-    private Cliente clienteSelecionado = null;
+    private Fornecedor fornecedorSelecionado = null;
     private String ultimaColunaSelecionada = null;
     
-    public frmPesquisaCliente(java.awt.Frame parent, boolean modal) {
+    public frmPesquisaFornecedor(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
         
-        tbCliente.getTableHeader().addMouseListener(new MouseAdapter() {
+        tbFornecedor.getTableHeader().addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                    int col = tbCliente.columnAtPoint(e.getPoint());
-                    String name = tbCliente.getColumnName(col);
+                    int col = tbFornecedor.columnAtPoint(e.getPoint());
+                    String name = tbFornecedor.getColumnName(col);
                     //System.out.println("Column index selected " + col + " " + name);
 
                     lblPesquisarPor.setText("Pesquisar pelo(a) " + name);
                     ultimaColunaSelecionada = name;
-                    
+                   
                     if (name.equals("ID")){
                         txtBuscar.setDocument(new JTextFieldLimit(10, true, true));
-                    }else if (name.equals("CPF")){
+                    }else if (name.equals("CNPJ")){
                         txtBuscar.setDocument(new JTextFieldLimit(11, true, true));
                     }else if (name.equals("CEP")){    
                         txtBuscar.setDocument(new JTextFieldLimit(8, true, true));
-                    }else if (name.equals("RG")){
-                        txtBuscar.setDocument(new JTextFieldLimit(10, true));
                     }else{
                         txtBuscar.setDocument(new JTextFieldLimit(50, true, false));
                     }
@@ -92,55 +90,52 @@ public class frmPesquisaCliente extends javax.swing.JDialog {
     }
 
     private void atualizarTabela(){
-        ClienteDAO clienteDAO = new ClienteDAO();
-        Cliente cliente = null;
+        FornecedorDAO fornecedorDAO = new FornecedorDAO();
+        Fornecedor fornecedor = null;
         
         if (ultimaColunaSelecionada.equals("ID") && !txtBuscar.getText().isEmpty()){
-            cliente = new Cliente();
-            cliente.setId_cliente(Integer.parseInt(txtBuscar.getText()));
+            fornecedor = new Fornecedor();
+            fornecedor.setId_fornecedor(Integer.parseInt(txtBuscar.getText()));
         }else if (ultimaColunaSelecionada.equals("NOME COMPLETO") && !txtBuscar.getText().isEmpty()){
-            cliente = new Cliente();
-            cliente.setNome_completo(txtBuscar.getText());
-        }else if (ultimaColunaSelecionada.equals("CPF") && !txtBuscar.getText().isEmpty()){
-            cliente = new Cliente();
-            cliente.setCpf(txtBuscar.getText());
-        }else if (ultimaColunaSelecionada.equals("RG") && !txtBuscar.getText().isEmpty()){
-            cliente = new Cliente();
-            cliente.setRg(txtBuscar.getText());
+            fornecedor = new Fornecedor();
+            fornecedor.setNome_completo(txtBuscar.getText());
+        }else if (ultimaColunaSelecionada.equals("CNPJ") && !txtBuscar.getText().isEmpty()){
+            fornecedor = new Fornecedor();
+            fornecedor.setCnpj(txtBuscar.getText());
         }else if (ultimaColunaSelecionada.equals("CEP") && !txtBuscar.getText().isEmpty()){
-            cliente = new Cliente();
-            cliente.setCep(txtBuscar.getText());
+            fornecedor = new Fornecedor();
+            fornecedor.setCep(txtBuscar.getText());
         }else if (ultimaColunaSelecionada.equals("CIDADE") && !txtBuscar.getText().isEmpty()){
-            cliente = new Cliente();
-            cliente.setCidade(txtBuscar.getText());
+            fornecedor = new Fornecedor();
+            fornecedor.setCidade(txtBuscar.getText());
         }else if (ultimaColunaSelecionada.equals("ENDEREÇO") && !txtBuscar.getText().isEmpty()){
-            cliente = new Cliente();
-            cliente.setEndereco(txtBuscar.getText());
+            fornecedor = new Fornecedor();
+            fornecedor.setEndereco(txtBuscar.getText());
         }else if (ultimaColunaSelecionada.equals("BAIRRO") && !txtBuscar.getText().isEmpty()){
-            cliente = new Cliente();
-            cliente.setBairro(txtBuscar.getText());
+            fornecedor = new Fornecedor();
+            fornecedor.setBairro(txtBuscar.getText());
         }
             
         try {
-            PesquisarClienteTableModel pesquisarClienteTableModel = new PesquisarClienteTableModel(clienteDAO.listaClientePesquisar(cliente));
+            PesquisarFornecedorTableModel pesquisarFornecedorTableModel = new PesquisarFornecedorTableModel(fornecedorDAO.listaFornecedorPesquisar(fornecedor));
             
-            tbCliente.setModel(pesquisarClienteTableModel);
+            tbFornecedor.setModel(pesquisarFornecedorTableModel);
             
-            tbCliente.getColumnModel().getColumn(0).setPreferredWidth(50);
-            tbCliente.getColumnModel().getColumn(1).setPreferredWidth(250);
-            tbCliente.getColumnModel().getColumn(2).setPreferredWidth(110);
-            tbCliente.getColumnModel().getColumn(3).setPreferredWidth(110);
-            tbCliente.getColumnModel().getColumn(4).setPreferredWidth(80);
-            tbCliente.getColumnModel().getColumn(5).setPreferredWidth(250);
-            tbCliente.getColumnModel().getColumn(6).setPreferredWidth(250);
-            tbCliente.getColumnModel().getColumn(7).setPreferredWidth(250);
+            tbFornecedor.getColumnModel().getColumn(0).setPreferredWidth(50);
+            tbFornecedor.getColumnModel().getColumn(1).setPreferredWidth(250);
+            tbFornecedor.getColumnModel().getColumn(2).setPreferredWidth(110);
+            tbFornecedor.getColumnModel().getColumn(3).setPreferredWidth(110);
+            tbFornecedor.getColumnModel().getColumn(4).setPreferredWidth(80);
+            tbFornecedor.getColumnModel().getColumn(5).setPreferredWidth(250);
+            tbFornecedor.getColumnModel().getColumn(6).setPreferredWidth(250);
+            tbFornecedor.getColumnModel().getColumn(7).setPreferredWidth(250);
             
-            tbCliente.getTableHeader().setReorderingAllowed(false);
-            tbCliente.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-            tbCliente.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+            tbFornecedor.getTableHeader().setReorderingAllowed(false);
+            tbFornecedor.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+            tbFornecedor.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
             
         } catch (SQLException ex) {
-            Logger.getLogger(frmPesquisaCliente.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(frmPesquisaFornecedor.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -152,7 +147,7 @@ public class frmPesquisaCliente extends javax.swing.JDialog {
         lblImagemFormulario = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tbCliente = new javax.swing.JTable();
+        tbFornecedor = new javax.swing.JTable();
         lblPesquisarPor = new javax.swing.JLabel();
         txtBuscar = new controller.TextFieldIconPlaceHolder();
 
@@ -161,12 +156,12 @@ public class frmPesquisaCliente extends javax.swing.JDialog {
         setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Calibri", 1, 36)); // NOI18N
-        jLabel1.setText("Procurar cliente");
+        jLabel1.setText("Procurar fornecedor");
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        lblImagemFormulario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/boss 64x64 pesquisar.png"))); // NOI18N
+        lblImagemFormulario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/deal 64x64.png"))); // NOI18N
 
-        tbCliente.setModel(new javax.swing.table.DefaultTableModel(
+        tbFornecedor.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -174,12 +169,12 @@ public class frmPesquisaCliente extends javax.swing.JDialog {
 
             }
         ));
-        tbCliente.addMouseListener(new java.awt.event.MouseAdapter() {
+        tbFornecedor.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tbClienteMouseClicked(evt);
+                tbFornecedorMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(tbCliente);
+        jScrollPane1.setViewportView(tbFornecedor);
 
         lblPesquisarPor.setText("Pesquisar pelo(a) NOME COMPLETO");
 
@@ -232,20 +227,20 @@ public class frmPesquisaCliente extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tbClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbClienteMouseClicked
+    private void tbFornecedorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbFornecedorMouseClicked
         if (evt.getClickCount() >= 2){
-            clienteSelecionado = new Cliente();
-            clienteSelecionado.setId_cliente((int) tbCliente.getValueAt(tbCliente.getSelectedRow(), 0));
+            fornecedorSelecionado = new Fornecedor();
+            fornecedorSelecionado.setId_fornecedor((int) tbFornecedor.getValueAt(tbFornecedor.getSelectedRow(), 0));
             dispose();
         }
-    }//GEN-LAST:event_tbClienteMouseClicked
+    }//GEN-LAST:event_tbFornecedorMouseClicked
 
     private void txtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtBuscarActionPerformed
     
-    public Cliente getClienteSelecionado(){
-        return clienteSelecionado;
+    public Fornecedor getFornecedorSelecionado(){
+        return fornecedorSelecionado;
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -254,7 +249,7 @@ public class frmPesquisaCliente extends javax.swing.JDialog {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lblImagemFormulario;
     private javax.swing.JLabel lblPesquisarPor;
-    private javax.swing.JTable tbCliente;
+    private javax.swing.JTable tbFornecedor;
     private controller.TextFieldIconPlaceHolder txtBuscar;
     // End of variables declaration//GEN-END:variables
 }
