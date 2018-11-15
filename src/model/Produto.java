@@ -11,15 +11,14 @@ package model;
  */
 public class Produto {
 
-    
     private int id_produto;
     private String nome_produto;
     private String marca;
     private int quantidade_estoque;
     private float preco_compra;
     private float preco_venda;
-    private String fornecedor;
-    private String margem;
+    private Fornecedor fornecedor;
+    private float margem;
 
     public int getId_produto() {
         return id_produto;
@@ -69,21 +68,20 @@ public class Produto {
         this.preco_venda = preco_venda;
     }
 
-    public String getFornecedor() {
+    public Fornecedor getFornecedor() {
         return fornecedor;
     }
 
-    public void setFornecedor(String fornecedor) {
+    public void setFornecedor(Fornecedor fornecedor) {
         this.fornecedor = fornecedor;
     }
 
-    public String getMargem() {
+    public float getMargem() {
         return margem;
     }
 
-    public void setMargem(String margem) {
-        this.margem= margem;
+    public void setMargem(float margem) {
+        this.margem = margem;
     }
 
-    
 }

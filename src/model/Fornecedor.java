@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package model;
 
 /**
@@ -12,7 +7,7 @@ package model;
 public class Fornecedor {
     
     private int id_fornecedor;
-    private String nome_completo;
+    private String razao_social;
     private String cidade;
     private Estado estado;
     private String cep;
@@ -24,6 +19,7 @@ public class Fornecedor {
     private String telefone;
     private String celular;
     private String cnpj;
+    private String nome_fantasia;
 
     public int getId_fornecedor() {
         return id_fornecedor;
@@ -34,11 +30,11 @@ public class Fornecedor {
     }
 
     public String getNome_completo() {
-        return nome_completo;
+        return razao_social;
     }
 
     public void setNome_completo(String nome_completo) {
-        this.nome_completo = nome_completo;
+        this.razao_social = nome_completo;
     }
 
     public String getCidade() {
@@ -129,10 +125,11 @@ public class Fornecedor {
         this.cnpj = cnpj;
     }
     
+    public void setNomeFantasia(String nome_fantasia){
+        this.nome_fantasia = nome_fantasia;
+    }
     
-    
-    
- 
-    
-    
+    public String getNomeFantasia(){
+        return this.nome_fantasia;
+    }
 }

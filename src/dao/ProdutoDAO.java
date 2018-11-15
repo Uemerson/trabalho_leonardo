@@ -1,14 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package dao;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import model.Fornecedor;
 import model.Produto;
 
 /**
@@ -18,23 +14,22 @@ import model.Produto;
 public class ProdutoDAO {
     
     PreparedStatement pst;
-        String sql;
+    String sql;
         
      public void inserir(Produto produto) throws SQLException{
         sql = "INSERT produto (nome_produto, marca, quantidade_estoque, preco_compra, preco_venda,"
-                + "fornecedor, margem)"
+                + "id_fornecedor, margem)"
                 + "VALUES (?, ?, ?, ?, ?, ?, ?)";
-        
-             pst = ConexaoDAO.getInstance().prepareStatement(sql);
-        
-            pst.setString(1, produto.getNome_produto());
-            pst.setString(2, produto.getMarca());
-            pst.setInt(3, produto.getQuantidade_estoque());
-            pst.setFloat(4, produto.getPreco_compra());
-            pst.setFloat(5, produto.getPreco_venda());
-            pst.setString(6, produto.getFornecedor());
-            pst.setString(7, produto.getMargem());
-        
+
+        pst = ConexaoDAO.getInstance().prepareStatement(sql);
+
+        pst.setString(1, produto.getNome_produto());
+        pst.setString(2, produto.getMarca());
+        pst.setInt(3, produto.getQuantidade_estoque());
+        pst.setFloat(4, produto.getPreco_compra());
+        pst.setFloat(5, produto.getPreco_venda());
+        pst.setInt(6, produto.getFornecedor().getId_fornecedor());
+        pst.setFloat(7, produto.getMargem());
         
         pst.execute();
         
@@ -47,15 +42,15 @@ public class ProdutoDAO {
     public void alterar(Produto produto) throws SQLException{
         
         sql = "UPDATE produto SET nome_produto = ?, marca = ?, quantidade_estoque = ?, preco_compra = ?,"
-                    + "preco_venda = ?, fornecedor = ?, margem = ? WHERE id_produto = ?";
+                    + "preco_venda = ?, id_fornecedor = ?, margem = ? WHERE id_produto = ?";
         pst = (PreparedStatement) ConexaoDAO.getInstance().prepareStatement(sql);
         pst.setString(1, produto.getNome_produto());
             pst.setString(2, produto.getMarca());
             pst.setInt(3, produto.getQuantidade_estoque());
             pst.setFloat(4, produto.getPreco_compra());
             pst.setFloat(5, produto.getPreco_venda());
-            pst.setString(6, produto.getFornecedor());
-            pst.setString(7, produto.getMargem());
+            pst.setInt(6, produto.getFornecedor().getId_fornecedor());
+            pst.setFloat(7, produto.getMargem());
             pst.setInt(8, produto.getId_produto());
             
             pst.execute();
@@ -84,8 +79,12 @@ public class ProdutoDAO {
             retornoProduto.setQuantidade_estoque(rs.getInt("quantidade_estoque"));
             retornoProduto.setPreco_compra(rs.getFloat("preco_compra"));
             retornoProduto.setPreco_venda(rs.getFloat("preco_venda"));
-            retornoProduto.setFornecedor(rs.getString("fornecedor"));
-            retornoProduto.setMargem(rs.getString("margem"));
+            
+            Fornecedor fornecedor = new Fornecedor();
+            fornecedor.setId_fornecedor(rs.getInt("id_fornecedor"));
+            
+            retornoProduto.setFornecedor(fornecedor);
+            retornoProduto.setMargem(rs.getFloat("margem"));
             
         }
         
@@ -127,10 +126,10 @@ public class ProdutoDAO {
                 SQL += "WHERE preco_compra = ?";
             }else if (produto.getPreco_venda() != 0){
                 SQL += "WHERE preco_venda = ?";
-            }else if (produto.getFornecedor()!= null){
+            }else if (produto.getFornecedor() != null){
                 SQL += "WHERE fornecedor LIKE ?";
-            }else if (produto.getMargem()!= null){
-                SQL += "WHERE margem LIKE ?";
+            }else if (produto.getMargem() != 0){
+                SQL += "WHERE margem = ?";
             }
         }
         PreparedStatement pst = ConexaoDAO.getInstance().prepareStatement(SQL);
@@ -150,8 +149,8 @@ public class ProdutoDAO {
                 pst.setFloat(1, produto.getPreco_venda());
             }else if (produto.getFornecedor() != null){
                 pst.setString(1, produto.getFornecedor() + "%");
-            }else if (produto.getMargem() != null){
-                pst.setString(1, produto.getMargem() + "%");
+            }else if (produto.getMargem() != 0){
+                pst.setFloat(1, produto.getMargem());
             }
         }
         
@@ -165,8 +164,12 @@ public class ProdutoDAO {
             produtoRetornado.setQuantidade_estoque(rs.getInt("quantidade_estoque"));
             produtoRetornado.setPreco_compra(rs.getFloat("preco_compra"));
             produtoRetornado.setPreco_venda(rs.getFloat("preco_venda"));
-            produtoRetornado.setFornecedor(rs.getString("fornecedor"));
-            produtoRetornado.setMargem(rs.getString("margem"));
+            
+            Fornecedor fornecedor = new Fornecedor();
+            fornecedor.setId_fornecedor(rs.getInt("id_fornecedor"));
+            
+            produtoRetornado.setFornecedor(fornecedor);
+            produtoRetornado.setMargem(rs.getFloat("margem"));
             
             listaProduto.add(produtoRetornado);
         }

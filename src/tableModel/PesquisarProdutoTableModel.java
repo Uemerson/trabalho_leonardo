@@ -7,6 +7,7 @@ package tableModel;
 
 import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
+import model.Fornecedor;
 import model.Produto;
 
 /**
@@ -72,7 +73,7 @@ public class PesquisarProdutoTableModel extends AbstractTableModel{
             case FORNECEDOR:
                 return String.class;
             case MARGEM:
-                return String.class;
+                return Float.class;
             default:
                 throw new IndexOutOfBoundsException("columnIndex out of bounds");
         }
@@ -145,11 +146,11 @@ public class PesquisarProdutoTableModel extends AbstractTableModel{
                 break;
 
             case FORNECEDOR:
-                produto.setFornecedor((String) aValue);
+                produto.setFornecedor((Fornecedor) aValue);
                 break;
 
             case MARGEM:
-                produto.setMargem((String) aValue);
+                produto.setMargem((Float) aValue);
                 break; 
 
             default:

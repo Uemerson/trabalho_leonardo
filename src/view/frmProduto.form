@@ -83,7 +83,7 @@
                   <Component id="btnCancelar" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="tbpCadastro" pref="277" max="32767" attributes="0"/>
+              <Component id="tbpCadastro" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -202,54 +202,57 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="txtId" alignment="0" min="-2" pref="55" max="-2" attributes="0"/>
                                   <Component id="lblId" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="txtNomeProduto" alignment="0" min="-2" pref="385" max="-2" attributes="0"/>
-                                  <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtNomeProduto" min="-2" pref="385" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="lblMarca" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Component id="lblMarca" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  </Group>
                                   <Component id="txtMarca" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="lblQuantidadeEstoque" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtQuantidadeEstoque" min="-2" pref="101" max="-2" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Component id="lblMarca1" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="0" pref="129" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Component id="txtMarca1" max="32767" attributes="0"/>
                               </Group>
-                              <EmptySpace max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="txtPrecoCompra" alignment="0" min="-2" pref="107" max="-2" attributes="0"/>
                                   <Component id="lblPrecoCompra" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="lblPrecoVenda" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtPrecoVenda" min="-2" pref="102" max="-2" attributes="0"/>
+                                  <Component id="txtMargem" alignment="0" min="-2" pref="70" max="-2" attributes="0"/>
+                                  <Component id="lblMargen" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="txtPrecoVenda" alignment="0" min="-2" pref="107" max="-2" attributes="0"/>
+                                  <Component id="lblPrecoVenda" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="lblFornecedor" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtFornecedor" min="-2" pref="254" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Component id="lblMargen" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Component id="txtMargem" max="32767" attributes="0"/>
+                                  <Component id="cbFornecedor" min="-2" pref="255" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -268,23 +271,23 @@
                           <Component id="txtNomeProduto" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtMarca" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lblQuantidadeEstoque" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblMarca1" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lblPrecoCompra" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblMargen" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lblPrecoVenda" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lblFornecedor" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblMargen" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="txtMarca1" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtPrecoCompra" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtPrecoVenda" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtFornecedor" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtMargem" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtQuantidadeEstoque" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtPrecoVenda" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cbFornecedor" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="103" max="32767" attributes="0"/>
+                      <EmptySpace pref="148" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -321,33 +324,15 @@
                 <Property name="text" type="java.lang.String" value="Marca"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="lblQuantidadeEstoque">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Quantidade de Estoque"/>
-              </Properties>
-            </Component>
             <Component class="javax.swing.JLabel" name="lblPrecoCompra">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Pre&#xe7;o de Compra"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="txtPrecoCompra">
-              <Properties>
-                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lblPrecoVenda">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Pre&#xe7;o de Venda"/>
               </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="txtPrecoVenda">
-              <Properties>
-                <Property name="enabled" type="boolean" value="false"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtPrecoVendaActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="lblFornecedor">
               <Properties>
@@ -356,7 +341,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="lblMargen">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Margem"/>
+                <Property name="text" type="java.lang.String" value="Margem %"/>
               </Properties>
             </Component>
             <Component class="controller.TextFieldIconPlaceHolder" name="txtMarca">
@@ -367,29 +352,52 @@
                 <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="txtMarca.setUpper(true);&#xa;txtMarca.setMaxLength(50);"/>
               </AuxValues>
             </Component>
-            <Component class="controller.TextFieldIconPlaceHolder" name="txtFornecedor">
+            <Component class="controller.JNumberFormatField" name="txtPrecoVenda">
               <Properties>
+                <Property name="text" type="java.lang.String" value=""/>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="txtFornecedor.setUpper(true);&#xa;txtFornecedor.setMaxLength(50);"/>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new controller.JNumberFormatField(new DecimalFormat(&quot;R$ #,##0.00&quot;)){&#xa;    {&#xa;        setLimit(9);&#xa;    }&#xa;}"/>
               </AuxValues>
             </Component>
-            <Component class="controller.TextFieldIconPlaceHolder" name="txtMargem">
+            <Component class="controller.JNumberFormatField" name="txtPrecoCompra">
               <Properties>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="txtMargem.setUpper(true);&#xa;txtMargem.setMaxLength(50);"/>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new controller.JNumberFormatField(new DecimalFormat(&quot;R$ #,##0.00&quot;)){&#xa;    {&#xa;        setLimit(9);&#xa;    }&#xa;}"/>
               </AuxValues>
             </Component>
-            <Component class="controller.TextFieldIconPlaceHolder" name="txtQuantidadeEstoque">
+            <Component class="controller.JNumberFormatField" name="txtMargem">
+              <Properties>
+                <Property name="text" type="java.lang.String" value=""/>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new controller.JNumberFormatField(new DecimalFormat(&quot;#,##0.00&quot;)){&#xa;    {&#xa;        setLimit(6);&#xa;    }&#xa;}"/>
+              </AuxValues>
+            </Component>
+            <Component class="javax.swing.JComboBox" name="cbFornecedor">
               <Properties>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="txtQuantidadeEstoque.setOnlyNumber(true);&#xd;&#xa;txtQuantidadeEstoque.setMaxLength(50);"/>
+                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value=""/>
               </AuxValues>
+            </Component>
+            <Component class="controller.TextFieldIconPlaceHolder" name="txtMarca1">
+              <Properties>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="txtMarca.setUpper(true);&#xa;txtMarca.setMaxLength(50);"/>
+              </AuxValues>
+            </Component>
+            <Component class="javax.swing.JLabel" name="lblMarca1">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="C&#xf3;digo de barra"/>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>

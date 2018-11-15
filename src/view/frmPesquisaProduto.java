@@ -11,6 +11,7 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import model.Fornecedor;
 import model.Produto;
 import tableModel.PesquisarProdutoTableModel;
 
@@ -112,10 +113,12 @@ public class frmPesquisaProduto extends javax.swing.JDialog {
             produto.setPreco_venda(Float.parseFloat(txtBuscar.getText()));
         }else if (ultimaColunaSelecionada.equals("FORNECEDOR") && !txtBuscar.getText().isEmpty()){
             produto = new Produto();
-            produto.setFornecedor(txtBuscar.getText());
+            Fornecedor fornecedor = new Fornecedor();
+            fornecedor.setNome_completo(txtBuscar.getText());
+            produto.setFornecedor(fornecedor);
         }else if (ultimaColunaSelecionada.equals("MARGEM") && !txtBuscar.getText().isEmpty()){
             produto = new Produto();
-            produto.setMargem(txtBuscar.getText());
+            produto.setMargem(Float.parseFloat(txtBuscar.getText()));
         }
             
         try {

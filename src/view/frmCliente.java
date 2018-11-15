@@ -68,8 +68,6 @@ public class frmCliente extends javax.swing.JInternalFrame {
             cbEstado.setRenderer(new EstadoCellRenderer());
             cbEstado.setSelectedItem(null);
             
-            
-            
         } catch (SQLException ex) {
             Logger.getLogger(frmCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
