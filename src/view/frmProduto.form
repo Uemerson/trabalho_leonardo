@@ -228,7 +228,7 @@
                                       <Component id="lblMarca1" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="0" pref="129" max="32767" attributes="0"/>
                                   </Group>
-                                  <Component id="txtMarca1" max="32767" attributes="0"/>
+                                  <Component id="txtCodigoBarra" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -246,9 +246,12 @@
                                   <Component id="lblPrecoVenda" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="lblFornecedor" min="-2" max="-2" attributes="0"/>
-                                  <Component id="cbFornecedor" min="-2" pref="255" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Component id="lblFornecedor" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="200" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="cbFornecedor" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -281,7 +284,7 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txtMarca1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtCodigoBarra" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtPrecoCompra" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtMargem" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtPrecoVenda" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -378,6 +381,19 @@
                 <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new controller.JNumberFormatField(new DecimalFormat(&quot;#,##0.00&quot;)){&#xa;    {&#xa;        setLimit(6);&#xa;    }&#xa;}"/>
               </AuxValues>
             </Component>
+            <Component class="controller.TextFieldIconPlaceHolder" name="txtCodigoBarra">
+              <Properties>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="txtCodigoBarra.setUpper(true);&#xa;txtCodigoBarra.setOnlyNumber(true);&#xa;txtCodigoBarra.setMaxLength(13);"/>
+              </AuxValues>
+            </Component>
+            <Component class="javax.swing.JLabel" name="lblMarca1">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="C&#xf3;digo de barra"/>
+              </Properties>
+            </Component>
             <Component class="javax.swing.JComboBox" name="cbFornecedor">
               <Properties>
                 <Property name="enabled" type="boolean" value="false"/>
@@ -385,19 +401,6 @@
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value=""/>
               </AuxValues>
-            </Component>
-            <Component class="controller.TextFieldIconPlaceHolder" name="txtMarca1">
-              <Properties>
-                <Property name="enabled" type="boolean" value="false"/>
-              </Properties>
-              <AuxValues>
-                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="txtMarca.setUpper(true);&#xa;txtMarca.setMaxLength(50);"/>
-              </AuxValues>
-            </Component>
-            <Component class="javax.swing.JLabel" name="lblMarca1">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="C&#xf3;digo de barra"/>
-              </Properties>
             </Component>
           </SubComponents>
         </Container>

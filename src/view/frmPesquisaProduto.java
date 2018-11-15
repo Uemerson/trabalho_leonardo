@@ -99,12 +99,12 @@ public class frmPesquisaProduto extends javax.swing.JDialog {
         }else if (ultimaColunaSelecionada.equals("NOME DO PRODUTO") && !txtBuscar.getText().isEmpty()){
             produto = new Produto();
             produto.setNome_produto(txtBuscar.getText());
+        }else if (ultimaColunaSelecionada.equals("CÓDIGO DE BARRA") && !txtBuscar.getText().isEmpty()){
+            produto = new Produto();
+            produto.setCodigoBarra(txtBuscar.getText());
         }else if (ultimaColunaSelecionada.equals("MARCA") && !txtBuscar.getText().isEmpty()){
             produto = new Produto();
             produto.setMarca(txtBuscar.getText());
-        }else if (ultimaColunaSelecionada.equals("QUANTIDADE DE ESTOQUE") && !txtBuscar.getText().isEmpty()){
-            produto = new Produto();
-            produto.setQuantidade_estoque(Integer.parseInt(txtBuscar.getText()));
         }else if (ultimaColunaSelecionada.equals("PREÇO DE COMPRA") && !txtBuscar.getText().isEmpty()){
             produto = new Produto();
             produto.setPreco_compra(Float.parseFloat(txtBuscar.getText()));
@@ -114,7 +114,7 @@ public class frmPesquisaProduto extends javax.swing.JDialog {
         }else if (ultimaColunaSelecionada.equals("FORNECEDOR") && !txtBuscar.getText().isEmpty()){
             produto = new Produto();
             Fornecedor fornecedor = new Fornecedor();
-            fornecedor.setNome_completo(txtBuscar.getText());
+            fornecedor.setRazaoSocial(txtBuscar.getText());
             produto.setFornecedor(fornecedor);
         }else if (ultimaColunaSelecionada.equals("MARGEM") && !txtBuscar.getText().isEmpty()){
             produto = new Produto();
@@ -128,12 +128,12 @@ public class frmPesquisaProduto extends javax.swing.JDialog {
             
             tbProduto.getColumnModel().getColumn(0).setPreferredWidth(50);
             tbProduto.getColumnModel().getColumn(1).setPreferredWidth(250);
-            tbProduto.getColumnModel().getColumn(2).setPreferredWidth(110);
-            tbProduto.getColumnModel().getColumn(3).setPreferredWidth(110);
-            tbProduto.getColumnModel().getColumn(4).setPreferredWidth(80);
-            tbProduto.getColumnModel().getColumn(5).setPreferredWidth(250);
+            tbProduto.getColumnModel().getColumn(2).setPreferredWidth(130);
+            tbProduto.getColumnModel().getColumn(3).setPreferredWidth(250);
+            tbProduto.getColumnModel().getColumn(4).setPreferredWidth(130);
+            tbProduto.getColumnModel().getColumn(5).setPreferredWidth(130);
             tbProduto.getColumnModel().getColumn(6).setPreferredWidth(250);
-            tbProduto.getColumnModel().getColumn(7).setPreferredWidth(250);
+            tbProduto.getColumnModel().getColumn(7).setPreferredWidth(130);
             
             tbProduto.getTableHeader().setReorderingAllowed(false);
             tbProduto.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);

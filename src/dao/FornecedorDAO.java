@@ -22,14 +22,14 @@ public class FornecedorDAO {
     String sql;
     
     public void inserir(Fornecedor fornecedor) throws SQLException{
-        String SQL = "INSERT fornecedor (nome_completo, id_estado, cep, cidade, endereco"
+        String SQL = "INSERT fornecedor (razao_social, id_estado, cep, cidade, endereco"
                 + ", numero, complemento, bairro, email, telefone, celular"
-                + ", cnpj) "
-                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                + ", cnpj, nome_fantasia) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         
         PreparedStatement pst = ConexaoDAO.getInstance().prepareStatement(SQL);
         
-        pst.setString(1, fornecedor.getNome_completo());
+        pst.setString(1, fornecedor.getRazaoSocial());
         pst.setInt(2, fornecedor.getEstado().getId_estado());
         pst.setString(3, fornecedor.getCep());
         pst.setString(4, fornecedor.getCidade());
@@ -41,7 +41,7 @@ public class FornecedorDAO {
         pst.setString(10, fornecedor.getTelefone());
         pst.setString(11, fornecedor.getCelular());
         pst.setString(14, fornecedor.getCnpj());
-        
+        pst.setString(15, fornecedor.getNomeFantasia());
         
         pst.execute();
         
@@ -52,38 +52,40 @@ public class FornecedorDAO {
     
     public void alterar(Fornecedor fornecedor) throws SQLException{
         
-        sql = "UPDATE cliente SET nome_completo = ?, id_estado = ?, cep = ?, cidade = ? , endereco = ?,"
+        sql = "UPDATE cliente SET razao_social = ?, id_estado = ?, cep = ?, cidade = ? , endereco = ?,"
                     + "numero = ?, complemento = ?, bairro = ?, email = ?, telefone = ?, celular = ?, "
-                    + "cnpj = ? WHERE id_fornecedor = ?";
+                    + "cnpj = ?, nome_fantasia = ? WHERE id_fornecedor = ?";
         pst = (PreparedStatement) ConexaoDAO.getInstance().prepareStatement(sql);
-        pst.setString(1, fornecedor.getNome_completo());
-            pst.setInt(2, fornecedor.getEstado().getId_estado());
-            pst.setString(3, fornecedor.getCep());
-            pst.setString(4, fornecedor.getCidade());
-            pst.setString(5, fornecedor.getEndereco());
-            pst.setString(6, fornecedor.getNumero());
-            pst.setString(7, fornecedor.getComplemento());
-            pst.setString(8, fornecedor.getBairro());
-            pst.setString(9, fornecedor.getEmail());
-            pst.setString(10, fornecedor.getTelefone());
-            pst.setString(11, fornecedor.getCelular());
-            pst.setString(14, fornecedor.getCnpj());
-            pst.setInt(15, fornecedor.getId_fornecedor());
-            
-            pst.execute();
-            
-            pst.close();
-            ConexaoDAO.closeInstance();
+        pst.setString(1, fornecedor.getRazaoSocial());
+        pst.setInt(2, fornecedor.getEstado().getId_estado());
+        pst.setString(3, fornecedor.getCep());
+        pst.setString(4, fornecedor.getCidade());
+        pst.setString(5, fornecedor.getEndereco());
+        pst.setString(6, fornecedor.getNumero());
+        pst.setString(7, fornecedor.getComplemento());
+        pst.setString(8, fornecedor.getBairro());
+        pst.setString(9, fornecedor.getEmail());
+        pst.setString(10, fornecedor.getTelefone());
+        pst.setString(11, fornecedor.getCelular());
+        pst.setString(14, fornecedor.getCnpj());
+        pst.setString(15, fornecedor.getNomeFantasia());
+        pst.setInt(16, fornecedor.getId_fornecedor());
+
+        pst.execute();
+
+        pst.close();
+        ConexaoDAO.closeInstance();
         
     }
     
     public Fornecedor buscar(Fornecedor fornecedor) throws SQLException{
         Fornecedor retorno = new Fornecedor();
         
-        String SQL = "SELECT fornecedor.id_fornecedor, fornecedor.nome_completo, estado.id_estado, estado.sigla, "
+        String SQL = "SELECT fornecedor.id_fornecedor, fornecedor.razao_social, fornecedor.nome_fantasia, "
+                + "estado.id_estado, estado.sigla, "
                 + "estado.descricao, fornecedor.cep, fornecedor.cidade, fornecedor.endereco, fornecedor.numero, "
                 + "fornecedor.complemento, fornecedor.bairro, fornecedor.email, fornecedor.telefone, "
-                + "fornecedor.celular, fornecedor.cnpj"
+                + "fornecedor.celular, fornecedor.cnpj "
                 + "FROM fornecedor "
                 + "INNER JOIN estado ON estado.id_estado = fornecedor.id_estado "
                 + "WHERE fornecedor.id_fornecedor = ?";
@@ -95,7 +97,7 @@ public class FornecedorDAO {
         
         if (rs.next()){
             retorno.setId_fornecedor(rs.getInt("id_fornecedor"));
-            retorno.setNome_completo(rs.getString("nome_completo"));
+            retorno.setRazaoSocial(rs.getString("razao_social"));
             
             Estado estado = new Estado();
             estado.setId_estado(rs.getInt("id_estado"));
@@ -136,7 +138,7 @@ public class FornecedorDAO {
     public ArrayList<Fornecedor> listaFornecedorPesquisar(Fornecedor fornecedor) throws SQLException{
         ArrayList<Fornecedor> listaFornecedor = new ArrayList<Fornecedor>();
         
-        String SQL = "SELECT fornecedor.id_fornecedor, fornecedor.nome_completo, fornecedor.cep, "
+        String SQL = "SELECT fornecedor.id_fornecedor, fornecedor.razao_social, fornecedor.cep, "
                 + "fornecedor.cidade, fornecedor.endereco, "
                 + "fornecedor.bairro, cliente.cnpj"
                 + "FROM fornecedor ";
@@ -144,8 +146,8 @@ public class FornecedorDAO {
         if (fornecedor != null){
             if (fornecedor.getId_fornecedor() != 0){
                 SQL += "WHERE id_fornecedor = ?";
-            }else if (fornecedor.getNome_completo() != null){
-                SQL += "WHERE nome_completo LIKE ?";
+            }else if (fornecedor.getRazaoSocial() != null){
+                SQL += "WHERE razao_social LIKE ?";
             }else if (fornecedor.getCnpj() != null){
                 SQL += "WHERE cpf LIKE ?";
             }else if (fornecedor.getCep() != null){
@@ -163,8 +165,8 @@ public class FornecedorDAO {
         if (fornecedor != null){
             if (fornecedor.getId_fornecedor() != 0){
                 pst.setInt(1, fornecedor.getId_fornecedor());
-            }else if (fornecedor.getNome_completo() != null){
-                pst.setString(1, fornecedor.getNome_completo() + "%");
+            }else if (fornecedor.getRazaoSocial()!= null){
+                pst.setString(1, fornecedor.getRazaoSocial() + "%");
             }else if (fornecedor.getCnpj() != null){
                 pst.setString(1, fornecedor.getCnpj() + "%");
             }else if (fornecedor.getCep() != null){
@@ -183,7 +185,8 @@ public class FornecedorDAO {
         while (rs.next()){
             Fornecedor fornecedorRetornado = new Fornecedor();
             fornecedorRetornado.setId_fornecedor(rs.getInt("id_fornecedor"));
-            fornecedorRetornado.setNome_completo(rs.getString("nome_completo"));
+            fornecedorRetornado.setRazaoSocial(rs.getString("razao_social"));
+            fornecedorRetornado.setNomeFantasia(rs.getString("nome_fantasia"));
             fornecedorRetornado.setCep(rs.getString("cep"));
             fornecedorRetornado.setCidade(rs.getString("cidade"));
             fornecedorRetornado.setEndereco(rs.getString("endereco"));
@@ -232,5 +235,45 @@ public class FornecedorDAO {
         
         return false;
     }
+
+    public ArrayList<Fornecedor> listaFornecedor() throws SQLException{
+        ArrayList<Fornecedor> retorno = new ArrayList<>();
+        
+        String SQL = "SELECT * FROM fornecedor";
+        PreparedStatement pst = ConexaoDAO.getInstance().prepareStatement(SQL);
+        ResultSet rs = pst.executeQuery();
+        
+        while (rs.next()){
+            Fornecedor fornecedor = new Fornecedor();
+            
+            fornecedor.setId_fornecedor(rs.getInt("id_fornecedor"));
+            fornecedor.setRazaoSocial(rs.getString("razao_social"));
+            fornecedor.setNomeFantasia(rs.getString("nome_fantasia"));
+            
+            Estado estado = new Estado();
+            estado.setId_estado(rs.getInt("id_estado"));
+            
+            fornecedor.setEstado(estado);
+            fornecedor.setCep(rs.getString("cep"));
+            fornecedor.setCidade(rs.getString("cidade"));
+            fornecedor.setEndereco(rs.getString("endereco"));
+            fornecedor.setNumero(rs.getString("numero"));
+            fornecedor.setComplemento(rs.getString("complemento"));
+            fornecedor.setBairro(rs.getString("bairro"));
+            fornecedor.setEmail(rs.getString("email"));
+            fornecedor.setTelefone(rs.getString("telefone"));
+            fornecedor.setCelular(rs.getString("celular"));
+            fornecedor.setCnpj(rs.getString("cnpj"));
+            
+            retorno.add(fornecedor);
+        }
+        
+        pst.close();
+        rs.close();
+        ConexaoDAO.closeInstance();
+        
+        return retorno;
+    }
+    
 }
 

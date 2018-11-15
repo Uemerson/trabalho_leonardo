@@ -29,14 +29,6 @@ public class Fornecedor {
         this.id_fornecedor= id_fornecedor;
     }
 
-    public String getNome_completo() {
-        return razao_social;
-    }
-
-    public void setNome_completo(String nome_completo) {
-        this.razao_social = nome_completo;
-    }
-
     public String getCidade() {
         return cidade;
     }
@@ -131,5 +123,13 @@ public class Fornecedor {
     
     public String getNomeFantasia(){
         return this.nome_fantasia;
+    }
+    
+    public String getRazaoSocial(){
+        return this.razao_social;
+    }
+    
+    public void setRazaoSocial(String razao_social){
+        this.razao_social = razao_social;
     }
 }

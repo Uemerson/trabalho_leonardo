@@ -27,6 +27,7 @@ import model.Produto;
 import com.itextpdf.text.Document;
 import comboModel.FornecedorCellRenderer;
 import comboModel.FornecedorComboModel;
+import dao.FornecedorDAO;
 import java.text.DecimalFormat;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileFilter;
@@ -54,30 +55,18 @@ public class frmProduto extends javax.swing.JInternalFrame {
         Container pane = ((BasicInternalFrameUI) this.getUI()).getNorthPane();
         pane.getComponent(0).setVisible(false);
         
-        //Carrrega lista de estados na caixa de seleção
+        try {
+            //Carrrega lista de estados na caixa de seleção
 
-        ArrayList<Fornecedor> listaFornecedor = new ArrayList<Fornecedor>();
-
-        Fornecedor fornecedor1 = new Fornecedor();
-        fornecedor1.setId_fornecedor(1);
-        fornecedor1.setNome_completo("Uemerson Pinheiro Junior");
-        listaFornecedor.add(fornecedor1);
-
-        Fornecedor fornecedor2 = new Fornecedor();
-        fornecedor2.setId_fornecedor(2);
-        fornecedor2.setNome_completo("Gabriel Ferreira");
-        listaFornecedor.add(fornecedor2);
-
-        Fornecedor fornecedor3 = new Fornecedor();
-        fornecedor3.setId_fornecedor(3);
-        fornecedor3.setNome_completo("Uemerson Pinheiro Junior");
-        listaFornecedor.add(fornecedor3);
-
-        FornecedorComboModel fornecedorComboModel = new FornecedorComboModel(listaFornecedor);
-        cbFornecedor.setModel(fornecedorComboModel);
-        cbFornecedor.setRenderer(new FornecedorCellRenderer());
-        cbFornecedor.setSelectedItem(null);
+            FornecedorDAO fornecedorDAO = new FornecedorDAO();
+            FornecedorComboModel fornecedorComboModel = new FornecedorComboModel(fornecedorDAO.listaFornecedor());
         
+            cbFornecedor.setModel(fornecedorComboModel);
+            cbFornecedor.setRenderer(new FornecedorCellRenderer());
+            cbFornecedor.setSelectedItem(null);
+        } catch (SQLException ex) {
+            Logger.getLogger(frmProduto.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public void setPosicao(){
@@ -125,9 +114,9 @@ public class frmProduto extends javax.swing.JInternalFrame {
                 setLimit(6);
             }
         };
-        cbFornecedor = new javax.swing.JComboBox();
-        txtMarca1 = new controller.TextFieldIconPlaceHolder();
+        txtCodigoBarra = new controller.TextFieldIconPlaceHolder();
         lblMarca1 = new javax.swing.JLabel();
+        cbFornecedor = new javax.swing.JComboBox();
         btnRelatorio = new javax.swing.JButton();
 
         setClosable(true);
@@ -233,13 +222,14 @@ public class frmProduto extends javax.swing.JInternalFrame {
         txtMargem.setText("");
         txtMargem.setEnabled(false);
 
-        cbFornecedor.setEnabled(false);
-
-        txtMarca.setUpper(true);
-        txtMarca.setMaxLength(50);
-        txtMarca1.setEnabled(false);
+        txtCodigoBarra.setUpper(true);
+        txtCodigoBarra.setOnlyNumber(true);
+        txtCodigoBarra.setMaxLength(13);
+        txtCodigoBarra.setEnabled(false);
 
         lblMarca1.setText("Código de barra");
+
+        cbFornecedor.setEnabled(false);
 
         javax.swing.GroupLayout pnlDadosLayout = new javax.swing.GroupLayout(pnlDados);
         pnlDados.setLayout(pnlDadosLayout);
@@ -267,7 +257,7 @@ public class frmProduto extends javax.swing.JInternalFrame {
                             .addGroup(pnlDadosLayout.createSequentialGroup()
                                 .addComponent(lblMarca1)
                                 .addGap(0, 129, Short.MAX_VALUE))
-                            .addComponent(txtMarca1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(txtCodigoBarra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(pnlDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtPrecoCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -281,9 +271,11 @@ public class frmProduto extends javax.swing.JInternalFrame {
                             .addComponent(txtPrecoVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblPrecoVenda))
                         .addGap(18, 18, 18)
-                        .addGroup(pnlDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblFornecedor)
-                            .addComponent(cbFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(pnlDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(pnlDadosLayout.createSequentialGroup()
+                                .addComponent(lblFornecedor)
+                                .addGap(200, 200, 200))
+                            .addComponent(cbFornecedor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         pnlDadosLayout.setVerticalGroup(
@@ -308,7 +300,7 @@ public class frmProduto extends javax.swing.JInternalFrame {
                     .addComponent(lblFornecedor))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtMarca1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCodigoBarra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtPrecoCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtMargem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtPrecoVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -397,6 +389,10 @@ public class frmProduto extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "O campo Marca deve ser preenchido!", "Sistema - Cadastro de produto", JOptionPane.ERROR_MESSAGE);
             tbpCadastro.setSelectedComponent(pnlDados);
             txtMarca.requestFocusInWindow();
+        }else if (txtCodigoBarra.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "O campo Código de Barra deve ser preenchido!", "Sistema - Cadastro de produto", JOptionPane.ERROR_MESSAGE);
+            tbpCadastro.setSelectedComponent(pnlDados);
+            txtCodigoBarra.requestFocusInWindow();
         }
         else if (Float.parseFloat(txtPrecoCompra.getValue().toString()) <= 0){
             JOptionPane.showMessageDialog(null, "O campo Preço de Compra deve ser maior que zero!", "Sistema - Cadastro de cliente", JOptionPane.ERROR_MESSAGE);
@@ -425,12 +421,13 @@ public class frmProduto extends javax.swing.JInternalFrame {
             
             produto.setNome_produto(txtNomeProduto.getText());
             produto.setMarca(txtMarca.getText());
+            produto.setCodigoBarra(txtCodigoBarra.getText());
             produto.setPreco_compra(Float.parseFloat(txtPrecoCompra.getValue().toString()));
             produto.setPreco_venda(Float.parseFloat(txtPrecoVenda.getValue().toString()));
             
             Fornecedor fornecedor = (Fornecedor) cbFornecedor.getSelectedItem();
             produto.setFornecedor(fornecedor);
-            produto.setMargem(Float.parseFloat(txtMargem.getText()));
+            produto.setMargem(Float.parseFloat(txtMargem.getValue().toString()));
             
             if (txtId.getText().equals("NOVO")){ //Inserindo um produto
                 ProdutoDAO produtoDAO = new ProdutoDAO();
@@ -546,7 +543,6 @@ public class frmProduto extends javax.swing.JInternalFrame {
        
         Funcoes.desativaCampos(pnlDados);
         
-
         Funcoes.limpaCampos(pnlDados);
 
         txtId.setText(null);
@@ -578,7 +574,9 @@ public class frmProduto extends javax.swing.JInternalFrame {
                 txtPrecoCompra.setText(Float.toString(produto.getPreco_compra()));
                 txtPrecoVenda.setText(Float.toString(produto.getPreco_venda()));
                 cbFornecedor.getModel().setSelectedItem(produto.getFornecedor());
+                
                 txtMargem.setText(Float.toString(produto.getMargem()));
+                txtCodigoBarra.setText(produto.getCodigoBarra());
             } catch (SQLException ex) {
                 Logger.getLogger(frmProduto.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -780,9 +778,9 @@ public class frmProduto extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblPrecoVenda;
     private javax.swing.JPanel pnlDados;
     private javax.swing.JTabbedPane tbpCadastro;
+    private controller.TextFieldIconPlaceHolder txtCodigoBarra;
     private controller.TextFieldIconPlaceHolder txtId;
     private controller.TextFieldIconPlaceHolder txtMarca;
-    private controller.TextFieldIconPlaceHolder txtMarca1;
     private controller.JNumberFormatField txtMargem;
     private controller.TextFieldIconPlaceHolder txtNomeProduto;
     private controller.JNumberFormatField txtPrecoCompra;

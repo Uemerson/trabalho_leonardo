@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package model;
 
 /**
@@ -14,6 +9,7 @@ public class Produto {
     private int id_produto;
     private String nome_produto;
     private String marca;
+    private String codigo_barra;
     private int quantidade_estoque;
     private float preco_compra;
     private float preco_venda;
@@ -43,7 +39,15 @@ public class Produto {
     public void setMarca(String marca) {
         this.marca = marca;
     }
+    
+    public String getCodigoBarra() {
+        return codigo_barra;
+    }
 
+    public void setCodigoBarra(String codigo_barra) {
+        this.codigo_barra = codigo_barra;
+    }
+    
     public int getQuantidade_estoque() {
         return quantidade_estoque;
     }

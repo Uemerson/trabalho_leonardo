@@ -675,7 +675,7 @@ public class frmFornecedor extends javax.swing.JInternalFrame {
         else{
             Fornecedor fornecedor = new Fornecedor();
             
-            fornecedor.setNome_completo(txtNomeCompleto.getText());
+            fornecedor.setRazaoSocial(txtNomeCompleto.getText());
             fornecedor.setCnpj(txtCnpj.getValue().toString().replace(".", "").replace("-", ""));
             
             fornecedor.setCep(txtCep.getValue().toString().replace("-", ""));
@@ -803,7 +803,7 @@ public class frmFornecedor extends javax.swing.JInternalFrame {
                 fornecedor.setId_fornecedor(Integer.parseInt(txtId.getText()));
                 fornecedorDAO.excluir(fornecedor);
                 
-                txtNomeCompleto.setText(fornecedor.getNome_completo());
+                txtNomeCompleto.setText(fornecedor.getRazaoSocial());
                 
                 javax.swing.text.MaskFormatter mask = new javax.swing.text.MaskFormatter("###.###.###-##");
                 mask.setValueContainsLiteralCharacters(false);
@@ -872,7 +872,7 @@ public class frmFornecedor extends javax.swing.JInternalFrame {
                 FornecedorDAO fornecedorDAO = new FornecedorDAO();
                 Fornecedor fornecedor = fornecedorDAO.buscar(fornecedorSelecionado);
                 
-                txtNomeCompleto.setText(fornecedor.getNome_completo());
+                txtNomeCompleto.setText(fornecedor.getRazaoSocial());
                 
                 javax.swing.text.MaskFormatter mask = new javax.swing.text.MaskFormatter("###.###.###-##");
                 mask.setValueContainsLiteralCharacters(false);
@@ -1037,7 +1037,7 @@ public class frmFornecedor extends javax.swing.JInternalFrame {
 
             for (Fornecedor  fornecedor : lista) {
                 
-                Paragraph p1 = new Paragraph(fornecedor.getNome_completo(), f5);
+                Paragraph p1 = new Paragraph(fornecedor.getRazaoSocial(), f5);
                 p1.setAlignment(Element.ALIGN_JUSTIFIED);
                 PdfPCell col1 = new PdfPCell(p1);
                 col1.setBorder(0);

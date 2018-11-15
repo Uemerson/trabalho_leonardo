@@ -13,11 +13,11 @@ public class PesquisarFornecedorTableModel extends AbstractTableModel{
     private ArrayList<Fornecedor> linhas;
     
     // Array com os nomes das colunas.
-    private String[] colunas = new String[] { "ID", "NOME COMPLETO", "CNPJ", "RG", "CEP", "CIDADE", "ENDEREÇO", "BAIRRO"};
+    private String[] colunas = new String[] { "ID", "RAZÃO SOCIAL", "CNPJ", "RG", "CEP", "CIDADE", "ENDEREÇO", "BAIRRO"};
 
     // Constantes representando o índice das colunas
     private static final int ID = 0;
-    private static final int NOME_COMPLETO = 1;
+    private static final int RAZAO_SOCIAL = 1;
     private static final int CNPJ = 2;
     private static final int CEP = 3;
     private static final int CIDADE = 4;
@@ -54,7 +54,7 @@ public class PesquisarFornecedorTableModel extends AbstractTableModel{
         switch (columnIndex) {
             case ID:
                 return Integer.class;
-            case NOME_COMPLETO:
+            case RAZAO_SOCIAL:
                 return String.class;
             case CNPJ:
                 return String.class;
@@ -86,8 +86,8 @@ public class PesquisarFornecedorTableModel extends AbstractTableModel{
         switch (columnIndex) {
             case ID:
                 return fornecedor.getId_fornecedor();
-            case NOME_COMPLETO:
-                return fornecedor.getNome_completo();
+            case RAZAO_SOCIAL:
+                return fornecedor.getRazaoSocial();
             case CNPJ:
                 return fornecedor.getCnpj();
             case CEP:
@@ -115,8 +115,8 @@ public class PesquisarFornecedorTableModel extends AbstractTableModel{
                 fornecedor.setId_fornecedor((int) aValue);
                 break;
 
-            case NOME_COMPLETO:
-                fornecedor.setNome_completo((String) aValue);
+            case RAZAO_SOCIAL:
+                fornecedor.setRazaoSocial((String) aValue);
                 break;
 
             case CNPJ:

@@ -17,7 +17,7 @@ public class FornecedorCellRenderer extends DefaultListCellRenderer{
          
         if (value instanceof Fornecedor) {
             Fornecedor fornecedor = (Fornecedor) value;
-            setText(fornecedor.getNome_completo());
+            setText(fornecedor.getRazaoSocial());
         }
         return this;
     }

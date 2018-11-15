@@ -18,13 +18,13 @@ public class PesquisarProdutoTableModel extends AbstractTableModel{
     private ArrayList<Produto> linhas;
     
     // Array com os nomes das colunas.
-    private String[] colunas = new String[] { "ID", "NOME DO PRODUTO", "MARCA", "QUANTIDADE DE ESTOQUE", "PREÇO DE COMPRA", "PREÇO DE VENDA", "FORNECEDOR", "MARGEM"};
+    private String[] colunas = new String[] { "ID", "NOME DO PRODUTO", "CÓDIGO DE BARRA", "MARCA", "PREÇO DE COMPRA", "PREÇO DE VENDA", "FORNECEDOR", "MARGEM"};
 
     // Constantes representando o índice das colunas
     private static final int ID = 0;
     private static final int NOME_PRODUTO = 1;
-    private static final int MARCA = 2;
-    private static final int QUANTIDADE_ESTOQUE = 3;
+    private static final int CODIGO_BARRA = 2;
+    private static final int MARCA = 3;
     private static final int PRECO_COMPRA = 4;
     private static final int PRECO_VENDA = 5;
     private static final int FORNECEDOR = 6;
@@ -62,9 +62,9 @@ public class PesquisarProdutoTableModel extends AbstractTableModel{
                 return Integer.class;
             case NOME_PRODUTO:
                 return String.class;
-            case MARCA:
+            case CODIGO_BARRA:
                 return String.class;
-            case QUANTIDADE_ESTOQUE:
+            case MARCA:
                 return String.class;
             case PRECO_COMPRA:
                 return String.class;
@@ -73,7 +73,7 @@ public class PesquisarProdutoTableModel extends AbstractTableModel{
             case FORNECEDOR:
                 return String.class;
             case MARGEM:
-                return Float.class;
+                return String.class;
             default:
                 throw new IndexOutOfBoundsException("columnIndex out of bounds");
         }
@@ -96,16 +96,16 @@ public class PesquisarProdutoTableModel extends AbstractTableModel{
                 return produto.getId_produto();
             case NOME_PRODUTO:
                 return produto.getNome_produto();
+            case CODIGO_BARRA:
+                return produto.getCodigoBarra();
             case MARCA:
                 return produto.getMarca();
-            case QUANTIDADE_ESTOQUE:
-                return produto.getQuantidade_estoque();
             case PRECO_COMPRA:
                 return produto.getPreco_compra();
             case PRECO_VENDA:
                 return produto.getPreco_venda();
             case FORNECEDOR:
-                return produto.getFornecedor();
+                return produto.getFornecedor().getRazaoSocial();
             case MARGEM:
                 return produto.getMargem();
 
@@ -129,12 +129,12 @@ public class PesquisarProdutoTableModel extends AbstractTableModel{
                 produto.setNome_produto((String) aValue);
                 break;
 
+            case CODIGO_BARRA:
+                produto.setCodigoBarra((String) aValue);
+                break;
+                
             case MARCA:
                 produto.setMarca((String) aValue);
-                break;
-
-            case QUANTIDADE_ESTOQUE:
-                produto.setQuantidade_estoque((int) aValue);
                 break;
                 
             case PRECO_COMPRA:

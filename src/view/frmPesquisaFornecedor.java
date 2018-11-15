@@ -98,7 +98,7 @@ public class frmPesquisaFornecedor extends javax.swing.JDialog {
             fornecedor.setId_fornecedor(Integer.parseInt(txtBuscar.getText()));
         }else if (ultimaColunaSelecionada.equals("NOME COMPLETO") && !txtBuscar.getText().isEmpty()){
             fornecedor = new Fornecedor();
-            fornecedor.setNome_completo(txtBuscar.getText());
+            fornecedor.setRazaoSocial(txtBuscar.getText());
         }else if (ultimaColunaSelecionada.equals("CNPJ") && !txtBuscar.getText().isEmpty()){
             fornecedor = new Fornecedor();
             fornecedor.setCnpj(txtBuscar.getText());
