@@ -20,7 +20,7 @@ public class ConexaoDAO implements Serializable  {
     private ConexaoDAO() {
         // Altere o usuário e senha de acordo com o banco de dados instalado
         usuario = "root";
-        senha = "";
+        senha = "12345";
         
         // Defina aqui o nome do seu banco de dados
         url = "jdbc:mysql://localhost:3306/sistema_pecas";

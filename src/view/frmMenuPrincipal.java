@@ -1,5 +1,7 @@
 package view;
 
+import model.Fornecedor;
+
 /**
  *
  * @author Uemerson
@@ -39,6 +41,8 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
         mniCadastroCargo = new javax.swing.JMenuItem();
         mnuProduto = new javax.swing.JMenu();
         mniCadastroProduto = new javax.swing.JMenuItem();
+        mnuFornecedor = new javax.swing.JMenu();
+        mniCadastroFornecedor = new javax.swing.JMenuItem();
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
@@ -126,6 +130,18 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
 
         mnuMenu.add(mnuProduto);
 
+        mnuFornecedor.setText("Fornecedor");
+
+        mniCadastroFornecedor.setText("Cadastro de fornecedor");
+        mniCadastroFornecedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniCadastroFornecedorActionPerformed(evt);
+            }
+        });
+        mnuFornecedor.add(mniCadastroFornecedor);
+
+        mnuMenu.add(mnuFornecedor);
+
         setJMenuBar(mnuMenu);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -186,6 +202,17 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
         produto.setPosicao();
         produto.setVisible(true);
     }//GEN-LAST:event_mniCadastroProdutoActionPerformed
+
+    private void mniCadastroFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniCadastroFornecedorActionPerformed
+        
+        pnlPrincipal.removeAll();
+        
+        frmFornecedor fornecedor = new frmFornecedor();
+        
+        pnlPrincipal.add(fornecedor);
+        fornecedor.setPosicao();
+        fornecedor.setVisible(true);
+    }//GEN-LAST:event_mniCadastroFornecedorActionPerformed
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
@@ -204,9 +231,11 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem mniCadastroCargo;
     private javax.swing.JMenuItem mniCadastroCliente;
+    private javax.swing.JMenuItem mniCadastroFornecedor;
     private javax.swing.JMenuItem mniCadastroFuncionario;
     private javax.swing.JMenuItem mniCadastroProduto;
     private javax.swing.JMenu mnuCliente;
+    private javax.swing.JMenu mnuFornecedor;
     private javax.swing.JMenu mnuFuncionario;
     private javax.swing.JMenuBar mnuMenu;
     private javax.swing.JMenu mnuProduto;

@@ -84,7 +84,7 @@ public class frmPesquisaFornecedor extends javax.swing.JDialog {
             public void changedUpdate(DocumentEvent e) {
             }
         });
-        ultimaColunaSelecionada = "NOME COMPLETO";
+        ultimaColunaSelecionada = "NOME FANTASIA";
         
         atualizarTabela();
     }
@@ -96,7 +96,10 @@ public class frmPesquisaFornecedor extends javax.swing.JDialog {
         if (ultimaColunaSelecionada.equals("ID") && !txtBuscar.getText().isEmpty()){
             fornecedor = new Fornecedor();
             fornecedor.setId_fornecedor(Integer.parseInt(txtBuscar.getText()));
-        }else if (ultimaColunaSelecionada.equals("NOME COMPLETO") && !txtBuscar.getText().isEmpty()){
+        }else if (ultimaColunaSelecionada.equals("NOME FANTASIA") && !txtBuscar.getText().isEmpty()){
+            fornecedor = new Fornecedor();
+            fornecedor.setNomeFantasia(txtBuscar.getText());
+        }else if (ultimaColunaSelecionada.equals("RAZÃO SOCIAL") && !txtBuscar.getText().isEmpty()){
             fornecedor = new Fornecedor();
             fornecedor.setRazaoSocial(txtBuscar.getText());
         }else if (ultimaColunaSelecionada.equals("CNPJ") && !txtBuscar.getText().isEmpty()){
@@ -123,12 +126,13 @@ public class frmPesquisaFornecedor extends javax.swing.JDialog {
             
             tbFornecedor.getColumnModel().getColumn(0).setPreferredWidth(50);
             tbFornecedor.getColumnModel().getColumn(1).setPreferredWidth(250);
-            tbFornecedor.getColumnModel().getColumn(2).setPreferredWidth(110);
+            tbFornecedor.getColumnModel().getColumn(2).setPreferredWidth(250);
             tbFornecedor.getColumnModel().getColumn(3).setPreferredWidth(110);
-            tbFornecedor.getColumnModel().getColumn(4).setPreferredWidth(80);
-            tbFornecedor.getColumnModel().getColumn(5).setPreferredWidth(250);
+            tbFornecedor.getColumnModel().getColumn(4).setPreferredWidth(110);
+            tbFornecedor.getColumnModel().getColumn(5).setPreferredWidth(80);
             tbFornecedor.getColumnModel().getColumn(6).setPreferredWidth(250);
             tbFornecedor.getColumnModel().getColumn(7).setPreferredWidth(250);
+            tbFornecedor.getColumnModel().getColumn(8).setPreferredWidth(250);
             
             tbFornecedor.getTableHeader().setReorderingAllowed(false);
             tbFornecedor.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);

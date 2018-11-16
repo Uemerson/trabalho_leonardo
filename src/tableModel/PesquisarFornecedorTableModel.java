@@ -13,16 +13,17 @@ public class PesquisarFornecedorTableModel extends AbstractTableModel{
     private ArrayList<Fornecedor> linhas;
     
     // Array com os nomes das colunas.
-    private String[] colunas = new String[] { "ID", "RAZÃO SOCIAL", "CNPJ", "RG", "CEP", "CIDADE", "ENDEREÇO", "BAIRRO"};
+    private String[] colunas = new String[] { "ID","NOME FANTASIA", "RAZÃO SOCIAL", "CNPJ", "RG", "CEP", "CIDADE", "ENDEREÇO", "BAIRRO"};
 
     // Constantes representando o índice das colunas
     private static final int ID = 0;
-    private static final int RAZAO_SOCIAL = 1;
-    private static final int CNPJ = 2;
-    private static final int CEP = 3;
-    private static final int CIDADE = 4;
-    private static final int ENDERECO = 5;
-    private static final int BAIRRO = 6;
+    private static final int NOME_FANTASIA = 1;
+    private static final int RAZAO_SOCIAL = 2;
+    private static final int CNPJ = 3;
+    private static final int CEP = 4;
+    private static final int CIDADE = 5;
+    private static final int ENDERECO = 6;
+    private static final int BAIRRO = 7;
     
     public PesquisarFornecedorTableModel(){
         linhas = new ArrayList<>();
@@ -54,6 +55,8 @@ public class PesquisarFornecedorTableModel extends AbstractTableModel{
         switch (columnIndex) {
             case ID:
                 return Integer.class;
+            case NOME_FANTASIA:
+                return String.class;
             case RAZAO_SOCIAL:
                 return String.class;
             case CNPJ:
@@ -86,6 +89,8 @@ public class PesquisarFornecedorTableModel extends AbstractTableModel{
         switch (columnIndex) {
             case ID:
                 return fornecedor.getId_fornecedor();
+            case NOME_FANTASIA:
+                return fornecedor.getNomeFantasia();
             case RAZAO_SOCIAL:
                 return fornecedor.getRazaoSocial();
             case CNPJ:
@@ -113,6 +118,10 @@ public class PesquisarFornecedorTableModel extends AbstractTableModel{
         switch (columnIndex) {
             case ID:
                 fornecedor.setId_fornecedor((int) aValue);
+                break;
+                
+            case NOME_FANTASIA:
+                fornecedor.setNomeFantasia((String) aValue);
                 break;
 
             case RAZAO_SOCIAL:
@@ -147,12 +156,12 @@ public class PesquisarFornecedorTableModel extends AbstractTableModel{
     }
     
     // Retorna a permissão referente a linha especificada
-    public Fornecedor getFuncionario(int indiceLinha) {
+    public Fornecedor getFornecedor(int indiceLinha) {
         return linhas.get(indiceLinha);
     }
     
     // Adiciona a permissão especificado ao modelo
-    public void addFuncionario(Fornecedor fornecedor) {
+    public void addFornecedor(Fornecedor fornecedor) {
         // Adiciona o registro.
         linhas.add(fornecedor);
 
@@ -166,7 +175,7 @@ public class PesquisarFornecedorTableModel extends AbstractTableModel{
     }
     
     // Remove a permissão da linha especificada.
-    public void removeFuncionario(int indiceLinha) {
+    public void removeFornecedor(int indiceLinha) {
         // Remove o registro.
         linhas.remove(indiceLinha);
 
@@ -175,16 +184,16 @@ public class PesquisarFornecedorTableModel extends AbstractTableModel{
     }
     
     // Adiciona uma lista de permissões no final da lista.
-    public void addListaPermissaoFuncionario(ArrayList<Fornecedor> funcionario) {
+    public void addListaPermissaoFornecedor(ArrayList<Fornecedor> fornecedor) {
         // Pega o tamanho antigo da tabela, que servirá
         // como índice para o primeiro dos novos registros
         int indice = getRowCount();
 
         // Adiciona os registros.
-        linhas.addAll(funcionario);
+        linhas.addAll(fornecedor);
 
         // Notifica a mudança.
-        fireTableRowsInserted(indice, indice + funcionario.size());
+        fireTableRowsInserted(indice, indice + fornecedor.size());
     }
 
     // Remove todos os registros.

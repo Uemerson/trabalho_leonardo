@@ -90,11 +90,13 @@ public class frmFornecedor extends javax.swing.JInternalFrame {
         pnlDados = new javax.swing.JPanel();
         txtId = new controller.TextFieldIconPlaceHolder();
         jLabel2 = new javax.swing.JLabel();
-        txtNomeCompleto = new controller.TextFieldIconPlaceHolder();
+        txtNomeFantasia = new controller.TextFieldIconPlaceHolder();
         jLabel3 = new javax.swing.JLabel();
         txtCnpj = new javax.swing.JFormattedTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
+        txtRazao_Social = new controller.TextFieldIconPlaceHolder();
+        jLabel5 = new javax.swing.JLabel();
         pnlEndereco = new javax.swing.JPanel();
         txtCep = new javax.swing.JFormattedTextField();
         jLabel6 = new javax.swing.JLabel();
@@ -198,11 +200,11 @@ public class frmFornecedor extends javax.swing.JInternalFrame {
 
         jLabel2.setText("ID");
 
-        txtNomeCompleto.setUpper(true);
-        txtNomeCompleto.setMaxLength(50);
-        txtNomeCompleto.setEnabled(false);
+        txtNomeFantasia.setUpper(true);
+        txtNomeFantasia.setMaxLength(50);
+        txtNomeFantasia.setEnabled(false);
 
-        jLabel3.setText("Nome Completo*");
+        jLabel3.setText("Nome Fantasia*");
 
         try {
             txtCnpj.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
@@ -225,6 +227,12 @@ public class frmFornecedor extends javax.swing.JInternalFrame {
 
         jLabel24.setText("Campos com * devem ser preenchidos obrigatóriamente");
 
+        txtNomeFantasia.setUpper(true);
+        txtNomeFantasia.setMaxLength(50);
+        txtRazao_Social.setEnabled(false);
+
+        jLabel5.setText("Razão Social*");
+
         javax.swing.GroupLayout pnlDadosLayout = new javax.swing.GroupLayout(pnlDados);
         pnlDados.setLayout(pnlDadosLayout);
         pnlDadosLayout.setHorizontalGroup(
@@ -232,21 +240,27 @@ public class frmFornecedor extends javax.swing.JInternalFrame {
             .addGroup(pnlDadosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addGap(18, 18, 18)
-                .addGroup(pnlDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(txtNomeCompleto, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(pnlDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addComponent(txtCnpj, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(247, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlDadosLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel24)
-                .addContainerGap())
+                    .addGroup(pnlDadosLayout.createSequentialGroup()
+                        .addGroup(pnlDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnlDadosLayout.createSequentialGroup()
+                                .addGroup(pnlDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel2))
+                                .addGap(18, 18, 18)
+                                .addGroup(pnlDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtNomeFantasia, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel3))
+                                .addGap(18, 18, 18)
+                                .addGroup(pnlDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel5)
+                                    .addComponent(txtRazao_Social, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel4)
+                            .addComponent(txtCnpj, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(19, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlDadosLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel24)
+                        .addGap(10, 10, 10))))
         );
         pnlDadosLayout.setVerticalGroup(
             pnlDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -255,13 +269,17 @@ public class frmFornecedor extends javax.swing.JInternalFrame {
                 .addGroup(pnlDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3)
-                    .addComponent(jLabel4))
+                    .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNomeCompleto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCnpj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 191, Short.MAX_VALUE)
+                    .addComponent(txtNomeFantasia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtRazao_Social, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtCnpj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 133, Short.MAX_VALUE)
                 .addComponent(jLabel24)
                 .addContainerGap())
         );
@@ -456,7 +474,7 @@ public class frmFornecedor extends javax.swing.JInternalFrame {
                 .addGroup(pnlContatoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel19)
                     .addComponent(txtCelular, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(182, Short.MAX_VALUE))
+                .addContainerGap(181, Short.MAX_VALUE))
         );
         pnlContatoLayout.setVerticalGroup(
             pnlContatoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -494,31 +512,28 @@ public class frmFornecedor extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(12, 12, 12)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(tbpCadastro)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblImagemFormulario)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 456, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnRelatorio)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 837, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(33, 33, 33)
-                                .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(31, 31, 31)
-                                .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(34, 34, 34)
-                                .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(39, 39, 39)
-                                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addComponent(lblImagemFormulario)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 456, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnRelatorio)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jSeparator1)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(33, 33, 33)
+                        .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(31, 31, 31)
+                        .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(34, 34, 34)
+                        .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(39, 39, 39)
+                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -626,41 +641,46 @@ public class frmFornecedor extends javax.swing.JInternalFrame {
         btnPesquisar.setEnabled(false);
         
         tbpCadastro.setSelectedComponent(pnlDados);
-        txtNomeCompleto.requestFocusInWindow();
+        txtNomeFantasia.requestFocusInWindow();
     }//GEN-LAST:event_btnNovoActionPerformed
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
          //Verifica os campos obrigatórios
-        if (txtNomeCompleto.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null, "O campo Nome Completo deve ser preenchido!", "Sistema - Cadastro de cliente", JOptionPane.ERROR_MESSAGE);
+        if (txtNomeFantasia.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "O campo Nome Completo deve ser preenchido!", "Sistema - Cadastro de fornecedor", JOptionPane.ERROR_MESSAGE);
             tbpCadastro.setSelectedComponent(pnlDados);
-            txtNomeCompleto.requestFocusInWindow();
+            txtNomeFantasia.requestFocusInWindow();
+        }else if (txtRazao_Social.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "O campo Razão Social deve ser preenchido!", "Sistema - Cadastro de fornecedor", JOptionPane.ERROR_MESSAGE);
+            tbpCadastro.setSelectedComponent(pnlDados);
+            txtRazao_Social.requestFocusInWindow();
         }else if (txtCnpj.getValue() == null){
-            JOptionPane.showMessageDialog(null, "O campo CPF deve ser preenchido!", "Sistema - Cadastro de cliente", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "O campo Cnpj deve ser preenchido!", "Sistema - Cadastro de fornecedor", JOptionPane.ERROR_MESSAGE);
             tbpCadastro.setSelectedComponent(pnlDados);
             txtCnpj.requestFocusInWindow();
         }else if (txtCep.getValue() == null){
-            JOptionPane.showMessageDialog(null, "O campo CEP deve ser preenchido!", "Sistema - Cadastro de cliente", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "O campo CEP deve ser preenchido!", "Sistema - Cadastro de fornecedor", JOptionPane.ERROR_MESSAGE);
             tbpCadastro.setSelectedComponent(pnlEndereco);
             txtCep.requestFocusInWindow();
         }else if (txtCidade.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null, "O campo Cidade deve ser preenchido!", "Sistema - Cadastro de cliente", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "O campo Cidade deve ser preenchido!", "Sistema - Cadastro de fornecedor", JOptionPane.ERROR_MESSAGE);
             tbpCadastro.setSelectedComponent(pnlEndereco);
             txtCidade.requestFocusInWindow();
         }else if (cbEstado.getSelectedItem() == null){
-            JOptionPane.showMessageDialog(null, "O campo Estado deve ser preenchido!", "Sistema - Cadastro de cliente", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "O campo Estado deve ser preenchido!", "Sistema - Cadastro de fornecedor", JOptionPane.ERROR_MESSAGE);
             tbpCadastro.setSelectedComponent(pnlEndereco);
             cbEstado.requestFocusInWindow();
         }else if (txtEndereco.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null, "O campo Endereço deve ser preenchido!", "Sistema - Cadastro de cliente", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "O campo Endereço deve ser preenchido!", "Sistema - Cadastro de fornecedor", JOptionPane.ERROR_MESSAGE);
             tbpCadastro.setSelectedComponent(pnlEndereco);
             txtEndereco.requestFocusInWindow();
         }
         
         else if (txtCelular.getValue() == null){
-            JOptionPane.showMessageDialog(null, "O campo Celular deve ser preenchido!", "Sistema - Cadastro de cliente", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "O campo Celular deve ser preenchido!", "Sistema - Cadastro de fornecedor", JOptionPane.ERROR_MESSAGE);
             tbpCadastro.setSelectedComponent(pnlContato);
             txtCelular.requestFocusInWindow();
         }
+        
         
         
         
@@ -675,7 +695,8 @@ public class frmFornecedor extends javax.swing.JInternalFrame {
         else{
             Fornecedor fornecedor = new Fornecedor();
             
-            fornecedor.setRazaoSocial(txtNomeCompleto.getText());
+            fornecedor.setNomeFantasia(txtNomeFantasia.getText());
+            fornecedor.setRazaoSocial(txtRazao_Social.getText());
             fornecedor.setCnpj(txtCnpj.getValue().toString().replace(".", "").replace("-", ""));
             
             fornecedor.setCep(txtCep.getValue().toString().replace("-", ""));
@@ -725,7 +746,7 @@ public class frmFornecedor extends javax.swing.JInternalFrame {
                     
                 } catch (SQLException ex) {
                     Logger.getLogger(frmFornecedor.class.getName()).log(Level.SEVERE, null, ex);
-                    JOptionPane.showMessageDialog(null, "Erro ao tentar salvar cliente", "Sistema - Cadastro de cliente", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Erro ao tentar salvaR fornecedor", "Sistema - Cadastro de fornecedor", JOptionPane.ERROR_MESSAGE);
                 }
             }else { //Atualizando os dados do funcionário
                 fornecedor.setId_fornecedor(Integer.parseInt(txtId.getText()));
@@ -803,7 +824,8 @@ public class frmFornecedor extends javax.swing.JInternalFrame {
                 fornecedor.setId_fornecedor(Integer.parseInt(txtId.getText()));
                 fornecedorDAO.excluir(fornecedor);
                 
-                txtNomeCompleto.setText(fornecedor.getRazaoSocial());
+                txtNomeFantasia.setText(fornecedor.getNomeFantasia());
+                txtRazao_Social.setText(fornecedor.getRazaoSocial());
                 
                 javax.swing.text.MaskFormatter mask = new javax.swing.text.MaskFormatter("###.###.###-##");
                 mask.setValueContainsLiteralCharacters(false);
@@ -872,7 +894,8 @@ public class frmFornecedor extends javax.swing.JInternalFrame {
                 FornecedorDAO fornecedorDAO = new FornecedorDAO();
                 Fornecedor fornecedor = fornecedorDAO.buscar(fornecedorSelecionado);
                 
-                txtNomeCompleto.setText(fornecedor.getRazaoSocial());
+                txtNomeFantasia.setText(fornecedor.getNomeFantasia());
+                txtRazao_Social.setText(fornecedor.getRazaoSocial());
                 
                 javax.swing.text.MaskFormatter mask = new javax.swing.text.MaskFormatter("###.###.###-##");
                 mask.setValueContainsLiteralCharacters(false);
@@ -909,7 +932,7 @@ public class frmFornecedor extends javax.swing.JInternalFrame {
 
     private void txtCnpjFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCnpjFocusLost
         //Verifica o que preencheu é um CPF
-        if (!Funcoes.isCNPJ(txtCnpj.getText().replace(".", "").replace("-", "").replace(" ", "")) 
+        /*if (!Funcoes.isCNPJ(txtCnpj.getText().replace(".", "").replace("-", "").replace(" ", "")) 
                 && txtCnpj.getText().replace(".", "").replace("-", "").replace(" ", "").length() >= 11){
             txtCnpj.setValue(null);
             tbpCadastro.setSelectedComponent(pnlDados);
@@ -941,7 +964,7 @@ public class frmFornecedor extends javax.swing.JInternalFrame {
             } catch (SQLException ex) {
                 Logger.getLogger(frmFornecedor.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }
+        }*/
     }//GEN-LAST:event_txtCnpjFocusLost
 
     private void txtTelefoneFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtTelefoneFocusLost
@@ -1098,6 +1121,7 @@ public class frmFornecedor extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -1117,8 +1141,9 @@ public class frmFornecedor extends javax.swing.JInternalFrame {
     private controller.TextFieldIconPlaceHolder txtEmail;
     private controller.TextFieldIconPlaceHolder txtEndereco;
     private controller.TextFieldIconPlaceHolder txtId;
-    private controller.TextFieldIconPlaceHolder txtNomeCompleto;
+    private controller.TextFieldIconPlaceHolder txtNomeFantasia;
     private controller.TextFieldIconPlaceHolder txtNumero;
+    private controller.TextFieldIconPlaceHolder txtRazao_Social;
     private javax.swing.JFormattedTextField txtTelefone;
     // End of variables declaration//GEN-END:variables
 }
