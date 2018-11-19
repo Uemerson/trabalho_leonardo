@@ -52,7 +52,7 @@ public class FornecedorDAO {
     
     public void alterar(Fornecedor fornecedor) throws SQLException{
         
-        sql = "UPDATE fornecedor SET nome_fantasia=?, razao_social = ?, id_estado = ?, cep = ?, cidade = ? , endereco = ?,"
+        sql = "UPDATE fornecedor SET nome_fantasia = ?, razao_social = ?, id_estado = ?, cep = ?, cidade = ? , endereco = ?,"
                     + "numero = ?, complemento = ?, bairro = ?, email = ?, telefone = ?, celular = ?, "
                     + "cnpj = ? WHERE id_fornecedor = ?";
         pst = (PreparedStatement) ConexaoDAO.getInstance().prepareStatement(sql);
@@ -141,7 +141,7 @@ public class FornecedorDAO {
         
         String SQL = "SELECT fornecedor.id_fornecedor,fornecedor.nome_fantasia, fornecedor.razao_social, fornecedor.cep,"
                 + "fornecedor.cidade, fornecedor.endereco,"
-                + "fornecedor.bairro, fornecedor.cnpj"
+                + "fornecedor.bairro, fornecedor.cnpj "
                 + "FROM fornecedor ";
                 
         if (fornecedor != null){
@@ -161,6 +161,8 @@ public class FornecedorDAO {
                 SQL += "WHERE endereco LIKE ?";
             }else if (fornecedor.getBairro() != null){
                 SQL += "WHERE bairro LIKE ?";
+            }else if (fornecedor.getCnpj() != null){
+                SQL += "WHERE cnpj LIKE ?";
             }
         }
         PreparedStatement pst = ConexaoDAO.getInstance().prepareStatement(SQL);
