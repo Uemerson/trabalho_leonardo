@@ -104,9 +104,6 @@ public class frmPesquisaFuncionario extends javax.swing.JDialog {
         }else if (ultimaColunaSelecionada.equals("CPF") && !txtBuscar.getText().isEmpty()){
             funcionario = new Funcionario();
             funcionario.setCpf(txtBuscar.getText());
-        }else if (ultimaColunaSelecionada.equals("RG") && !txtBuscar.getText().isEmpty()){
-            funcionario = new Funcionario();
-            funcionario.setRg(txtBuscar.getText());
         }else if (ultimaColunaSelecionada.equals("CEP") && !txtBuscar.getText().isEmpty()){
             funcionario = new Funcionario();
             funcionario.setCep(txtBuscar.getText());

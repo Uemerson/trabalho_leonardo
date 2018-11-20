@@ -820,9 +820,9 @@ public class frmFornecedor extends javax.swing.JInternalFrame {
             //Retorna os dados que estão cadastrados no banco
             try {
                 FornecedorDAO fornecedorDAO = new FornecedorDAO();
-                Fornecedor fornecedor = new Fornecedor();
+                Fornecedor fornecedorId = new Fornecedor();
                 fornecedor.setId_fornecedor(Integer.parseInt(txtId.getText()));
-                fornecedorDAO.excluir(fornecedor);
+                Fornecedor fornecedor = fornecedorDAO.buscar(fornecedorId);
                 
                 txtNomeFantasia.setText(fornecedor.getNomeFantasia());
                 txtRazao_Social.setText(fornecedor.getRazaoSocial());

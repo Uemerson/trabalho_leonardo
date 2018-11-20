@@ -128,11 +128,10 @@ public class frmPesquisaFornecedor extends javax.swing.JDialog {
             tbFornecedor.getColumnModel().getColumn(1).setPreferredWidth(250);
             tbFornecedor.getColumnModel().getColumn(2).setPreferredWidth(250);
             tbFornecedor.getColumnModel().getColumn(3).setPreferredWidth(110);
-            tbFornecedor.getColumnModel().getColumn(4).setPreferredWidth(110);
-            tbFornecedor.getColumnModel().getColumn(5).setPreferredWidth(80);
+            tbFornecedor.getColumnModel().getColumn(4).setPreferredWidth(80);
+            tbFornecedor.getColumnModel().getColumn(5).setPreferredWidth(250);
             tbFornecedor.getColumnModel().getColumn(6).setPreferredWidth(250);
             tbFornecedor.getColumnModel().getColumn(7).setPreferredWidth(250);
-            tbFornecedor.getColumnModel().getColumn(8).setPreferredWidth(250);
             
             tbFornecedor.getTableHeader().setReorderingAllowed(false);
             tbFornecedor.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);

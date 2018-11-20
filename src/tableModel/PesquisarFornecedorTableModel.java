@@ -13,7 +13,7 @@ public class PesquisarFornecedorTableModel extends AbstractTableModel{
     private ArrayList<Fornecedor> linhas;
     
     // Array com os nomes das colunas.
-    private String[] colunas = new String[] { "ID", "NOME FANTASIA", "RAZÃO SOCIAL", "CNPJ", "RG", "CEP", "CIDADE", "ENDEREÇO", "BAIRRO"};
+    private String[] colunas = new String[] { "ID", "NOME FANTASIA", "RAZÃO SOCIAL", "CNPJ", "CEP", "CIDADE", "ENDEREÇO", "BAIRRO"};
 
     // Constantes representando o índice das colunas
     private static final int ID = 0;

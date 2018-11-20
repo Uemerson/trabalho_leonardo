@@ -52,7 +52,7 @@ public class FornecedorDAO {
     
     public void alterar(Fornecedor fornecedor) throws SQLException{
         
-        sql = "UPDATE fornecedor SET nome_fantasia = ?, razao_social = ?, id_estado = ?, cep = ?, cidade = ? , endereco = ?,"
+        sql = "UPDATE fornecedor SET nome_fantasia = ?, razao_social = ?, id_estado = ?, cep = ?, cidade = ?, endereco = ?, "
                     + "numero = ?, complemento = ?, bairro = ?, email = ?, telefone = ?, celular = ?, "
                     + "cnpj = ? WHERE id_fornecedor = ?";
         pst = (PreparedStatement) ConexaoDAO.getInstance().prepareStatement(sql);
