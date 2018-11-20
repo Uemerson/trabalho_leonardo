@@ -56,19 +56,19 @@ public class FornecedorDAO {
                     + "numero = ?, complemento = ?, bairro = ?, email = ?, telefone = ?, celular = ?, "
                     + "cnpj = ? WHERE id_fornecedor = ?";
         pst = (PreparedStatement) ConexaoDAO.getInstance().prepareStatement(sql);
-        pst.setString(1, fornecedor.getRazaoSocial());
-        pst.setInt(2, fornecedor.getEstado().getId_estado());
-        pst.setString(3, fornecedor.getCep());
-        pst.setString(4, fornecedor.getCidade());
-        pst.setString(5, fornecedor.getEndereco());
-        pst.setString(6, fornecedor.getNumero());
-        pst.setString(7, fornecedor.getComplemento());
-        pst.setString(8, fornecedor.getBairro());
-        pst.setString(9, fornecedor.getEmail());
-        pst.setString(10, fornecedor.getTelefone());
-        pst.setString(11, fornecedor.getCelular());
-        pst.setString(12, fornecedor.getCnpj());
-        pst.setString(13, fornecedor.getNomeFantasia());
+        pst.setString(1, fornecedor.getNomeFantasia());
+        pst.setString(2, fornecedor.getRazaoSocial());
+        pst.setInt(3, fornecedor.getEstado().getId_estado());
+        pst.setString(4, fornecedor.getCep());
+        pst.setString(5, fornecedor.getCidade());
+        pst.setString(6, fornecedor.getEndereco());
+        pst.setString(7, fornecedor.getNumero());
+        pst.setString(8, fornecedor.getComplemento());
+        pst.setString(9, fornecedor.getBairro());
+        pst.setString(10, fornecedor.getEmail());
+        pst.setString(11, fornecedor.getTelefone());
+        pst.setString(12, fornecedor.getCelular());
+        pst.setString(13, fornecedor.getCnpj());
         pst.setInt(14, fornecedor.getId_fornecedor());
 
         pst.execute();
