@@ -310,9 +310,6 @@
               <Properties>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtNomeProdutoActionPerformed"/>
-              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="txtNomeProduto.setUpper(true);&#xa;txtNomeProduto.setMaxLength(50);"/>
               </AuxValues>
@@ -377,6 +374,9 @@
                 <Property name="text" type="java.lang.String" value=""/>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
+              <Events>
+                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtMargemFocusLost"/>
+              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new controller.JNumberFormatField(new DecimalFormat(&quot;#,##0.00&quot;)){&#xa;    {&#xa;        setLimit(6);&#xa;    }&#xa;}"/>
               </AuxValues>

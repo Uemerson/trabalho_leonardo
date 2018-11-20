@@ -28,6 +28,10 @@ import com.itextpdf.text.Document;
 import comboModel.FornecedorCellRenderer;
 import comboModel.FornecedorComboModel;
 import dao.FornecedorDAO;
+import java.awt.event.KeyEvent;
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileFilter;
@@ -192,11 +196,6 @@ public class frmProduto extends javax.swing.JInternalFrame {
         txtNomeProduto.setUpper(true);
         txtNomeProduto.setMaxLength(50);
         txtNomeProduto.setEnabled(false);
-        txtNomeProduto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNomeProdutoActionPerformed(evt);
-            }
-        });
 
         jLabel3.setText("Nome do Produto");
 
@@ -221,6 +220,11 @@ public class frmProduto extends javax.swing.JInternalFrame {
 
         txtMargem.setText("");
         txtMargem.setEnabled(false);
+        txtMargem.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtMargemFocusLost(evt);
+            }
+        });
 
         txtCodigoBarra.setUpper(true);
         txtCodigoBarra.setOnlyNumber(true);
@@ -484,9 +488,10 @@ public class frmProduto extends javax.swing.JInternalFrame {
         
         Funcoes.limpaCampos(pnlDados);
         
-        
         txtId.setText("NOVO");
         txtId.setEnabled(false);
+        
+        txtPrecoVenda.setEnabled(false);
         
         btnNovo.setEnabled(false);
         btnSalvar.setEnabled(true);
@@ -571,11 +576,11 @@ public class frmProduto extends javax.swing.JInternalFrame {
                 
                 txtNomeProduto.setText(produto.getNome_produto());
                 txtMarca.setText(produto.getMarca());
-                txtPrecoCompra.setText(Float.toString(produto.getPreco_compra()));
-                txtPrecoVenda.setText(Float.toString(produto.getPreco_venda()));
+                txtMargem.setValue(new BigDecimal(produto.getMargem()));
+                txtPrecoCompra.setValue(new BigDecimal(produto.getPreco_compra()));
+                txtPrecoVenda.setValue(new BigDecimal(produto.getPreco_venda()));
                 cbFornecedor.getModel().setSelectedItem(produto.getFornecedor());
                 
-                txtMargem.setText(Float.toString(produto.getMargem()));
                 txtCodigoBarra.setText(produto.getCodigoBarra());
             } catch (SQLException ex) {
                 Logger.getLogger(frmProduto.class.getName()).log(Level.SEVERE, null, ex);
@@ -629,6 +634,7 @@ public class frmProduto extends javax.swing.JInternalFrame {
         Funcoes.ativaCampos(pnlDados);
         
         txtId.setEnabled(false);
+        txtPrecoVenda.setEnabled(false);
         
         btnNovo.setEnabled(false);
         btnSalvar.setEnabled(true);
@@ -637,10 +643,6 @@ public class frmProduto extends javax.swing.JInternalFrame {
         btnExcluir.setEnabled(false);
         btnPesquisar.setEnabled(false);
     }//GEN-LAST:event_btnEditarActionPerformed
-
-    private void txtNomeProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeProdutoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNomeProdutoActionPerformed
 
     private void btnRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRelatorioActionPerformed
         FileFilter filter = new FileNameExtensionFilter("Arquivos em PDF", ".pdf");
@@ -661,6 +663,28 @@ public class frmProduto extends javax.swing.JInternalFrame {
         }
 
     }//GEN-LAST:event_btnRelatorioActionPerformed
+
+    private void txtMargemFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtMargemFocusLost
+         
+        if (Float.parseFloat(txtMargem.getText().replace("R$", "").replace(",", ".")) > 0){
+            
+            if (Float.parseFloat(txtPrecoCompra.getValue().toString()) <= 0){
+                txtMargem.setValue(BigDecimal.ZERO);
+                txtPrecoCompra.requestFocusInWindow();
+                JOptionPane.showMessageDialog(null, "Preço de compra não pode ser inferior ou igual a zero!", "Sistema - Cadastro de produto", JOptionPane.ERROR_MESSAGE);
+
+            }else{
+                float precoCompra = Float.parseFloat(txtPrecoCompra.getValue().toString());
+                float margem = Float.parseFloat(txtMargem.getText().replace("R$", "").replace(",", "."));
+
+                BigDecimal precoVenda = new BigDecimal(((precoCompra * margem) / 100) + precoCompra).setScale(2, RoundingMode.HALF_EVEN);
+
+                txtPrecoVenda.setValue(precoVenda);
+            }
+        }else{
+            txtPrecoVenda.setValue(BigDecimal.ZERO);
+        }
+    }//GEN-LAST:event_txtMargemFocusLost
                                           
     public void gerarDocumento(String path)  {
         

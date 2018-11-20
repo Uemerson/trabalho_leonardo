@@ -43,6 +43,8 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
         mniCadastroProduto = new javax.swing.JMenuItem();
         mnuFornecedor = new javax.swing.JMenu();
         mniCadastroFornecedor = new javax.swing.JMenuItem();
+        mnuVenda = new javax.swing.JMenu();
+        mnuCadastroVenda = new javax.swing.JMenuItem();
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
@@ -142,6 +144,18 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
 
         mnuMenu.add(mnuFornecedor);
 
+        mnuVenda.setText("Venda");
+
+        mnuCadastroVenda.setText("Cadastro de venda");
+        mnuCadastroVenda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuCadastroVendaActionPerformed(evt);
+            }
+        });
+        mnuVenda.add(mnuCadastroVenda);
+
+        mnuMenu.add(mnuVenda);
+
         setJMenuBar(mnuMenu);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -193,7 +207,6 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_mniCadastroCargoActionPerformed
 
     private void mniCadastroProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniCadastroProdutoActionPerformed
-        
         pnlPrincipal.removeAll();
         
         frmProduto produto = new frmProduto();
@@ -204,7 +217,6 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_mniCadastroProdutoActionPerformed
 
     private void mniCadastroFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniCadastroFornecedorActionPerformed
-        
         pnlPrincipal.removeAll();
         
         frmFornecedor fornecedor = new frmFornecedor();
@@ -213,6 +225,16 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
         fornecedor.setPosicao();
         fornecedor.setVisible(true);
     }//GEN-LAST:event_mniCadastroFornecedorActionPerformed
+
+    private void mnuCadastroVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuCadastroVendaActionPerformed
+        pnlPrincipal.removeAll();
+        
+        frmVenda venda = new frmVenda();
+        
+        pnlPrincipal.add(venda);
+        venda.setPosicao();
+        venda.setVisible(true);
+    }//GEN-LAST:event_mnuCadastroVendaActionPerformed
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
@@ -234,11 +256,13 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem mniCadastroFornecedor;
     private javax.swing.JMenuItem mniCadastroFuncionario;
     private javax.swing.JMenuItem mniCadastroProduto;
+    private javax.swing.JMenuItem mnuCadastroVenda;
     private javax.swing.JMenu mnuCliente;
     private javax.swing.JMenu mnuFornecedor;
     private javax.swing.JMenu mnuFuncionario;
     private javax.swing.JMenuBar mnuMenu;
     private javax.swing.JMenu mnuProduto;
+    private javax.swing.JMenu mnuVenda;
     private javax.swing.JDesktopPane pnlPrincipal;
     // End of variables declaration//GEN-END:variables
 }
