@@ -224,7 +224,7 @@
                                       </Group>
                                   </Group>
                                   <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtCnpj" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                                  <Component id="txtCnpj" alignment="0" min="-2" pref="157" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace pref="19" max="32767" attributes="0"/>
                           </Group>
@@ -293,8 +293,8 @@
             </Component>
             <Component class="javax.swing.JFormattedTextField" name="txtCnpj">
               <Properties>
-                <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.RADConnectionPropertyEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
-                  <Connection code="new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter(&quot;###.###.###-##&quot;))" type="code"/>
+                <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
+                  <Format format="##.###.###/####-##" subtype="-1" type="5"/>
                 </Property>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>

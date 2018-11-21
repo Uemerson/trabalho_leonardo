@@ -207,7 +207,7 @@ public class frmFornecedor extends javax.swing.JInternalFrame {
         jLabel3.setText("Nome Fantasia*");
 
         try {
-            txtCnpj.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+            txtCnpj.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##.###.###/####-##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
@@ -255,7 +255,7 @@ public class frmFornecedor extends javax.swing.JInternalFrame {
                                     .addComponent(jLabel5)
                                     .addComponent(txtRazao_Social, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(jLabel4)
-                            .addComponent(txtCnpj, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtCnpj, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(19, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlDadosLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
