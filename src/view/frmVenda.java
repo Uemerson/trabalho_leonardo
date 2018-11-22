@@ -3,6 +3,7 @@ package view;
 import controller.Funcoes;
 import dao.CargoDAO;
 import dao.ClienteDAO;
+import dao.ProdutoDAO;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.sql.SQLException;
@@ -12,6 +13,7 @@ import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 import model.Cargo;
 import model.Cliente;
+import model.Produto;
 
 
 
@@ -41,10 +43,10 @@ public class frmVenda extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         txtIdCliente = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        txtIdProduto = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        txtNomeProduto = new javax.swing.JTextField();
         txtNomeCliente = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -57,7 +59,7 @@ public class frmVenda extends javax.swing.JInternalFrame {
         jSeparator2 = new javax.swing.JSeparator();
         jSeparator1 = new javax.swing.JSeparator();
         btnPesquisarCliente = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnPesquisarProduto = new javax.swing.JButton();
         btnSalvar = new javax.swing.JButton();
 
         setClosable(true);
@@ -81,13 +83,18 @@ public class frmVenda extends javax.swing.JInternalFrame {
 
         txtIdCliente.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
-        jTextField2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtIdProduto.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtIdProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtIdProdutoActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("CLIENTE");
 
         jLabel5.setText("PRODUTO");
 
-        jTextField3.setEnabled(false);
+        txtNomeProduto.setEnabled(false);
 
         txtNomeCliente.setEnabled(false);
 
@@ -123,7 +130,12 @@ public class frmVenda extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/pesquisar 24x24.png"))); // NOI18N
+        btnPesquisarProduto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/pesquisar 24x24.png"))); // NOI18N
+        btnPesquisarProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPesquisarProdutoActionPerformed(evt);
+            }
+        });
 
         btnSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/salvar 24x24.png"))); // NOI18N
         btnSalvar.setText("Finalizar Venda (F5)");
@@ -146,7 +158,7 @@ public class frmVenda extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtIdCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
-                            .addComponent(jTextField2))
+                            .addComponent(txtIdProduto))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
@@ -154,11 +166,11 @@ public class frmVenda extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtNomeCliente)
-                            .addComponent(jTextField3))
+                            .addComponent(txtNomeProduto))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnPesquisarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(btnPesquisarProduto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
@@ -211,11 +223,11 @@ public class frmVenda extends javax.swing.JInternalFrame {
                             .addComponent(btnPesquisarCliente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtIdProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3)
                             .addComponent(jLabel5)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtNomeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(btnPesquisarProduto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 3, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -262,13 +274,40 @@ public class frmVenda extends javax.swing.JInternalFrame {
         }
         
     }//GEN-LAST:event_btnPesquisarClienteActionPerformed
+
+    private void btnPesquisarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarProdutoActionPerformed
+        frmPesquisaProduto pesquisarProduto = new frmPesquisaProduto(null, true);
+        
+        pesquisarProduto.setVisible(true);
+        
+        Produto produtoSelecionado = pesquisarProduto.getProdutoSelecionado();
+        
+        if (produtoSelecionado != null){
+            
+            ProdutoDAO produtoDAO = new ProdutoDAO();
+            try {
+                Produto produto = produtoDAO.buscar(produtoSelecionado);
+                txtIdProduto.setText(Integer.toString(produto.getId_produto()));
+                txtNomeProduto.setText(produto.getNome_produto());
+                
+            } catch (SQLException ex) {
+                Logger.getLogger(frmVenda.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            
+        }
+    }//GEN-LAST:event_btnPesquisarProdutoActionPerformed
+
+    private void txtIdProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdProdutoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtIdProdutoActionPerformed
                            
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnNovo;
     private javax.swing.JButton btnPesquisarCliente;
+    private javax.swing.JButton btnPesquisarProduto;
     private javax.swing.JButton btnSalvar;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -281,13 +320,13 @@ public class frmVenda extends javax.swing.JInternalFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
     private javax.swing.JLabel lblImagemFormulario;
     private javax.swing.JTextField txtIdCliente;
+    private javax.swing.JTextField txtIdProduto;
     private javax.swing.JTextField txtNomeCliente;
+    private javax.swing.JTextField txtNomeProduto;
     // End of variables declaration//GEN-END:variables
 }
