@@ -52,6 +52,25 @@ public class FuncionarioDAO {
         ConexaoDAO.closeInstance();
         
     }
+    public Funcionario buscalogin (String login, String senha) throws SQLException{
+        
+       String sql = "Select * from funcionario where login COLLATE utf8_bin =? and senha COLLATE utf8_bin =?";
+        
+        PreparedStatement pst = ConexaoDAO.getInstance().prepareStatement(sql);
+        Funcionario funcionario = null;
+        pst.setString (1, login);
+        pst.setString (2, senha); 
+        pst.executeQuery();
+        ResultSet rs = pst.getResultSet();
+        while (rs.next()){
+        
+            funcionario = new Funcionario (rs.getInt("codigo"), rs.getString("login"), rs. getString("senha"), rs.getInt("cargo" ));
+            
+            
+        }
+        return funcionario;
+        
+    }
     
     public void alterar(Funcionario funcionario) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException{
         String SQL;

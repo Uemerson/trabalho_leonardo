@@ -1,6 +1,7 @@
 package view;
 
 import model.Fornecedor;
+import model.Funcionario;
 
 /**
  *
@@ -8,10 +9,14 @@ import model.Fornecedor;
  */
 public class frmMenuPrincipal extends javax.swing.JFrame {
 
-    public frmMenuPrincipal() {
+    public frmMenuPrincipal(Funcionario funcionario) {
         initComponents();
         setVisible(true);
         setExtendedState(MAXIMIZED_BOTH);
+        
+        if(funcionario.getCargo().equals(1)){
+        
+        }
     }
 
     @SuppressWarnings("unchecked")

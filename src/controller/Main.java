@@ -10,6 +10,7 @@ import java.util.logging.Logger;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.UnsupportedLookAndFeelException;
+import view.frmLogin;
 import view.frmMenuPrincipal;
 /**
  *
@@ -37,7 +38,7 @@ public class Main {
         
         UIManager.put("Button.defaultButtonFollowsFocus", Boolean.TRUE);
         
-        new frmMenuPrincipal();
+        new frmLogin();
                     
     }
 }
