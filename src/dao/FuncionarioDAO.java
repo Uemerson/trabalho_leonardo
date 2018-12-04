@@ -52,6 +52,7 @@ public class FuncionarioDAO {
         ConexaoDAO.closeInstance();
         
     }
+    
     public Funcionario buscalogin (String login, String senha) throws SQLException{
         
        String sql = "Select * from funcionario where login COLLATE utf8_bin =? and senha COLLATE utf8_bin =?";
@@ -64,7 +65,7 @@ public class FuncionarioDAO {
         ResultSet rs = pst.getResultSet();
         while (rs.next()){
         
-            funcionario = new Funcionario (rs.getInt("codigo"), rs.getString("login"), rs. getString("senha"), rs.getInt("cargo" ));
+            //funcionario = new Funcionario (rs.getInt("codigo"), rs.getString("login"), rs. getString("senha"), rs.getInt("cargo" ));
             
             
         }
@@ -345,6 +346,30 @@ public class FuncionarioDAO {
             funcionarioRetornado.setBairro(rs.getString("bairro"));
             funcionarioRetornado.setRg(rs.getString("rg"));
             funcionarioRetornado.setCpf(rs.getString("cpf"));
+            listaFuncionario.add(funcionarioRetornado);
+        }
+        
+        pst.close();
+        rs.close();
+        ConexaoDAO.closeInstance();
+        
+        return listaFuncionario;
+    }
+
+    public ArrayList<Funcionario> listaVendedor() throws SQLException{
+        ArrayList<Funcionario> listaFuncionario = new ArrayList<Funcionario>();
+        
+        String SQL =    "SELECT funcionario.id_funcionario, funcionario.nome_completo FROM funcionario \n" +
+                        "WHERE funcionario.id_funcionario IN (SELECT funcionario.id_funcionario FROM funcionario\n" +
+                        "INNER JOIN cargo ON cargo.id_cargo = funcionario.id_cargo AND cargo.nome_cargo = 'VENDEDOR');";
+        
+        PreparedStatement pst = ConexaoDAO.getInstance().prepareStatement(SQL);
+        ResultSet rs = pst.executeQuery();
+        
+        while (rs.next()){
+            Funcionario funcionarioRetornado = new Funcionario();
+            funcionarioRetornado.setId_funcionario(rs.getInt("id_funcionario"));
+            funcionarioRetornado.setNome_completo(rs.getString("nome_completo"));
             listaFuncionario.add(funcionarioRetornado);
         }
         

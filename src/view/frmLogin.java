@@ -141,7 +141,7 @@ public class frmLogin extends javax.swing.JFrame {
                 txtSenha.setText("");
                 txtUsuario.requestFocus();
             }else{
-                frmFuncionario funcionario = new frmFuncionario(funcionario);
+                //frmFuncionario funcionario = new frmFuncionario(funcionario);
                 this.dispose();
             }
         }
