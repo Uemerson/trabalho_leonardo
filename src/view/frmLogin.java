@@ -45,6 +45,7 @@ public class frmLogin extends javax.swing.JFrame {
         btnLogar = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jLabel2.setText("Senha");
 
@@ -100,7 +101,7 @@ public class frmLogin extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -121,7 +122,7 @@ public class frmLogin extends javax.swing.JFrame {
     private void btnLogarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogarActionPerformed
         
         if(txtUsuario.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null, "O campo Usuario deve ser preenchido!", "Sistema - Login", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "O campo Usuário deve ser preenchido!", "Sistema - Login", JOptionPane.ERROR_MESSAGE);
             txtUsuario.requestFocusInWindow();
             
         }else if(txtSenha.getText().isEmpty()){
@@ -130,18 +131,21 @@ public class frmLogin extends javax.swing.JFrame {
             
         }else {
             try {
-                funcionario = funcionarioDao.buscalogin(txtUsuario.getText(), txtSenha.getText());
+                Funcionario funcionarioParametro = new Funcionario();
+                funcionarioParametro.setLogin(txtUsuario.getText());
+                funcionarioParametro.setSenha(txtSenha.getText());
+                funcionario = funcionarioDao.validaLogin(funcionarioParametro);
             } catch (SQLException ex) {
                 Logger.getLogger(frmLogin.class.getName()).log(Level.SEVERE, null, ex);
             }
             
             if(funcionario == null){
-                JOptionPane.showMessageDialog(null, "As senhas não se conhecidem!", "Sistema - Login", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Usuário ou senha inválido!", "Sistema - Login", JOptionPane.ERROR_MESSAGE);
                 txtUsuario.setText("");
                 txtSenha.setText("");
                 txtUsuario.requestFocus();
             }else{
-                //frmFuncionario funcionario = new frmFuncionario(funcionario);
+                frmMenuPrincipal menuPrincipal = new frmMenuPrincipal(funcionario);
                 this.dispose();
             }
         }
