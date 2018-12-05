@@ -53,26 +53,6 @@ public class FuncionarioDAO {
         
     }
     
-    public Funcionario buscalogin (String login, String senha) throws SQLException{
-        
-       String sql = "Select * from funcionario where login COLLATE utf8_bin =? and senha COLLATE utf8_bin =?";
-        
-        PreparedStatement pst = ConexaoDAO.getInstance().prepareStatement(sql);
-        Funcionario funcionario = null;
-        pst.setString (1, login);
-        pst.setString (2, senha); 
-        pst.executeQuery();
-        ResultSet rs = pst.getResultSet();
-        while (rs.next()){
-        
-            //funcionario = new Funcionario (rs.getInt("codigo"), rs.getString("login"), rs. getString("senha"), rs.getInt("cargo" ));
-            
-            
-        }
-        return funcionario;
-        
-    }
-    
     public void alterar(Funcionario funcionario) throws SQLException, NoSuchAlgorithmException, UnsupportedEncodingException{
         String SQL;
         
@@ -378,5 +358,33 @@ public class FuncionarioDAO {
         ConexaoDAO.closeInstance();
         
         return listaFuncionario;
+
+    }
+
+    public Funcionario validaLogin (Funcionario funcionario) throws SQLException{
+        
+        String SQL = "SELECT id_funcionario FROM funcionario WHERE login LIKE ? AND senha LIKE ?";
+        
+        PreparedStatement pst = ConexaoDAO.getInstance().prepareStatement(SQL);
+        pst.setString(1, funcionario.getLogin());
+        pst.setString(2, funcionario.getSenha());
+        ResultSet rs = pst.executeQuery();
+        
+        if (rs.next()){
+            Funcionario funcionarioRetornado = new Funcionario();
+            funcionarioRetornado.setId_funcionario(rs.getInt("id_funcionario"));
+            pst.close();
+            rs.close();
+            ConexaoDAO.closeInstance();
+            
+            return funcionarioRetornado;
+        }
+        
+        pst.close();
+        rs.close();
+        ConexaoDAO.closeInstance();
+        
+        return null;
+        
     }
 }

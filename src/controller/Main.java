@@ -42,7 +42,9 @@ public class Main {
         Funcionario funcionario = new Funcionario();
         funcionario.setId_funcionario(1);
         
-        new frmMenuPrincipal(funcionario);
+        new frmLogin();
+        
+        
                     
     }
 }
