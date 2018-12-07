@@ -363,7 +363,8 @@ public class FuncionarioDAO {
 
     public Funcionario validaLogin (Funcionario funcionario) throws SQLException{
         
-        String SQL = "SELECT id_funcionario FROM funcionario WHERE login LIKE ? AND senha LIKE ?";
+        String SQL = "SELECT id_funcionario, cargo.id_cargo FROM funcionario "
+                + "INNER JOIN cargo ON funcionario.id_cargo = cargo.id_cargo WHERE login LIKE ? AND senha LIKE ?";
         
         PreparedStatement pst = ConexaoDAO.getInstance().prepareStatement(SQL);
         pst.setString(1, funcionario.getLogin());
@@ -373,6 +374,10 @@ public class FuncionarioDAO {
         if (rs.next()){
             Funcionario funcionarioRetornado = new Funcionario();
             funcionarioRetornado.setId_funcionario(rs.getInt("id_funcionario"));
+            Cargo cargo = new Cargo();
+            
+            cargo.setId_Cargo(rs.getInt("id_cargo"));
+            funcionarioRetornado.setCargo(cargo);
             pst.close();
             rs.close();
             ConexaoDAO.closeInstance();

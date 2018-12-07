@@ -130,7 +130,7 @@ public class frmProduto extends javax.swing.JInternalFrame {
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         btnPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/pesquisar 24x24.png"))); // NOI18N
-        btnPesquisar.setText("Pesquisar (F6)");
+        btnPesquisar.setText("Pesquisar");
         btnPesquisar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnPesquisar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -141,7 +141,7 @@ public class frmProduto extends javax.swing.JInternalFrame {
         lblImagemFormulario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/delivery-cart (1).png"))); // NOI18N
 
         btnNovo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/adicionar 24x24.png"))); // NOI18N
-        btnNovo.setText("Novo (F1)");
+        btnNovo.setText("Novo");
         btnNovo.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnNovo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -150,7 +150,7 @@ public class frmProduto extends javax.swing.JInternalFrame {
         });
 
         btnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/lixo 24x24.png"))); // NOI18N
-        btnExcluir.setText("Excluir (F2)");
+        btnExcluir.setText("Excluir");
         btnExcluir.setEnabled(false);
         btnExcluir.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnExcluir.addActionListener(new java.awt.event.ActionListener() {
@@ -160,7 +160,7 @@ public class frmProduto extends javax.swing.JInternalFrame {
         });
 
         btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/editar 24x24.png"))); // NOI18N
-        btnEditar.setText("Editar (F3)");
+        btnEditar.setText("Editar");
         btnEditar.setEnabled(false);
         btnEditar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
@@ -170,7 +170,7 @@ public class frmProduto extends javax.swing.JInternalFrame {
         });
 
         btnSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/salvar 24x24.png"))); // NOI18N
-        btnSalvar.setText("Salvar (F4)");
+        btnSalvar.setText("Salvar");
         btnSalvar.setEnabled(false);
         btnSalvar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnSalvar.addActionListener(new java.awt.event.ActionListener() {
@@ -180,7 +180,7 @@ public class frmProduto extends javax.swing.JInternalFrame {
         });
 
         btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cancelar 24x24.png"))); // NOI18N
-        btnCancelar.setText("Cancelar (F5)");
+        btnCancelar.setText("Cancelar");
         btnCancelar.setEnabled(false);
         btnCancelar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -315,7 +315,7 @@ public class frmProduto extends javax.swing.JInternalFrame {
         tbpCadastro.addTab("Dados", pnlDados);
 
         btnRelatorio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/pdf.png"))); // NOI18N
-        btnRelatorio.setText("Relatório (F7)");
+        btnRelatorio.setText("Relatório");
         btnRelatorio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRelatorioActionPerformed(evt);
@@ -330,13 +330,13 @@ public class frmProduto extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 3, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(lblImagemFormulario)
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btnRelatorio)
                                 .addGap(27, 27, 27)
                                 .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -376,7 +376,7 @@ public class frmProduto extends javax.swing.JInternalFrame {
                     .addComponent(btnSalvar)
                     .addComponent(btnCancelar))
                 .addGap(18, 18, 18)
-                .addComponent(tbpCadastro)
+                .addComponent(tbpCadastro, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE)
                 .addContainerGap())
         );
 

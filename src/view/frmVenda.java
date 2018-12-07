@@ -180,7 +180,7 @@ public class frmVenda extends javax.swing.JInternalFrame {
         });
 
         btnSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/salvar 24x24.png"))); // NOI18N
-        btnSalvar.setText("Finalizar Venda (F5)");
+        btnSalvar.setText("Finalizar Venda");
         btnSalvar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

@@ -91,6 +91,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Cliente"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="mnuCliente.setVisible(false);"/>
+          </AuxValues>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="mniCadastroCliente">
               <Properties>
@@ -99,6 +102,9 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mniCadastroClienteActionPerformed"/>
               </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="mniCadastroCliente.setVisible(false);"/>
+              </AuxValues>
             </MenuItem>
           </SubComponents>
         </Menu>
@@ -106,6 +112,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Funcion&#xe1;rio"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="mnuFuncionario.setVisible(false);"/>
+          </AuxValues>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="mniCadastroFuncionario">
               <Properties>
@@ -114,6 +123,9 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mniCadastroFuncionarioActionPerformed"/>
               </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="mniCadastroFuncionario.setVisible(false);"/>
+              </AuxValues>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="mniCadastroCargo">
               <Properties>
@@ -122,6 +134,9 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mniCadastroCargoActionPerformed"/>
               </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="mniCadastroCargo.setVisible(false);"/>
+              </AuxValues>
             </MenuItem>
           </SubComponents>
         </Menu>
@@ -129,6 +144,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Produto"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="mnuProduto.setVisible(false);"/>
+          </AuxValues>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="mniCadastroProduto">
               <Properties>
@@ -137,6 +155,9 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mniCadastroProdutoActionPerformed"/>
               </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="mniCadastroProduto.setVisible(false);"/>
+              </AuxValues>
             </MenuItem>
           </SubComponents>
         </Menu>
@@ -144,6 +165,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Fornecedor"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="mnuFornecedor.setVisible(false);"/>
+          </AuxValues>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="mniCadastroFornecedor">
               <Properties>
@@ -152,6 +176,9 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mniCadastroFornecedorActionPerformed"/>
               </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="mniCadastroFornecedor.setVisible(false);"/>
+              </AuxValues>
             </MenuItem>
           </SubComponents>
         </Menu>
@@ -159,6 +186,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Venda"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="mnuVenda.setVisible(false);"/>
+          </AuxValues>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="mnuCadastroVenda">
               <Properties>
@@ -167,6 +197,9 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuCadastroVendaActionPerformed"/>
               </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="mnuCadastroVenda.setVisible(false);"/>
+              </AuxValues>
             </MenuItem>
           </SubComponents>
         </Menu>

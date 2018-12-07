@@ -26,13 +26,13 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
+                      <EmptySpace min="0" pref="3" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="lblImagemFormulario" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
                               <Component id="jLabel1" min="-2" pref="460" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                               <Component id="btnRelatorio" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                               <Component id="btnPesquisar" min="-2" pref="140" max="-2" attributes="0"/>
@@ -67,12 +67,12 @@
                       <Component id="lblImagemFormulario" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Component id="jLabel1" alignment="0" min="-2" pref="70" max="-2" attributes="0"/>
-                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                  <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="btnPesquisar" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnRelatorio" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
               <Component id="jSeparator1" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -83,7 +83,7 @@
                   <Component id="btnCancelar" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="tbpCadastro" max="32767" attributes="0"/>
+              <Component id="tbpCadastro" pref="282" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -104,7 +104,7 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/img/pesquisar 24x24.png"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Pesquisar (F6)"/>
+        <Property name="text" type="java.lang.String" value="Pesquisar"/>
         <Property name="horizontalTextPosition" type="int" value="4"/>
       </Properties>
       <Events>
@@ -125,7 +125,7 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/img/adicionar 24x24.png"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Novo (F1)"/>
+        <Property name="text" type="java.lang.String" value="Novo"/>
         <Property name="horizontalTextPosition" type="int" value="4"/>
       </Properties>
       <Events>
@@ -137,7 +137,7 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/img/lixo 24x24.png"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Excluir (F2)"/>
+        <Property name="text" type="java.lang.String" value="Excluir"/>
         <Property name="enabled" type="boolean" value="false"/>
         <Property name="horizontalTextPosition" type="int" value="4"/>
       </Properties>
@@ -150,7 +150,7 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/img/editar 24x24.png"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Editar (F3)"/>
+        <Property name="text" type="java.lang.String" value="Editar"/>
         <Property name="enabled" type="boolean" value="false"/>
         <Property name="horizontalTextPosition" type="int" value="4"/>
       </Properties>
@@ -163,7 +163,7 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/img/salvar 24x24.png"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Salvar (F4)"/>
+        <Property name="text" type="java.lang.String" value="Salvar"/>
         <Property name="enabled" type="boolean" value="false"/>
         <Property name="horizontalTextPosition" type="int" value="4"/>
       </Properties>
@@ -176,7 +176,7 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/img/cancelar 24x24.png"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Cancelar (F5)"/>
+        <Property name="text" type="java.lang.String" value="Cancelar"/>
         <Property name="enabled" type="boolean" value="false"/>
         <Property name="horizontalTextPosition" type="int" value="4"/>
       </Properties>
@@ -411,7 +411,7 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/img/pdf.png"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Relat&#xf3;rio (F7)"/>
+        <Property name="text" type="java.lang.String" value="Relat&#xf3;rio"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRelatorioActionPerformed"/>

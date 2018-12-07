@@ -160,7 +160,7 @@ public class frmLogin extends javax.swing.JFrame {
             }else{
                 this.dispose();
                 frmMenuPrincipal menuPrincipal = new frmMenuPrincipal(funcionario);                
-                this.setVisible(true);
+                //this.setVisible(true);
             }
         }
     }//GEN-LAST:event_btnLogarActionPerformed

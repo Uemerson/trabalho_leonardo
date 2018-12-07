@@ -14,8 +14,35 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
         setVisible(true);
         setExtendedState(MAXIMIZED_BOTH);
         
-        if(funcionario.getCargo().equals(1)){
-            mniCadastroFuncionario.setVisible(false);
+        //Caixa
+        if(funcionario.getCargo().getId_cargo() == 1){
+            mnuVenda.setVisible(true);
+            mnuCadastroVenda.setVisible(true);
+        }
+        
+        //Gerentes
+        else if (funcionario.getCargo().getId_cargo() == 2 || funcionario.getCargo().getId_cargo() == 3){
+            mnuCliente.setVisible(true);
+            mniCadastroCliente.setVisible(true);
+            
+            mnuFuncionario.setVisible(true);
+            mniCadastroFuncionario.setVisible(true);
+            mniCadastroCargo.setVisible(true);
+            
+            mnuProduto.setVisible(true);
+            mniCadastroProduto.setVisible(true);
+            
+            mnuFornecedor.setVisible(true);
+            mniCadastroFornecedor.setVisible(true);
+            
+            mnuVenda.setVisible(true);
+            mnuCadastroVenda.setVisible(true);
+        }
+        
+        //Vendedor
+        else if (funcionario.getCargo().getId_cargo() == 4){
+            mnuCliente.setVisible(true);
+            mniCadastroCliente.setVisible(true);
         }
     }
 
@@ -94,8 +121,10 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
         );
 
         mnuCliente.setText("Cliente");
+        mnuCliente.setVisible(false);
 
         mniCadastroCliente.setText("Cadastro de cliente");
+        mniCadastroCliente.setVisible(false);
         mniCadastroCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mniCadastroClienteActionPerformed(evt);
@@ -105,9 +134,11 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
 
         mnuMenu.add(mnuCliente);
 
+        mnuFuncionario.setVisible(false);
         mnuFuncionario.setText("Funcionário");
 
         mniCadastroFuncionario.setText("Cadastro de funcionário");
+        mniCadastroFuncionario.setVisible(false);
         mniCadastroFuncionario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mniCadastroFuncionarioActionPerformed(evt);
@@ -116,6 +147,7 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
         mnuFuncionario.add(mniCadastroFuncionario);
 
         mniCadastroCargo.setText("Cadastro de cargo");
+        mniCadastroCargo.setVisible(false);
         mniCadastroCargo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mniCadastroCargoActionPerformed(evt);
@@ -125,9 +157,11 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
 
         mnuMenu.add(mnuFuncionario);
 
+        mnuProduto.setVisible(false);
         mnuProduto.setText("Produto");
 
         mniCadastroProduto.setText("Cadastro de produto");
+        mniCadastroProduto.setVisible(false);
         mniCadastroProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mniCadastroProdutoActionPerformed(evt);
@@ -137,9 +171,11 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
 
         mnuMenu.add(mnuProduto);
 
+        mnuFornecedor.setVisible(false);
         mnuFornecedor.setText("Fornecedor");
 
         mniCadastroFornecedor.setText("Cadastro de fornecedor");
+        mniCadastroFornecedor.setVisible(false);
         mniCadastroFornecedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mniCadastroFornecedorActionPerformed(evt);
@@ -149,9 +185,11 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
 
         mnuMenu.add(mnuFornecedor);
 
+        mnuVenda.setVisible(false);
         mnuVenda.setText("Venda");
 
         mnuCadastroVenda.setText("Cadastro de venda");
+        mnuCadastroVenda.setVisible(false);
         mnuCadastroVenda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnuCadastroVendaActionPerformed(evt);

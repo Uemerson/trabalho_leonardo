@@ -56,7 +56,7 @@ public class frmCargo extends javax.swing.JInternalFrame {
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         btnPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/pesquisar 24x24.png"))); // NOI18N
-        btnPesquisar.setText("Pesquisar (F6)");
+        btnPesquisar.setText("Pesquisar");
         btnPesquisar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnPesquisar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -67,7 +67,7 @@ public class frmCargo extends javax.swing.JInternalFrame {
         lblImagemFormulario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/employee 64x64.png"))); // NOI18N
 
         btnNovo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/adicionar 24x24.png"))); // NOI18N
-        btnNovo.setText("Novo (F1)");
+        btnNovo.setText("Novo");
         btnNovo.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnNovo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -76,7 +76,7 @@ public class frmCargo extends javax.swing.JInternalFrame {
         });
 
         btnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/lixo 24x24.png"))); // NOI18N
-        btnExcluir.setText("Excluir (F2)");
+        btnExcluir.setText("Excluir");
         btnExcluir.setEnabled(false);
         btnExcluir.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnExcluir.addActionListener(new java.awt.event.ActionListener() {
@@ -86,7 +86,7 @@ public class frmCargo extends javax.swing.JInternalFrame {
         });
 
         btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/editar 24x24.png"))); // NOI18N
-        btnEditar.setText("Editar (F3)");
+        btnEditar.setText("Editar");
         btnEditar.setEnabled(false);
         btnEditar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
@@ -96,7 +96,7 @@ public class frmCargo extends javax.swing.JInternalFrame {
         });
 
         btnSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/salvar 24x24.png"))); // NOI18N
-        btnSalvar.setText("Salvar (F4)");
+        btnSalvar.setText("Salvar");
         btnSalvar.setEnabled(false);
         btnSalvar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnSalvar.addActionListener(new java.awt.event.ActionListener() {
@@ -106,7 +106,7 @@ public class frmCargo extends javax.swing.JInternalFrame {
         });
 
         btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cancelar 24x24.png"))); // NOI18N
-        btnCancelar.setText("Cancelar (F5)");
+        btnCancelar.setText("Cancelar");
         btnCancelar.setEnabled(false);
         btnCancelar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {

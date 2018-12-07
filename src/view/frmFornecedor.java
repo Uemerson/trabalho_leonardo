@@ -108,7 +108,6 @@ public class frmFornecedor extends javax.swing.JInternalFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         cbEstado = new javax.swing.JComboBox();
-        jButton1 = new javax.swing.JButton();
         txtComplemento = new controller.TextFieldIconPlaceHolder();
         jLabel11 = new javax.swing.JLabel();
         txtBairro = new controller.TextFieldIconPlaceHolder();
@@ -131,7 +130,7 @@ public class frmFornecedor extends javax.swing.JInternalFrame {
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         btnPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/pesquisar 24x24.png"))); // NOI18N
-        btnPesquisar.setText("Pesquisar (F6)");
+        btnPesquisar.setText("Pesquisar");
         btnPesquisar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnPesquisar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -142,7 +141,7 @@ public class frmFornecedor extends javax.swing.JInternalFrame {
         lblImagemFormulario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/deal 64x64.png"))); // NOI18N
 
         btnNovo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/adicionar 24x24.png"))); // NOI18N
-        btnNovo.setText("Novo (F1)");
+        btnNovo.setText("Novo");
         btnNovo.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnNovo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -151,7 +150,7 @@ public class frmFornecedor extends javax.swing.JInternalFrame {
         });
 
         btnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/lixo 24x24.png"))); // NOI18N
-        btnExcluir.setText("Excluir (F2)");
+        btnExcluir.setText("Excluir");
         btnExcluir.setEnabled(false);
         btnExcluir.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnExcluir.addActionListener(new java.awt.event.ActionListener() {
@@ -161,7 +160,7 @@ public class frmFornecedor extends javax.swing.JInternalFrame {
         });
 
         btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/editar 24x24.png"))); // NOI18N
-        btnEditar.setText("Editar (F3)");
+        btnEditar.setText("Editar");
         btnEditar.setEnabled(false);
         btnEditar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
@@ -171,7 +170,7 @@ public class frmFornecedor extends javax.swing.JInternalFrame {
         });
 
         btnSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/salvar 24x24.png"))); // NOI18N
-        btnSalvar.setText("Salvar (F4)");
+        btnSalvar.setText("Salvar");
         btnSalvar.setEnabled(false);
         btnSalvar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnSalvar.addActionListener(new java.awt.event.ActionListener() {
@@ -181,7 +180,7 @@ public class frmFornecedor extends javax.swing.JInternalFrame {
         });
 
         btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cancelar 24x24.png"))); // NOI18N
-        btnCancelar.setText("Cancelar (F5)");
+        btnCancelar.setText("Cancelar");
         btnCancelar.setEnabled(false);
         btnCancelar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -317,8 +316,6 @@ public class frmFornecedor extends javax.swing.JInternalFrame {
 
         cbEstado.setEnabled(false);
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/pesquisar 24x24.png"))); // NOI18N
-
         txtComplemento.setUpper(true);
         txtComplemento.setMaxLength(50);
         txtComplemento.setEnabled(false);
@@ -347,11 +344,8 @@ public class frmFornecedor extends javax.swing.JInternalFrame {
                     .addGroup(pnlEnderecoLayout.createSequentialGroup()
                         .addGroup(pnlEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6)
-                            .addGroup(pnlEnderecoLayout.createSequentialGroup()
-                                .addComponent(txtCep, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(txtCep, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(48, 48, 48)
                         .addGroup(pnlEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel8))
@@ -375,7 +369,7 @@ public class frmFornecedor extends javax.swing.JInternalFrame {
                         .addGroup(pnlEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel12)
                             .addComponent(txtBairro, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
         pnlEnderecoLayout.setVerticalGroup(
             pnlEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -387,12 +381,11 @@ public class frmFornecedor extends javax.swing.JInternalFrame {
                     .addComponent(jLabel10))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(pnlEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtCep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(cbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
+                .addGap(27, 27, 27)
                 .addGroup(pnlEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(pnlEnderecoLayout.createSequentialGroup()
                         .addComponent(jLabel7)
@@ -412,7 +405,7 @@ public class frmFornecedor extends javax.swing.JInternalFrame {
                         .addComponent(jLabel12)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtBairro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addContainerGap(91, Short.MAX_VALUE))
         );
 
         tbpCadastro.addTab("Endereço", pnlEndereco);
@@ -499,7 +492,7 @@ public class frmFornecedor extends javax.swing.JInternalFrame {
         tbpCadastro.addTab("Contato", pnlContato);
 
         btnRelatorio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/pdf.png"))); // NOI18N
-        btnRelatorio.setText("Relatório (F7)");
+        btnRelatorio.setText("Relatório");
         btnRelatorio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRelatorioActionPerformed(evt);
@@ -512,13 +505,13 @@ public class frmFornecedor extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(12, 12, 12)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(tbpCadastro)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblImagemFormulario)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 456, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnRelatorio)
                         .addGap(18, 18, 18)
                         .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -532,7 +525,8 @@ public class frmFornecedor extends javax.swing.JInternalFrame {
                         .addGap(34, 34, 34)
                         .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(39, 39, 39)
-                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -558,7 +552,7 @@ public class frmFornecedor extends javax.swing.JInternalFrame {
                     .addComponent(btnSalvar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(tbpCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         pack();
@@ -1108,7 +1102,6 @@ public class frmFornecedor extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnRelatorio;
     private javax.swing.JButton btnSalvar;
     private javax.swing.JComboBox cbEstado;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

@@ -35,15 +35,6 @@
                   <Component id="tbpCadastro" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="lblImagemFormulario" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                              <Component id="jLabel1" min="-2" pref="331" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="137" max="-2" attributes="0"/>
-                              <Component id="btnRelatorio" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="btnPesquisar" min="-2" pref="140" max="-2" attributes="0"/>
-                          </Group>
                           <Component id="jSeparator1" min="-2" pref="837" max="-2" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Component id="btnNovo" min="-2" pref="140" max="-2" attributes="0"/>
@@ -58,6 +49,15 @@
                           </Group>
                       </Group>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="lblImagemFormulario" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                      <Component id="jLabel1" min="-2" pref="331" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="btnRelatorio" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="btnPesquisar" min="-2" pref="140" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -79,7 +79,7 @@
                       <Component id="btnRelatorio" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
               <Component id="jSeparator1" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -91,7 +91,7 @@
               </Group>
               <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
               <Component id="tbpCadastro" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="15" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -111,7 +111,7 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/img/pesquisar 24x24.png"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Pesquisar (F6)"/>
+        <Property name="text" type="java.lang.String" value="Pesquisar"/>
         <Property name="horizontalTextPosition" type="int" value="4"/>
       </Properties>
       <Events>
@@ -132,7 +132,7 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/img/adicionar 24x24.png"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Novo (F1)"/>
+        <Property name="text" type="java.lang.String" value="Novo"/>
         <Property name="horizontalTextPosition" type="int" value="4"/>
       </Properties>
       <Events>
@@ -144,7 +144,7 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/img/lixo 24x24.png"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Excluir (F2)"/>
+        <Property name="text" type="java.lang.String" value="Excluir"/>
         <Property name="enabled" type="boolean" value="false"/>
         <Property name="horizontalTextPosition" type="int" value="4"/>
       </Properties>
@@ -157,7 +157,7 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/img/editar 24x24.png"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Editar (F3)"/>
+        <Property name="text" type="java.lang.String" value="Editar"/>
         <Property name="enabled" type="boolean" value="false"/>
         <Property name="horizontalTextPosition" type="int" value="4"/>
       </Properties>
@@ -170,7 +170,7 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/img/salvar 24x24.png"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Salvar (F4)"/>
+        <Property name="text" type="java.lang.String" value="Salvar"/>
         <Property name="enabled" type="boolean" value="false"/>
         <Property name="horizontalTextPosition" type="int" value="4"/>
       </Properties>
@@ -183,7 +183,7 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/img/cancelar 24x24.png"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Cancelar (F5)"/>
+        <Property name="text" type="java.lang.String" value="Cancelar"/>
         <Property name="enabled" type="boolean" value="false"/>
         <Property name="horizontalTextPosition" type="int" value="4"/>
       </Properties>
@@ -381,13 +381,9 @@
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="txtCep" min="-2" pref="90" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jButton1" min="-2" pref="36" max="-2" attributes="0"/>
-                                  </Group>
+                                  <Component id="txtCep" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="txtCidade" min="-2" pref="385" max="-2" attributes="0"/>
                                   <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
@@ -421,7 +417,7 @@
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="35" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -436,14 +432,13 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jButton1" alignment="0" min="-2" pref="29" max="-2" attributes="0"/>
                           <Component id="txtCidade" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="txtCep" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="cbEstado" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Group type="102" attributes="0">
                               <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
@@ -469,7 +464,7 @@
                               <Component id="txtBairro" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="64" max="32767" attributes="0"/>
+                      <EmptySpace pref="79" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -542,13 +537,6 @@
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value=""/>
               </AuxValues>
-            </Component>
-            <Component class="javax.swing.JButton" name="jButton1">
-              <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/img/pesquisar 24x24.png"/>
-                </Property>
-              </Properties>
             </Component>
             <Component class="controller.TextFieldIconPlaceHolder" name="txtComplemento">
               <Properties>
@@ -708,7 +696,7 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/img/pdf.png"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Relat&#xf3;rio (F7)"/>
+        <Property name="text" type="java.lang.String" value="Relat&#xf3;rio"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRelatorioActionPerformed"/>
