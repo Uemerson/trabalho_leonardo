@@ -15,7 +15,7 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
         setExtendedState(MAXIMIZED_BOTH);
         
         if(funcionario.getCargo().equals(1)){
-        
+            mniCadastroFuncionario.setVisible(false);
         }
     }
 
