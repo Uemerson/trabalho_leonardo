@@ -7,7 +7,6 @@ package view;
 
 import dao.FuncionarioDAO;
 import java.sql.SQLException;
-import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -45,7 +44,6 @@ public class frmLogin extends javax.swing.JFrame {
         btnLogar = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setResizable(false);
 
         jLabel2.setText("Senha");
 
@@ -145,8 +143,9 @@ public class frmLogin extends javax.swing.JFrame {
                 txtSenha.setText("");
                 txtUsuario.requestFocus();
             }else{
-                frmMenuPrincipal menuPrincipal = new frmMenuPrincipal(funcionario);
                 this.dispose();
+                frmMenuPrincipal menuPrincipal = new frmMenuPrincipal(funcionario);                
+                this.setVisible(true);
             }
         }
     }//GEN-LAST:event_btnLogarActionPerformed
