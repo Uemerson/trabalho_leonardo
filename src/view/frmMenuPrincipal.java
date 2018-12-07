@@ -15,13 +15,15 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
         setExtendedState(MAXIMIZED_BOTH);
         
         //Caixa
-        if(funcionario.getCargo().getId_cargo() == 1){
+        if(funcionario.getCargo().getNome_cargo().equals("CAIXA")){
             mnuVenda.setVisible(true);
             mnuCadastroVenda.setVisible(true);
         }
         
         //Gerentes
-        else if (funcionario.getCargo().getId_cargo() == 2 || funcionario.getCargo().getId_cargo() == 3){
+        else if (funcionario.getCargo().getNome_cargo().equals("GERENTE DE RH") 
+                || funcionario.getCargo().getNome_cargo().equals("GERENTE DE VENDAS")
+                || funcionario.getCargo().getNome_cargo().equals("ADMINISTRADOR")){
             mnuCliente.setVisible(true);
             mniCadastroCliente.setVisible(true);
             
@@ -40,7 +42,7 @@ public class frmMenuPrincipal extends javax.swing.JFrame {
         }
         
         //Vendedor
-        else if (funcionario.getCargo().getId_cargo() == 4){
+        else if (funcionario.getCargo().getNome_cargo().equals("VENDEDOR")){
             mnuCliente.setVisible(true);
             mniCadastroCliente.setVisible(true);
         }
